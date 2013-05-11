@@ -18,7 +18,39 @@
 		0797E340173DAE8E004C2C62 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0797E33F173DAE8E004C2C62 /* Default-568h@2x.png */; };
 		0797E343173DAE8E004C2C62 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0797E342173DAE8E004C2C62 /* ViewController.m */; };
 		0797E346173DAE8E004C2C62 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0797E344173DAE8E004C2C62 /* ViewController.xib */; };
+		07D01640173DB1FF005F488B /* libOCDSpec2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 07D01639173DB1E2005F488B /* libOCDSpec2.a */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		07D01638173DB1E2005F488B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 07D01631173DB1E2005F488B /* OCDSpec2.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 94A6BA5A15BB2DE7003F22B6;
+			remoteInfo = OCDSpec2;
+		};
+		07D0163A173DB1E2005F488B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 07D01631173DB1E2005F488B /* OCDSpec2.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 942AAEEC15BBB3760006C241;
+			remoteInfo = OCDSpec2Mac;
+		};
+		07D0163C173DB1E2005F488B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 07D01631173DB1E2005F488B /* OCDSpec2.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 947F6C2515BC39A200C7CF3B;
+			remoteInfo = OCDSpec2Tests;
+		};
+		07D0163E173DB1E2005F488B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 07D01631173DB1E2005F488B /* OCDSpec2.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 944FBF4E15C168C100BF85FC;
+			remoteInfo = OCDSpec2AcceptanceTest;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		0797E326173DAE8E004C2C62 /* FreelancingWithKids.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FreelancingWithKids.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -37,6 +69,7 @@
 		0797E341173DAE8E004C2C62 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		0797E342173DAE8E004C2C62 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		0797E345173DAE8E004C2C62 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
+		07D01631173DB1E2005F488B /* OCDSpec2.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OCDSpec2.xcodeproj; path = OCDSpec2/OCDSpec2.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +78,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0797E32A173DAE8E004C2C62 /* UIKit.framework in Frameworks */,
+				07D01640173DB1FF005F488B /* libOCDSpec2.a in Frameworks */,
 				0797E32C173DAE8E004C2C62 /* Foundation.framework in Frameworks */,
 				0797E32E173DAE8E004C2C62 /* CoreGraphics.framework in Frameworks */,
 			);
@@ -56,6 +90,7 @@
 		0797E31D173DAE8E004C2C62 = {
 			isa = PBXGroup;
 			children = (
+				07D01631173DB1E2005F488B /* OCDSpec2.xcodeproj */,
 				0797E32F173DAE8E004C2C62 /* FreelancingWithKids */,
 				0797E328173DAE8E004C2C62 /* Frameworks */,
 				0797E327173DAE8E004C2C62 /* Products */,
@@ -107,6 +142,17 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		07D01632173DB1E2005F488B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				07D01639173DB1E2005F488B /* libOCDSpec2.a */,
+				07D0163B173DB1E2005F488B /* libOCDSpec2Mac.a */,
+				07D0163D173DB1E2005F488B /* OCDSpec2Tests.octest */,
+				07D0163F173DB1E2005F488B /* OCDSpec2AcceptanceTest.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -146,12 +192,49 @@
 			mainGroup = 0797E31D173DAE8E004C2C62;
 			productRefGroup = 0797E327173DAE8E004C2C62 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 07D01632173DB1E2005F488B /* Products */;
+					ProjectRef = 07D01631173DB1E2005F488B /* OCDSpec2.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				0797E325173DAE8E004C2C62 /* FreelancingWithKids */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		07D01639173DB1E2005F488B /* libOCDSpec2.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libOCDSpec2.a;
+			remoteRef = 07D01638173DB1E2005F488B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		07D0163B173DB1E2005F488B /* libOCDSpec2Mac.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libOCDSpec2Mac.a;
+			remoteRef = 07D0163A173DB1E2005F488B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		07D0163D173DB1E2005F488B /* OCDSpec2Tests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = OCDSpec2Tests.octest;
+			remoteRef = 07D0163C173DB1E2005F488B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		07D0163F173DB1E2005F488B /* OCDSpec2AcceptanceTest.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = OCDSpec2AcceptanceTest.octest;
+			remoteRef = 07D0163E173DB1E2005F488B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		0797E324173DAE8E004C2C62 /* Resources */ = {
@@ -300,6 +383,7 @@
 				0797E34B173DAE8E004C2C62 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
