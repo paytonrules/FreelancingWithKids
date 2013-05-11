@@ -1,3 +1,3 @@
-[submodule "OCDSpec"]
+[submodule "OCDSpecRemote"]
 	path = OCDSpec2
-	url = ../WorkFromHomePrototypeOne/OCDSpec2/
+	url = git@github.com:ericmeyer/OCDSpec2.git
