@@ -7,7 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+@class Task;
 
 @protocol PerformWorkTaskDelegate <NSObject>
+
+-(void) taskStarted:(Task *) task;
 
 @end

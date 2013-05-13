@@ -20,6 +20,7 @@
 		074A9E66173E6FED00D4CA53 /* Task.m in Sources */ = {isa = PBXBuildFile; fileRef = 074A9E64173E6FED00D4CA53 /* Task.m */; };
 		074A9E68173E708400D4CA53 /* libOCDSpec2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 07D01639173DB1E2005F488B /* libOCDSpec2.a */; };
 		074A9E6A173E710300D4CA53 /* TaskSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 074A9E69173E710300D4CA53 /* TaskSpec.m */; };
+		074A9E6E17410CFE00D4CA53 /* libOCMock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 074A9E6D17410CFE00D4CA53 /* libOCMock.a */; };
 		0797E32A173DAE8E004C2C62 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0797E329173DAE8E004C2C62 /* UIKit.framework */; };
 		0797E32C173DAE8E004C2C62 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0797E32B173DAE8E004C2C62 /* Foundation.framework */; };
 		0797E32E173DAE8E004C2C62 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0797E32D173DAE8E004C2C62 /* CoreGraphics.framework */; };
@@ -83,6 +84,8 @@
 		074A9E63173E6FED00D4CA53 /* Task.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Task.h; path = Models/Task.h; sourceTree = "<group>"; };
 		074A9E64173E6FED00D4CA53 /* Task.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Task.m; path = Models/Task.m; sourceTree = "<group>"; };
 		074A9E69173E710300D4CA53 /* TaskSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TaskSpec.m; path = FreelancingWithKidsSpecs/TaskSpec.m; sourceTree = "<group>"; };
+		074A9E6D17410CFE00D4CA53 /* libOCMock.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libOCMock.a; path = include/OCMock/libOCMock.a; sourceTree = "<group>"; };
+		074A9E6F17410DBC00D4CA53 /* PerformWorkTaskDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PerformWorkTaskDelegate.h; path = Interactors/PerformWorkTaskDelegate.h; sourceTree = "<group>"; };
 		0797E326173DAE8E004C2C62 /* FreelancingWithKids.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FreelancingWithKids.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0797E329173DAE8E004C2C62 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		0797E32B173DAE8E004C2C62 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -109,6 +112,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				074A9E6E17410CFE00D4CA53 /* libOCMock.a in Frameworks */,
 				074A9E4A173E6D3400D4CA53 /* UIKit.framework in Frameworks */,
 				074A9E4B173E6D3400D4CA53 /* Foundation.framework in Frameworks */,
 				074A9E68173E708400D4CA53 /* libOCDSpec2.a in Frameworks */,
@@ -165,6 +169,7 @@
 			children = (
 				074A9E5D173E6E2900D4CA53 /* PerformWorkTask.h */,
 				074A9E5E173E6E2900D4CA53 /* PerformWorkTask.m */,
+				074A9E6F17410DBC00D4CA53 /* PerformWorkTaskDelegate.h */,
 			);
 			name = Interactors;
 			sourceTree = "<group>";
@@ -181,6 +186,7 @@
 		0797E31D173DAE8E004C2C62 = {
 			isa = PBXGroup;
 			children = (
+				074A9E6D17410CFE00D4CA53 /* libOCMock.a */,
 				07D01631173DB1E2005F488B /* OCDSpec2.xcodeproj */,
 				0797E32F173DAE8E004C2C62 /* FreelancingWithKids */,
 				074A9E4D173E6D3400D4CA53 /* FreelancingWithKidsSpecs */,
@@ -491,8 +497,20 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FreelancingWithKidsSpecs/FreelancingWithKidsSpecs-Prefix.pch";
-				HEADER_SEARCH_PATHS = OCDSpec2;
+				HEADER_SEARCH_PATHS = (
+					OCDSpec2,
+					"\"$(SRCROOT)/include",
+				);
 				INFOPLIST_FILE = "";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/include/OCMock\"",
+				);
+				OTHER_LDFLAGS = (
+					"-force_load",
+					"\"$(SRCROOT)/include/OCMock/libOCMock.a\"",
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -504,8 +522,20 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FreelancingWithKidsSpecs/FreelancingWithKidsSpecs-Prefix.pch";
-				HEADER_SEARCH_PATHS = OCDSpec2;
+				HEADER_SEARCH_PATHS = (
+					OCDSpec2,
+					"\"$(SRCROOT)/include",
+				);
 				INFOPLIST_FILE = "";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/include/OCMock\"",
+				);
+				OTHER_LDFLAGS = (
+					"-force_load",
+					"\"$(SRCROOT)/include/OCMock/libOCMock.a\"",
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

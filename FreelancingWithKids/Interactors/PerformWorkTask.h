@@ -7,11 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "PerformWorkTaskDelegate.h"
 
 @class Task;
 
 @interface PerformWorkTask : NSObject
 
++(id) performWorkTaskWithDelegate:(id<PerformWorkTaskDelegate>) delegate;
 -(void) addTask: (Task *) task;
+-(void) startTask: (NSString *)name;
 
 @end
