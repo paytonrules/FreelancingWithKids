@@ -7,12 +7,38 @@
 //
 
 #import "ViewController.h"
+#import "Task.h"
 
 @interface ViewController ()
-
+@property (strong, nonatomic) NSMutableArray *tasks;
 @end
 
 @implementation ViewController
+
+-(id) initWithTasks:(NSMutableArray *)tasks
+{
+  if (self = [super init])
+  {
+    self.tasks = tasks;
+  }
+  return self;
+}
+
+-(UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath: (NSIndexPath *)indexPath
+{
+  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"task"];
+  if (cell == nil) {
+    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"task"];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+  }
+  
+  Task *task = (Task *)[self.tasks objectAtIndex:0];
+  
+  NSLog(@"cell %@", cell);
+  NSLog(@"cell.textLabel %@", cell.detailTextLabel);
+  cell.textLabel.text = task.name;
+  return cell;
+}
 
 - (void)viewDidLoad
 {
