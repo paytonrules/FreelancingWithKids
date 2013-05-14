@@ -23,7 +23,6 @@
 int main(int argc, char *argv[])
 {
   @autoreleasepool {
-    NSLog(@"HEY BABY ITS ME");
-    return UIApplicationMain(argc, argv, nil, NSStringFromClass([OCDSpec2EntryPoint self]));
+    return OCDSpec2RunAllTests();
   }
 }
