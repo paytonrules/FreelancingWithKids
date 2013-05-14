@@ -12,7 +12,7 @@
 @interface PerformWorkTask()
 
 @property (strong, nonatomic) id<PerformWorkTaskDelegate> delegate;
-@property (strong, nonatomic) Task *task;
+@property (strong, nonatomic) NSMutableArray *tasks;
 
 @end
 
@@ -20,20 +20,22 @@
 
 +(id) performWorkTaskWithDelegate:(id<PerformWorkTaskDelegate>) delegate
 {
-  PerformWorkTask *task = [PerformWorkTask new];
-  task.delegate = delegate;
+  PerformWorkTask *interactor = [PerformWorkTask new];
+  interactor.delegate = delegate;
+  interactor.tasks = [NSMutableArray new];
   
-  return task;
+  return interactor;
 }
 
 -(void) addTask: (Task *) task
 {
-  self.task = task;
+  [self.tasks addObject:task];
 }
 
 -(void) startTask:(NSString *)name
 {
-  [self.delegate taskStarted:self.task];
+  Task *task = [self.tasks filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"name == %@", name]][0];
+  [self.delegate taskStarted:task];
 }
 
 @end

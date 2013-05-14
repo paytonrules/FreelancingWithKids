@@ -23,10 +23,28 @@ OCDSpec2Context(PerformWorkInteractorSpec) {
       [delegate verify];
     });
     
+    It(@"choosed the right work task", ^{
+      id delegate = [OCMockObject mockForProtocol:@protocol(PerformWorkTaskDelegate)];
+      Task *emailTask = [Task taskWithName:@"email"];
+      Task *meetingTask = [Task taskWithName:@"meeting"];
+      
+      [[delegate expect] taskStarted:emailTask];
+      
+      PerformWorkTask *interaction = [PerformWorkTask performWorkTaskWithDelegate: delegate];
+      
+      [interaction addTask: emailTask];
+      [interaction addTask: meetingTask];
+      
+      [interaction startTask: @"email"];
+      
+      [delegate verify];
+    });
+    
     // task started
     // task progress
     // task complete
     // task done
+    // Write the view
     
   });
   

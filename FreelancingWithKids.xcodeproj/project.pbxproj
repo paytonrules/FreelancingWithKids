@@ -633,6 +633,7 @@
 				074A9E58173E6D3400D4CA53 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0797E321173DAE8E004C2C62 /* Build configuration list for PBXProject "FreelancingWithKids" */ = {
 			isa = XCConfigurationList;
