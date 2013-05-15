@@ -27,17 +27,22 @@
 -(UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath: (NSIndexPath *)indexPath
 {
   UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"task"];
-  if (cell == nil) {
-    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"task"];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+  
+  if (cell == nil)
+  {
+    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                  reuseIdentifier:@"task"];
   }
   
   Task *task = (Task *)[self.tasks objectAtIndex:0];
+  [cell.textLabel setText: task.name];
   
-  NSLog(@"cell %@", cell);
-  NSLog(@"cell.textLabel %@", cell.detailTextLabel);
-  cell.textLabel.text = task.name;
   return cell;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+  return 1;
 }
 
 - (void)viewDidLoad
