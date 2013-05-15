@@ -6,14 +6,14 @@
 //  Copyright (c) 2013 Eric Smith. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "WorkdayController.h"
 #import "Task.h"
 
-@interface ViewController ()
+@interface WorkdayController ()
 @property (strong, nonatomic) NSMutableArray *tasks;
 @end
 
-@implementation ViewController
+@implementation WorkdayController
 
 -(id) initWithTasks:(NSMutableArray *)tasks
 {
