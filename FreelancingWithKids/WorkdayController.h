@@ -10,6 +10,4 @@
 
 @interface WorkdayController : UIViewController<UITableViewDelegate, UITableViewDataSource>
 
--(id) initWithTasks:(NSMutableArray *)tasks;
-
 @end

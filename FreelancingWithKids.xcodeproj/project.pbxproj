@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		00FB3E98FDD34AF6896BB865 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 520B81D9BB504CF280B298E5 /* libPods.a */; };
+		073E74211743B84D00393AB3 /* ToDoList.m in Sources */ = {isa = PBXBuildFile; fileRef = 073E74201743B84D00393AB3 /* ToDoList.m */; };
+		073E74221743B84D00393AB3 /* ToDoList.m in Sources */ = {isa = PBXBuildFile; fileRef = 073E74201743B84D00393AB3 /* ToDoList.m */; };
+		073E74271743B94300393AB3 /* ToDoListSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 073E74261743B94300393AB3 /* ToDoListSpec.m */; };
 		074A9E4A173E6D3400D4CA53 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0797E329173DAE8E004C2C62 /* UIKit.framework */; };
 		074A9E4B173E6D3400D4CA53 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0797E32B173DAE8E004C2C62 /* Foundation.framework */; };
 		074A9E4C173E6D3400D4CA53 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0797E32D173DAE8E004C2C62 /* CoreGraphics.framework */; };
@@ -74,6 +77,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		073E741F1743B84D00393AB3 /* ToDoList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ToDoList.h; path = Models/ToDoList.h; sourceTree = "<group>"; };
+		073E74201743B84D00393AB3 /* ToDoList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ToDoList.m; path = Models/ToDoList.m; sourceTree = "<group>"; };
+		073E74261743B94300393AB3 /* ToDoListSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ToDoListSpec.m; path = FreelancingWithKidsSpecs/ToDoListSpec.m; sourceTree = "<group>"; };
 		074A9E49173E6D3400D4CA53 /* FreelancingWithKidsSpecs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FreelancingWithKidsSpecs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		074A9E4F173E6D3400D4CA53 /* FreelancingWithKidsSpecs-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FreelancingWithKidsSpecs-Info.plist"; sourceTree = "<group>"; };
 		074A9E51173E6D3400D4CA53 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -140,6 +146,7 @@
 			children = (
 				074A9E59173E6D5C00D4CA53 /* PerformWorkTasksInteractorSpec.m */,
 				074A9E69173E710300D4CA53 /* TaskSpec.m */,
+				073E74261743B94300393AB3 /* ToDoListSpec.m */,
 			);
 			name = Specs;
 			path = ..;
@@ -180,6 +187,8 @@
 			children = (
 				074A9E63173E6FED00D4CA53 /* Task.h */,
 				074A9E64173E6FED00D4CA53 /* Task.m */,
+				073E741F1743B84D00393AB3 /* ToDoList.h */,
+				073E74201743B84D00393AB3 /* ToDoList.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -440,6 +449,8 @@
 				074A9E66173E6FED00D4CA53 /* Task.m in Sources */,
 				07CCC2F21741E1C7005EB000 /* WorkdayController.m in Sources */,
 				074A9E6A173E710300D4CA53 /* TaskSpec.m in Sources */,
+				073E74221743B84D00393AB3 /* ToDoList.m in Sources */,
+				073E74271743B94300393AB3 /* ToDoListSpec.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -452,6 +463,7 @@
 				0797E343173DAE8E004C2C62 /* WorkdayController.m in Sources */,
 				074A9E5F173E6E2900D4CA53 /* PerformWorkTask.m in Sources */,
 				074A9E65173E6FED00D4CA53 /* Task.m in Sources */,
+				073E74211743B84D00393AB3 /* ToDoList.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

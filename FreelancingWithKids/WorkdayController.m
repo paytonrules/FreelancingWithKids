@@ -7,21 +7,22 @@
 //
 
 #import "WorkdayController.h"
+#import "ToDoList.h"
 #import "Task.h"
 
 @interface WorkdayController ()
-@property (strong, nonatomic) NSMutableArray *tasks;
+@property (strong, nonatomic) ToDoList *tasks;
 @end
 
 @implementation WorkdayController
 
--(id) initWithTasks:(NSMutableArray *)tasks
+- (void)viewDidLoad
 {
-  if (self = [super init])
-  {
-    self.tasks = tasks;
-  }
-  return self;
+    [super viewDidLoad];
+  self.tasks = [ToDoList new];
+  [self.tasks add:[Task taskWithName:@"email"]];
+  [self.tasks add:[Task taskWithName:@"meeting"]];
+	// Do any additional setup after loading the view, typically from a nib.
 }
 
 -(UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath: (NSIndexPath *)indexPath
@@ -34,7 +35,7 @@
                                   reuseIdentifier:@"task"];
   }
   
-  Task *task = (Task *)[self.tasks objectAtIndex:0];
+  Task *task = (Task *)[self.tasks taskNumber:indexPath.row];
   [cell.textLabel setText: task.name];
   
   return cell;
@@ -42,13 +43,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-  return 1;
-}
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+  return self.tasks.count;
 }
 
 - (void)didReceiveMemoryWarning
