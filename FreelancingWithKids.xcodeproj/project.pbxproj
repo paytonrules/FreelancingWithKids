@@ -35,7 +35,9 @@
 		0797E340173DAE8E004C2C62 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0797E33F173DAE8E004C2C62 /* Default-568h@2x.png */; };
 		0797E343173DAE8E004C2C62 /* WorkdayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0797E342173DAE8E004C2C62 /* WorkdayController.m */; };
 		0797E346173DAE8E004C2C62 /* WorkdayController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0797E344173DAE8E004C2C62 /* WorkdayController.xib */; };
-		07CCC2F21741E1C7005EB000 /* WorkdayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0797E342173DAE8E004C2C62 /* WorkdayController.m */; };
+		07A5C80A1744FD9200665282 /* TaskViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 07A5C8091744FD9200665282 /* TaskViewCell.m */; };
+		07A5C8431746536A00665282 /* TaskController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07A5C8421746536A00665282 /* TaskController.m */; };
+		07A5C8471746599800665282 /* TaskViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07A5C8461746599800665282 /* TaskViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -109,6 +111,12 @@
 		0797E341173DAE8E004C2C62 /* WorkdayController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WorkdayController.h; sourceTree = "<group>"; };
 		0797E342173DAE8E004C2C62 /* WorkdayController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WorkdayController.m; sourceTree = "<group>"; };
 		0797E345173DAE8E004C2C62 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/WorkdayController.xib; sourceTree = "<group>"; };
+		07A5C8031744F50D00665282 /* TaskView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TaskView.h; sourceTree = "<group>"; };
+		07A5C8081744FD9200665282 /* TaskViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskViewCell.h; sourceTree = "<group>"; };
+		07A5C8091744FD9200665282 /* TaskViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskViewCell.m; sourceTree = "<group>"; };
+		07A5C8411746536A00665282 /* TaskController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskController.h; sourceTree = "<group>"; };
+		07A5C8421746536A00665282 /* TaskController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskController.m; sourceTree = "<group>"; };
+		07A5C8461746599800665282 /* TaskViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TaskViewCell.xib; sourceTree = "<group>"; };
 		07D01631173DB1E2005F488B /* OCDSpec2.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OCDSpec2.xcodeproj; path = OCDSpec2/OCDSpec2.xcodeproj; sourceTree = "<group>"; };
 		0DDBF41F4B2E4983A99CBF1E /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		520B81D9BB504CF280B298E5 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -189,6 +197,7 @@
 				074A9E64173E6FED00D4CA53 /* Task.m */,
 				073E741F1743B84D00393AB3 /* ToDoList.h */,
 				073E74201743B84D00393AB3 /* ToDoList.m */,
+				07A5C8031744F50D00665282 /* TaskView.h */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -237,6 +246,11 @@
 				0797E342173DAE8E004C2C62 /* WorkdayController.m */,
 				0797E344173DAE8E004C2C62 /* WorkdayController.xib */,
 				0797E330173DAE8E004C2C62 /* Supporting Files */,
+				07A5C8081744FD9200665282 /* TaskViewCell.h */,
+				07A5C8091744FD9200665282 /* TaskViewCell.m */,
+				07A5C8411746536A00665282 /* TaskController.h */,
+				07A5C8421746536A00665282 /* TaskController.m */,
+				07A5C8461746599800665282 /* TaskViewCell.xib */,
 			);
 			path = FreelancingWithKids;
 			sourceTree = "<group>";
@@ -389,6 +403,7 @@
 				0797E33E173DAE8E004C2C62 /* Default@2x.png in Resources */,
 				0797E340173DAE8E004C2C62 /* Default-568h@2x.png in Resources */,
 				0797E346173DAE8E004C2C62 /* WorkdayController.xib in Resources */,
+				07A5C8471746599800665282 /* TaskViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -447,7 +462,6 @@
 				074A9E5A173E6D5C00D4CA53 /* PerformWorkTasksInteractorSpec.m in Sources */,
 				074A9E60173E6E2900D4CA53 /* PerformWorkTask.m in Sources */,
 				074A9E66173E6FED00D4CA53 /* Task.m in Sources */,
-				07CCC2F21741E1C7005EB000 /* WorkdayController.m in Sources */,
 				074A9E6A173E710300D4CA53 /* TaskSpec.m in Sources */,
 				073E74221743B84D00393AB3 /* ToDoList.m in Sources */,
 				073E74271743B94300393AB3 /* ToDoListSpec.m in Sources */,
@@ -464,6 +478,8 @@
 				074A9E5F173E6E2900D4CA53 /* PerformWorkTask.m in Sources */,
 				074A9E65173E6FED00D4CA53 /* Task.m in Sources */,
 				073E74211743B84D00393AB3 /* ToDoList.m in Sources */,
+				07A5C80A1744FD9200665282 /* TaskViewCell.m in Sources */,
+				07A5C8431746536A00665282 /* TaskController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

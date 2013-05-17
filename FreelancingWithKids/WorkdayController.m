@@ -9,6 +9,8 @@
 #import "WorkdayController.h"
 #import "ToDoList.h"
 #import "Task.h"
+#import "TaskViewCell.h"
+#import "TaskController.h"
 
 @interface WorkdayController ()
 @property (strong, nonatomic) ToDoList *tasks;
@@ -19,6 +21,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+  
   self.tasks = [ToDoList new];
   [self.tasks add:[Task taskWithName:@"email"]];
   [self.tasks add:[Task taskWithName:@"meeting"]];
@@ -27,23 +30,39 @@
 
 -(UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath: (NSIndexPath *)indexPath
 {
-  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"task"];
+  TaskViewCell *cell = (TaskViewCell *)[tableView dequeueReusableCellWithIdentifier:@"task"];
+  TaskController *controller = nil;
+  Task *task = (Task *)[self.tasks taskNumber:indexPath.row];
   
   if (cell == nil)
   {
-    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                  reuseIdentifier:@"task"];
+    controller = [TaskController new];
+    [[NSBundle mainBundle] loadNibNamed:@"TaskViewCell" owner:controller options:nil];
+    cell = controller.view;
   }
-  
-  Task *task = (Task *)[self.tasks taskNumber:indexPath.row];
-  [cell.textLabel setText: task.name];
+  else
+  {
+    controller = cell.controller;
+  }
+  controller.task = task;
   
   return cell;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+-(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
   return self.tasks.count;
+}
+
+-(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  // selecting this would be ...uh different?
+  // delegate to the controller you can get from the cell?
+  // Do nuttin'
+  Task *task = (Task *)[self.tasks taskNumber:indexPath.row];
+  TaskViewCell *cell = (TaskViewCell *)[self tableView:tableView cellForRowAtIndexPath: indexPath];
+  
+  [task start:cell];
 }
 
 - (void)didReceiveMemoryWarning

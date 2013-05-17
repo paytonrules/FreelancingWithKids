@@ -7,6 +7,7 @@
 //
 
 #import "Task.h"
+#import "TaskView.h"
 
 @implementation Task
 
@@ -16,6 +17,11 @@
   task.name = name;
   
   return task;
+}
+
+-(void) start:(id<TaskView>) view
+{
+  
 }
 
 @end

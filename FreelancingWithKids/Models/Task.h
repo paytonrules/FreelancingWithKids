@@ -7,10 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "TaskView.h"
 
 @interface Task : NSObject
++(id) taskWithName: (NSString *) name;
 
 @property(strong, nonatomic) NSString *name;
-+(id) taskWithName: (NSString *) name;
+-(void) start:(id<TaskView>) view;
 
 @end
