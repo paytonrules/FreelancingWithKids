@@ -9,13 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "TaskView.h"
 
-@class TaskController;
+@class Task;
 
 @interface TaskViewCell : UITableViewCell<TaskView>
-{
-  IBOutlet TaskController *_controller;
-}
 
-@property(nonatomic, readonly) TaskController *controller;
+@property(nonatomic, strong) Task *task;
 
 @end

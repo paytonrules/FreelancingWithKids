@@ -1,4 +1,12 @@
 #import "TaskViewCell.h"
+#import "Task.h"
+
+@interface TaskViewCell()
+
+@property(nonatomic, strong) IBOutlet UILabel *taskName;
+@property(nonatomic, strong) IBOutlet UIProgressView *progress;
+
+@end
 
 @implementation TaskViewCell
 
@@ -9,6 +17,12 @@
     {
     }
     return self;
+}
+
+-(void) setTask:(Task *)task
+{
+  self.taskName.text = task.name;
+  
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

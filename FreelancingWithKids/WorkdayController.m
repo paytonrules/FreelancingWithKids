@@ -10,7 +10,6 @@
 #import "ToDoList.h"
 #import "Task.h"
 #import "TaskViewCell.h"
-#import "TaskController.h"
 
 @interface WorkdayController ()
 @property (strong, nonatomic) ToDoList *tasks;
@@ -18,9 +17,15 @@
 
 @implementation WorkdayController
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+  return 116.0;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+  
+  [self.taskList registerNib:[UINib nibWithNibName:@"TaskViewCell" bundle:nil] forCellReuseIdentifier:@"task"];
   
   self.tasks = [ToDoList new];
   [self.tasks add:[Task taskWithName:@"email"]];
@@ -30,21 +35,10 @@
 
 -(UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath: (NSIndexPath *)indexPath
 {
-  TaskViewCell *cell = (TaskViewCell *)[tableView dequeueReusableCellWithIdentifier:@"task"];
-  TaskController *controller = nil;
+  TaskViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"task"];
   Task *task = (Task *)[self.tasks taskNumber:indexPath.row];
-  
-  if (cell == nil)
-  {
-    controller = [TaskController new];
-    [[NSBundle mainBundle] loadNibNamed:@"TaskViewCell" owner:controller options:nil];
-    cell = controller.view;
-  }
-  else
-  {
-    controller = cell.controller;
-  }
-  controller.task = task;
+
+  cell.task = task;
   
   return cell;
 }
@@ -54,6 +48,7 @@
   return self.tasks.count;
 }
 
+// How do I disable this?
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
   // selecting this would be ...uh different?
