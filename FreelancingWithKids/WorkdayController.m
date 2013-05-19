@@ -1,11 +1,3 @@
-//
-//  ViewController.m
-//  FreelancingWithKids
-//
-//  Created by Eric Smith on 5/10/13.
-//  Copyright (c) 2013 Eric Smith. All rights reserved.
-//
-
 #import "WorkdayController.h"
 #import "ToDoList.h"
 #import "Task.h"
@@ -16,10 +8,6 @@
 @end
 
 @implementation WorkdayController
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-  return 90.0;
-}
 
 - (void)viewDidLoad
 {
@@ -47,19 +35,6 @@
 {
   return self.tasks.count;
 }
-
-// How do I disable this?
--(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-  // selecting this would be ...uh different?
-  // delegate to the controller you can get from the cell?
-  // Do nuttin'
-  Task *task = (Task *)[self.tasks taskNumber:indexPath.row];
-  TaskViewCell *cell = (TaskViewCell *)[self tableView:tableView cellForRowAtIndexPath: indexPath];
-  
-  [task start:cell];
-}
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
