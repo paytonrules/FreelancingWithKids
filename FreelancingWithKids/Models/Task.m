@@ -2,6 +2,8 @@
 #import "TaskView.h"
 
 @interface Task()
+@property(assign) int timeSpent;
+@property(assign) int duration;
 @property(strong) NSTimer *timer;
 @property(strong, nonatomic) id<TaskView> view;
 @end
@@ -17,6 +19,8 @@
 {
   Task *task = [Task new];
   task.name = name;
+  task.timeSpent = 0;
+  task.duration = seconds;
   
   return task;
 }
@@ -30,7 +34,9 @@
 
 -(void) updateProgress
 {
-  [self.view updateProgress];
+  self.timeSpent++;
+  float progress = (float) self.timeSpent / (float) self.duration;
+  [self.view updateProgress:[[NSDecimalNumber alloc] initWithFloat:progress]];
 }
 
 @end

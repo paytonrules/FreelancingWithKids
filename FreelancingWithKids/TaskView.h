@@ -10,5 +10,5 @@
 
 @protocol TaskView <NSObject>
 
--(void) updateProgress;
+-(void) updateProgress:(NSDecimalNumber *) progress;
 @end

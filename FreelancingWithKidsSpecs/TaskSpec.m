@@ -18,7 +18,7 @@ OCDSpec2Context(TaskSpec) {
 
       Task *task = [Task taskWithName: @"name" andDuration:3];
 
-      [[delegate expect] updateProgress];
+      [[delegate expect] updateProgress:[OCMArg any]];
 
       [task start:delegate];
       [task.timer fire];
@@ -26,6 +26,26 @@ OCDSpec2Context(TaskSpec) {
       [delegate verify];
     });
     
+    It(@"sends the current progress when the timer is fired", ^{
+      id delegate = [OCMockObject mockForProtocol:@protocol(TaskView)];
+      
+      Task *task = [Task taskWithName: @"name" andDuration:4];
+      
+      [[delegate expect] updateProgress:[[NSDecimalNumber alloc] initWithFloat:0.25f]];
+      
+      [task start:delegate];
+      [task.timer fire];
+      
+      [delegate verify];
+    });
+    
+    It(@"is cleared and stops firing when the task is complete", ^{
+      
+    });
+
+    It(@"is a legit timer", ^{
+      
+    });
   });
   
 }
