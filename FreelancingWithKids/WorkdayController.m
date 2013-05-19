@@ -7,13 +7,15 @@
 @property (strong, nonatomic) ToDoList *tasks;
 @end
 
+static NSString *reuseIdentifier = @"task";
+
 @implementation WorkdayController
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
   
-  [self.taskList registerNib:[UINib nibWithNibName:@"TaskViewCell" bundle:nil] forCellReuseIdentifier:@"task"];
+  [self.taskList registerNib:[UINib nibWithNibName:@"TaskViewCell" bundle:nil] forCellReuseIdentifier:reuseIdentifier];
   
   self.tasks = [ToDoList new];
   [self.tasks add:[Task taskWithName:@"email"]];
@@ -23,7 +25,7 @@
 
 -(UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath: (NSIndexPath *)indexPath
 {
-  TaskViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"task"];
+  TaskViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
   Task *task = (Task *)[self.tasks taskNumber:indexPath.row];
 
   cell.task = task;

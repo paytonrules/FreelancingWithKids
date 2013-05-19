@@ -13,13 +13,17 @@ OCDSpec2Context(TaskSpec) {
       [ExpectObj(task.name) toBeEqualTo:@"name"];
     });
     
-    It(@"it can be started with a task delegate", ^{
+    It(@"updates the task with progress when the timer fires", ^{
       id delegate = [OCMockObject mockForProtocol:@protocol(TaskView)];
-      
-      Task *task = [Task taskWithName:@"name"];
-      
+
+      Task *task = [Task taskWithName: @"name" andDuration:3];
+
+      [[delegate expect] updateProgress];
+
       [task start:delegate];
-    
+      [task.timer fire];
+      
+      [delegate verify];
     });
     
   });

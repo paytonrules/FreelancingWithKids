@@ -10,4 +10,5 @@
 
 @protocol TaskView <NSObject>
 
+-(void) updateProgress;
 @end
