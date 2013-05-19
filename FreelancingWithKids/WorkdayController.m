@@ -18,7 +18,7 @@
 @implementation WorkdayController
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-  return 116.0;
+  return 90.0;
 }
 
 - (void)viewDidLoad
