@@ -37,6 +37,9 @@
   self.timeSpent++;
   float progress = (float) self.timeSpent / (float) self.duration;
   [self.view updateProgress:[[NSDecimalNumber alloc] initWithFloat:progress]];
+  
+  if (self.timeSpent == self.duration)
+    self.timer = nil;
 }
 
 @end

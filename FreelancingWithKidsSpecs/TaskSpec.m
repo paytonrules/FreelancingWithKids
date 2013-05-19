@@ -39,8 +39,18 @@ OCDSpec2Context(TaskSpec) {
       [delegate verify];
     });
     
-    It(@"is cleared and stops firing when the task is complete", ^{
+    It(@"stops firing updating progress when the task is complete", ^{
+      id delegate = [OCMockObject mockForProtocol:@protocol(TaskView)];
       
+      [[delegate expect] updateProgress:[[NSDecimalNumber alloc] initWithFloat:1.0f]];
+      
+      Task *task = [Task taskWithName: @"name" andDuration:1];
+
+      [task start:delegate];
+      [task.timer fire];
+      [task.timer fire];
+      
+      [delegate verify];
     });
 
     It(@"is a legit timer", ^{
