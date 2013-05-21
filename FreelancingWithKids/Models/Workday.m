@@ -1,9 +1,11 @@
 
 #import "Workday.h"
+#import "ToDoList.h"
 
 @interface Workday ()
 
 @property (nonatomic, strong) id<WorkdayClock> itsClock;
+@property (nonatomic, strong) ToDoList *tasks;
 @end
 
 @implementation Workday
@@ -13,6 +15,7 @@
   Workday *day = [Workday new];
   
   day.itsClock = fakeClock;
+  day.tasks = todoList;
   return day;
 }
 
@@ -24,7 +27,9 @@
 
 -(void) clockTicked
 {
-  [[NSNotificationCenter defaultCenter] postNotificationName:@"gameOver" object:self userInfo:@{@"successful": @YES}];
+  if ([self.tasks complete]) {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"gameOver" object:self userInfo:@{@"successful": @YES}];
+  }
 }
 
 @end

@@ -34,4 +34,13 @@
   return self.tasks.count;
 }
 
+-(bool) complete
+{
+  if (self.count > 0) {
+    return NO;
+  } else {
+    return YES;
+  }
+}
+
 @end
