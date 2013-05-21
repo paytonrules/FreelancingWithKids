@@ -22,4 +22,9 @@
   [self.itsClock start:self];
 }
 
+-(void) clockTicked
+{
+  [[NSNotificationCenter defaultCenter] postNotificationName:@"gameOver" object:self userInfo:@{@"successful": @YES}];
+}
+
 @end

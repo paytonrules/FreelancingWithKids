@@ -5,4 +5,5 @@
 @interface FakeWorkdayClock : NSObject<WorkdayClock>
 
 @property (assign) BOOL started;
+-(void) notifyWatcher;
 @end

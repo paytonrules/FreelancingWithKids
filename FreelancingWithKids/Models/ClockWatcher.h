@@ -2,4 +2,6 @@
 
 @protocol ClockWatcher <NSObject>
 
+-(void) clockTicked;
+
 @end
