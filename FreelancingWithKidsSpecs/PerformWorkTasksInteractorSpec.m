@@ -10,7 +10,7 @@ OCDSpec2Context(PerformWorkInteractorSpec) {
     
     It(@"begins a work task by name", ^{
       id delegate = [OCMockObject mockForProtocol:@protocol(PerformWorkTaskDelegate)];
-      Task *task = [Task taskWithName:@"email"];
+      Task *task = [Task taskWithName:@"email" andDuration:1];
       
       [[delegate expect] taskStarted:task];
       
@@ -25,8 +25,8 @@ OCDSpec2Context(PerformWorkInteractorSpec) {
     
     It(@"choosed the right work task", ^{
       id delegate = [OCMockObject mockForProtocol:@protocol(PerformWorkTaskDelegate)];
-      Task *emailTask = [Task taskWithName:@"email"];
-      Task *meetingTask = [Task taskWithName:@"meeting"];
+      Task *emailTask = [Task taskWithName:@"email" andDuration:1];
+      Task *meetingTask = [Task taskWithName:@"meeting" andDuration:1];
       
       [[delegate expect] taskStarted:emailTask];
       

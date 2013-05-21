@@ -4,41 +4,44 @@
 @interface Task()
 @property(assign) int timeSpent;
 @property(assign) int duration;
+@property(assign) float durationInUpdates;
 @property(strong) NSTimer *timer;
 @property(strong, nonatomic) id<TaskView> view;
+@property(assign) float updateInterval;
 @end
 
 @implementation Task
 
-+(id) taskWithName: (NSString *) name
++(id) taskWithName: (NSString *) name andDuration:(NSInteger) seconds
 {
-  return [Task taskWithName:name andDuration:0];
+  return [Task taskWithName:name duration:seconds andUpdatesPerSecond:10];
 }
 
-+(id) taskWithName: (NSString *) name andDuration:(NSInteger) seconds
++(id) taskWithName: (NSString *) name duration:(NSInteger) duration andUpdatesPerSecond:(float) updatesPerSecond
 {
   Task *task = [Task new];
   task.name = name;
   task.timeSpent = 0;
-  task.duration = seconds;
+  task.duration = duration;
+  task.updateInterval = 1 / updatesPerSecond;
+  task.durationInUpdates = task.duration / task.updateInterval;
   
   return task;
 }
 
-
 -(void) start:(id<TaskView>) view
 {
   self.view = view;
-  self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updateProgress) userInfo:nil repeats:YES];
+  self.timer = [NSTimer scheduledTimerWithTimeInterval:self.updateInterval target:self selector:@selector(updateProgress) userInfo:nil repeats:YES];
 }
 
 -(void) updateProgress
 {
   self.timeSpent++;
-  float progress = (float) self.timeSpent / (float) self.duration;
+  float progress = (float) self.timeSpent / (float) self.durationInUpdates;
   [self.view updateProgress:[[NSDecimalNumber alloc] initWithFloat:progress]];
   
-  if (self.timeSpent == self.duration)
+  if (self.timeSpent >= self.durationInUpdates)
     self.timer = nil;
 }
 

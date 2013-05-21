@@ -6,6 +6,8 @@
 @property(nonatomic, strong) IBOutlet UILabel *taskName;
 @property(nonatomic, strong) IBOutlet UIProgressView *progress;
 
+-(IBAction) startTask:(id) sender;
+
 @end
 
 @implementation TaskViewCell
@@ -22,13 +24,18 @@
 
 -(void) setTask:(Task *)task
 {
+  _task = task;
   self.taskName.text = task.name;
-  
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
+-(IBAction) startTask:(id)sender
 {
-    [super setSelected:selected animated:animated];
+  [self.task start:self];
+}
+
+-(void) updateProgress:(NSDecimalNumber *)progress
+{
+  [self.progress setProgress:[progress floatValue] animated:YES];
 }
 
 @end

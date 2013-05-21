@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		00FB3E98FDD34AF6896BB865 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 520B81D9BB504CF280B298E5 /* libPods.a */; };
+		070B5A2F174B9B64005B35E5 /* WorkdaySpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 070B5A2E174B9B64005B35E5 /* WorkdaySpec.m */; };
+		070B5A36174B9BFE005B35E5 /* Workday.m in Sources */ = {isa = PBXBuildFile; fileRef = 070B5A35174B9BFE005B35E5 /* Workday.m */; };
+		070B5A37174B9C07005B35E5 /* Workday.m in Sources */ = {isa = PBXBuildFile; fileRef = 070B5A35174B9BFE005B35E5 /* Workday.m */; };
+		070B5A3C174B9F94005B35E5 /* FakeWorkdayClock.m in Sources */ = {isa = PBXBuildFile; fileRef = 070B5A39174B9ED3005B35E5 /* FakeWorkdayClock.m */; };
 		073E74211743B84D00393AB3 /* ToDoList.m in Sources */ = {isa = PBXBuildFile; fileRef = 073E74201743B84D00393AB3 /* ToDoList.m */; };
 		073E74221743B84D00393AB3 /* ToDoList.m in Sources */ = {isa = PBXBuildFile; fileRef = 073E74201743B84D00393AB3 /* ToDoList.m */; };
 		073E74271743B94300393AB3 /* ToDoListSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 073E74261743B94300393AB3 /* ToDoListSpec.m */; };
@@ -78,6 +82,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		070B5A2E174B9B64005B35E5 /* WorkdaySpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WorkdaySpec.m; path = FreelancingWithKidsSpecs/WorkdaySpec.m; sourceTree = "<group>"; };
+		070B5A34174B9BFE005B35E5 /* Workday.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Workday.h; path = Models/Workday.h; sourceTree = "<group>"; };
+		070B5A35174B9BFE005B35E5 /* Workday.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Workday.m; path = Models/Workday.m; sourceTree = "<group>"; };
+		070B5A38174B9ED3005B35E5 /* FakeWorkdayClock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FakeWorkdayClock.h; path = Models/FakeWorkdayClock.h; sourceTree = "<group>"; };
+		070B5A39174B9ED3005B35E5 /* FakeWorkdayClock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FakeWorkdayClock.m; path = Models/FakeWorkdayClock.m; sourceTree = "<group>"; };
+		070B5A3B174B9EF4005B35E5 /* WorkdayClock.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = WorkdayClock.h; path = Models/WorkdayClock.h; sourceTree = "<group>"; };
+		070B5A3D174BA2D3005B35E5 /* ClockWatcher.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ClockWatcher.h; path = Models/ClockWatcher.h; sourceTree = "<group>"; };
 		073E741F1743B84D00393AB3 /* ToDoList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ToDoList.h; path = Models/ToDoList.h; sourceTree = "<group>"; };
 		073E74201743B84D00393AB3 /* ToDoList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ToDoList.m; path = Models/ToDoList.m; sourceTree = "<group>"; };
 		073E74261743B94300393AB3 /* ToDoListSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ToDoListSpec.m; path = FreelancingWithKidsSpecs/ToDoListSpec.m; sourceTree = "<group>"; };
@@ -152,6 +163,7 @@
 				074A9E59173E6D5C00D4CA53 /* PerformWorkTasksInteractorSpec.m */,
 				074A9E69173E710300D4CA53 /* TaskSpec.m */,
 				073E74261743B94300393AB3 /* ToDoListSpec.m */,
+				070B5A2E174B9B64005B35E5 /* WorkdaySpec.m */,
 			);
 			name = Specs;
 			path = ..;
@@ -195,6 +207,12 @@
 				074A9E64173E6FED00D4CA53 /* Task.m */,
 				073E741F1743B84D00393AB3 /* ToDoList.h */,
 				073E74201743B84D00393AB3 /* ToDoList.m */,
+				070B5A34174B9BFE005B35E5 /* Workday.h */,
+				070B5A35174B9BFE005B35E5 /* Workday.m */,
+				070B5A38174B9ED3005B35E5 /* FakeWorkdayClock.h */,
+				070B5A39174B9ED3005B35E5 /* FakeWorkdayClock.m */,
+				070B5A3B174B9EF4005B35E5 /* WorkdayClock.h */,
+				070B5A3D174BA2D3005B35E5 /* ClockWatcher.h */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -458,8 +476,11 @@
 				074A9E60173E6E2900D4CA53 /* PerformWorkTask.m in Sources */,
 				074A9E66173E6FED00D4CA53 /* Task.m in Sources */,
 				074A9E6A173E710300D4CA53 /* TaskSpec.m in Sources */,
+				070B5A37174B9C07005B35E5 /* Workday.m in Sources */,
 				073E74221743B84D00393AB3 /* ToDoList.m in Sources */,
 				073E74271743B94300393AB3 /* ToDoListSpec.m in Sources */,
+				070B5A3C174B9F94005B35E5 /* FakeWorkdayClock.m in Sources */,
+				070B5A2F174B9B64005B35E5 /* WorkdaySpec.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -474,6 +495,7 @@
 				074A9E65173E6FED00D4CA53 /* Task.m in Sources */,
 				073E74211743B84D00393AB3 /* ToDoList.m in Sources */,
 				07A5C80A1744FD9200665282 /* TaskViewCell.m in Sources */,
+				070B5A36174B9BFE005B35E5 /* Workday.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

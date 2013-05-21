@@ -18,8 +18,8 @@ static NSString *reuseIdentifier = @"task";
   [self.taskList registerNib:[UINib nibWithNibName:@"TaskViewCell" bundle:nil] forCellReuseIdentifier:reuseIdentifier];
   
   self.tasks = [ToDoList new];
-  [self.tasks add:[Task taskWithName:@"email"]];
-  [self.tasks add:[Task taskWithName:@"meeting"]];
+  [self.tasks add:[Task taskWithName:@"email" andDuration:3]];
+  [self.tasks add:[Task taskWithName:@"meeting" andDuration:10]];
 	// Do any additional setup after loading the view, typically from a nib.
 }
 

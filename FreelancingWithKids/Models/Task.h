@@ -10,8 +10,8 @@
 #import "TaskView.h"
 
 @interface Task : NSObject
-+(id) taskWithName: (NSString *) name;
 +(id) taskWithName: (NSString *) name andDuration:(NSInteger) seconds;
++(id) taskWithName: (NSString *) name duration:(NSInteger) duration andUpdatesPerSecond:(float) updatesPerSecond;
 
 @property(strong, nonatomic) NSString *name;
 @property(readonly, nonatomic) NSTimer *timer;

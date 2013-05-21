@@ -9,7 +9,7 @@ OCDSpec2Context(ToDoListSpec) {
     It(@"allows adding and retrieving a task", ^{
       ToDoList *list = [ToDoList new];
       
-      [list add:[Task taskWithName: @"email"]];
+      [list add:[Task taskWithName: @"email" andDuration:1]];
       
       Task *task = [list taskNumber:0];
       
@@ -19,8 +19,8 @@ OCDSpec2Context(ToDoListSpec) {
     It(@"allows adding more than one task", ^{
       ToDoList *list = [ToDoList new];
       
-      [list add:[Task taskWithName:@"email"]];
-      [list add:[Task taskWithName: @"meeting"]];
+      [list add:[Task taskWithName:@"email" andDuration:1]];
+      [list add:[Task taskWithName: @"meeting" andDuration:1]];
       
       Task *task = [list taskNumber:0];
       
@@ -30,8 +30,8 @@ OCDSpec2Context(ToDoListSpec) {
     It(@"tells me how many tasks there are", ^{
       ToDoList *list = [ToDoList new];
       
-      [list add:[Task taskWithName:@"email"]];
-      [list add:[Task taskWithName: @"meeting"]];
+      [list add:[Task taskWithName:@"email" andDuration:1]];
+      [list add:[Task taskWithName: @"meeting" andDuration:1]];
       
       [ExpectInt(list.count) toBe:2];
     });
