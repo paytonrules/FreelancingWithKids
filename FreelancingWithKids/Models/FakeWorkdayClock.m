@@ -14,9 +14,9 @@
   self.started = true;
 }
 
--(void) notifyWatcher
+-(void) notifyWatcher:(NSTimeInterval) timeInterval
 {
-  [self.watcher clockTicked];
+  [self.watcher clockTicked: timeInterval];
 }
 
 @end

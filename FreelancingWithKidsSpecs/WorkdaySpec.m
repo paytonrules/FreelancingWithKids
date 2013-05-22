@@ -7,9 +7,7 @@
 @interface GameObserver : NSObject
 
 -(void) notified: (NSNotification *) notification;
--(BOOL) notifiedWith: (NSString *) status;
-
-@property(strong, nonatomic) NSString *status;
+@property(assign) WorkdayStatus status;
 
 @end
 
@@ -17,15 +15,8 @@
 
 -(void) notified: (NSNotification *) notification
 {
-  NSLog(@"NOTIFIED: @");
-  if (notification.userInfo[@"successful"]) {
-    self.status = @"success";
-  }
-}
-
--(BOOL) notifiedWith: (NSString *) status
-{
-  return (self.status != nil) && [self.status compare:status] == NSOrderedSame;
+  NSLog(@"I AM AT THE RIGHT NOTIFICATION");
+  self.status = (WorkdayStatus) [notification.userInfo[@"result"] intValue];
 }
 
 @end
@@ -37,13 +28,26 @@ OCDSpec2Context(WorkdaySpec) {
     __block FakeWorkdayClock *fakeClock;
     __block ToDoList *todoList;
     __block Workday *day;
+    __block GameObserver *observer;
     
     BeforeEach(^{
       fakeClock = [FakeWorkdayClock new];
       todoList = [ToDoList new];
       day = [Workday workdayWithTodoList: todoList andClock: fakeClock];
+      observer = [GameObserver new];
+      
+      [[NSNotificationCenter defaultCenter] addObserver:observer
+                                               selector:@selector(notified:)
+                                                   name:@"gameOver"
+                                                 object:nil];
     });
     
+    AfterEach(^{
+      [[NSNotificationCenter defaultCenter] removeObserver:observer name:@"gameOver" object:nil];
+    });
+    
+    // Test that you're wired to the timer
+    // Test the notifications
     It(@"starts watching the clock at the start", ^{
       [day start];
       
@@ -58,34 +62,40 @@ OCDSpec2Context(WorkdaySpec) {
                                                   object:nil];
       
       [day start];
-      [fakeClock notifyWatcher];
+      [fakeClock notifyWatcher:0];
       
-      [ExpectBool([observer notifiedWith:@"success"]) toBeTrue];
+      [ExpectInt(observer.status) toBe:Successful];
+    });
+    
+    It(@"notifies of the day failed when the day is over but the tasks aren't done", ^{
+      [todoList add:[Task taskWithName:@"name" andDuration:10]];
+      
+      [day start];
+      [fakeClock notifyWatcher:28800];
+      
+      [ExpectInt(observer.status) toBe:Failed];
     });
     
     It(@"doesn't notify anything if the tasks aren't done and the day isn't over", ^{
       [todoList add:[Task taskWithName:@"name" andDuration:10]];
       
       GameObserver *observer = [GameObserver new];
-      [ExpectBool([observer notifiedWith:@"success"]) toBeFalse];
 
       [[NSNotificationCenter defaultCenter] addObserver:observer
-                                               selector:@selector(notified)
+                                               selector:@selector(notified:)
                                                    name:@"gameOver"
                                                  object:nil];
       
       [day start];
-      [fakeClock notifyWatcher];
+      [fakeClock notifyWatcher:0];
       
-      [ExpectBool([observer notifiedWith:@"success"]) toBeFalse];
+      [ExpectInt(observer.status) toBe:None];
       
     });
     
+
     
-    
-    // It doesn't do anything if the tasks aren't done and they day isn't over
-    // It notifies of the day failed when the day
-    
+    It(@"notifies of the day success when the day is over and the tasks are done", ^{
+    });
   });
-  
 }
