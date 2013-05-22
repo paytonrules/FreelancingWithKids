@@ -90,7 +90,7 @@
 		070B5A35174B9BFE005B35E5 /* Workday.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Workday.m; path = Models/Workday.m; sourceTree = "<group>"; };
 		070B5A38174B9ED3005B35E5 /* FakeWorkdayClock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FakeWorkdayClock.h; path = Models/FakeWorkdayClock.h; sourceTree = "<group>"; };
 		070B5A39174B9ED3005B35E5 /* FakeWorkdayClock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FakeWorkdayClock.m; path = Models/FakeWorkdayClock.m; sourceTree = "<group>"; };
-		070B5A3B174B9EF4005B35E5 /* WorkdayClock.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = WorkdayClock.h; path = Models/WorkdayClock.h; sourceTree = "<group>"; };
+		070B5A3B174B9EF4005B35E5 /* WallClock.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = WallClock.h; path = Models/WallClock.h; sourceTree = "<group>"; };
 		070B5A3D174BA2D3005B35E5 /* ClockWatcher.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ClockWatcher.h; path = Models/ClockWatcher.h; sourceTree = "<group>"; };
 		073C74C4174CFE850094A643 /* TickingClockSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TickingClockSpec.m; path = FreelancingWithKidsSpecs/TickingClockSpec.m; sourceTree = "<group>"; };
 		073E741F1743B84D00393AB3 /* ToDoList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ToDoList.h; path = Models/ToDoList.h; sourceTree = "<group>"; };
@@ -218,7 +218,7 @@
 				070B5A35174B9BFE005B35E5 /* Workday.m */,
 				070B5A38174B9ED3005B35E5 /* FakeWorkdayClock.h */,
 				070B5A39174B9ED3005B35E5 /* FakeWorkdayClock.m */,
-				070B5A3B174B9EF4005B35E5 /* WorkdayClock.h */,
+				070B5A3B174B9EF4005B35E5 /* WallClock.h */,
 				070B5A3D174BA2D3005B35E5 /* ClockWatcher.h */,
 				074C382D174D825700337FC0 /* TickingClock.h */,
 				074C382E174D825700337FC0 /* TickingClock.m */,

@@ -42,9 +42,6 @@ OCDSpec2Context(TickingClockSpec) {
       [clock stop];
       
       [ExpectBool(clock.timer.isValid) toBeFalse];
-      
     });
-    
   });
-  
 }

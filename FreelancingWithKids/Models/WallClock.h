@@ -2,7 +2,7 @@
 
 #import "ClockWatcher.h"
 
-@protocol WorkdayClock <NSObject>
+@protocol WallClock <NSObject>
 
 -(void) start:(id<ClockWatcher>) watcher;
 

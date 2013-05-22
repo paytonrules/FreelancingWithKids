@@ -4,7 +4,7 @@
 
 @interface Workday ()
 
-@property (nonatomic, strong) id<WorkdayClock> itsClock;
+@property (nonatomic, strong) id<WallClock> itsClock;
 @property (nonatomic, strong) ToDoList *tasks;
 @end
 
@@ -12,14 +12,14 @@ static NSTimeInterval EIGHT_HOUR_DAY = 28800; // 8 hours
 
 @implementation Workday
 
-+(id) workdayWithTodoList: (ToDoList *)todoList andClock: (id<WorkdayClock>) fakeClock
++(id) workdayWithTodoList: (ToDoList *)todoList andClock: (id<WallClock>) fakeClock
 {
   Workday *day = [[Workday alloc] initWithList:todoList andClock:fakeClock];
   
   return day;
 }
 
-- (id)initWithList: (ToDoList *)todoList andClock: (id<WorkdayClock>) fakeClock
+- (id)initWithList: (ToDoList *)todoList andClock: (id<WallClock>) fakeClock
 {
     self = [super init];
     if (self) {

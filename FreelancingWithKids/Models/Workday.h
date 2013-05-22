@@ -1,5 +1,5 @@
 #import <Foundation/Foundation.h>
-#import "WorkdayClock.h"
+#import "WallClock.h"
 
 
 enum _WorkdayStatus {
@@ -14,7 +14,7 @@ typedef enum _WorkdayStatus WorkdayStatus;
 
 @interface Workday : NSObject<ClockWatcher>
 
-+(id) workdayWithTodoList: (ToDoList *)todoList andClock: (id<WorkdayClock>) fakeClock;
++(id) workdayWithTodoList: (ToDoList *)todoList andClock: (id<WallClock>) fakeClock;
 @property (assign) NSTimeInterval currentTimePassed;
 -(void) start;
 

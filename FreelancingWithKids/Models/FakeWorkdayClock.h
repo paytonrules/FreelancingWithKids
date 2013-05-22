@@ -1,8 +1,8 @@
 
 #import <Foundation/Foundation.h>
-#import "WorkdayClock.h"
+#import "WallClock.h"
 
-@interface FakeWorkdayClock : NSObject<WorkdayClock>
+@interface FakeWorkdayClock : NSObject<WallClock>
 
 -(void) notifyWatcher:(NSTimeInterval) timeInterval;
 @end

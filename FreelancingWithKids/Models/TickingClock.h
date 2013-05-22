@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "WorkdayClock.h"
+#import "WallClock.h"
 
-@interface TickingClock : NSObject<WorkdayClock>
+@interface TickingClock : NSObject<WallClock>
 
 +(id) clockWithUpdateInterval:(NSTimeInterval) interval;
 @property(readonly) NSTimer *timer;
