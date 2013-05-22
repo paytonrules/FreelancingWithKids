@@ -1,15 +1,15 @@
 #import <OCDSpec2/OCDSpec2.h>
 #import <OCMock/OCMock.h>
-#import "TimingClock.h"
+#import "TickingClock.h"
 #import "ClockWatcher.h"
 
-OCDSpec2Context(TimingClockSpec) {
+OCDSpec2Context(TickingClockSpec) {
   
   Describe(@"A real clock using the timer", ^{
     
     It(@"creates a new NSTimer on start", ^{
       id delegate = [OCMockObject mockForProtocol:@protocol(ClockWatcher)];
-      TimingClock *clock = [TimingClock clockWithUpdateInterval:600];
+      TickingClock *clock = [TickingClock clockWithUpdateInterval:600];
       
       [clock start:delegate];
       
@@ -19,7 +19,7 @@ OCDSpec2Context(TimingClockSpec) {
     
     It(@"calls its delegate when the timer fires", ^{
       id delegate = [OCMockObject mockForProtocol:@protocol(ClockWatcher)];
-      TimingClock *clock = [TimingClock clockWithUpdateInterval:600];
+      TickingClock *clock = [TickingClock clockWithUpdateInterval:600];
       
       [[delegate expect] clockTicked:600];
       
@@ -35,7 +35,7 @@ OCDSpec2Context(TimingClockSpec) {
     
     It(@"can be ended", ^{
       id delegate = [OCMockObject mockForProtocol:@protocol(ClockWatcher)];
-      TimingClock *clock = [TimingClock clockWithUpdateInterval:600];
+      TickingClock *clock = [TickingClock clockWithUpdateInterval:600];
       
       [clock start:delegate];
       

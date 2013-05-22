@@ -1,6 +1,6 @@
-#import "TimingClock.h"
+#import "TickingClock.h"
 
-@interface TimingClock()
+@interface TickingClock()
 
 @property(nonatomic, strong) NSTimer *timer;
 @property(assign) NSTimeInterval interval;
@@ -8,7 +8,7 @@
 
 @end
 
-@implementation TimingClock
+@implementation TickingClock
 
 - (id)initWithTimeInterval:(NSTimeInterval) interval
 {
@@ -21,7 +21,7 @@
 
 +(id) clockWithUpdateInterval:(NSTimeInterval) interval
 {
-  return [[TimingClock alloc] initWithTimeInterval:interval];
+  return [[TickingClock alloc] initWithTimeInterval:interval];
 }
 
 -(void) start:(id<ClockWatcher>)watcher

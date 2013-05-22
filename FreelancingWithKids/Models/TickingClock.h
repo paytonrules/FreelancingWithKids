@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "WorkdayClock.h"
 
-@interface TimingClock : NSObject<WorkdayClock>
+@interface TickingClock : NSObject<WorkdayClock>
 
 +(id) clockWithUpdateInterval:(NSTimeInterval) interval;
 @property(readonly) NSTimer *timer;
