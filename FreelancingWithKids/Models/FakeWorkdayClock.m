@@ -11,7 +11,6 @@
 -(void) start:(id<ClockWatcher>)watcher
 {
   self.watcher = watcher;
-  self.started = true;
 }
 
 -(void) notifyWatcher:(NSTimeInterval) timeInterval

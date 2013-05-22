@@ -15,6 +15,7 @@ typedef enum _WorkdayStatus WorkdayStatus;
 @interface Workday : NSObject<ClockWatcher>
 
 +(id) workdayWithTodoList: (ToDoList *)todoList andClock: (id<WorkdayClock>) fakeClock;
+@property (assign) NSTimeInterval currentTimePassed;
 -(void) start;
 
 @end

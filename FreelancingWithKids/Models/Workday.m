@@ -6,7 +6,6 @@
 
 @property (nonatomic, strong) id<WorkdayClock> itsClock;
 @property (nonatomic, strong) ToDoList *tasks;
-@property (assign) NSTimeInterval currentTimePassed;
 @end
 
 static NSTimeInterval EIGHT_HOUR_DAY = 28800; // 8 hours

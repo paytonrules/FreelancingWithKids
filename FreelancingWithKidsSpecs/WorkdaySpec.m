@@ -1,4 +1,5 @@
 #import <OCDSpec2/OCDSpec2.h>
+#import <OCMock/OCMock.h>
 #import "Workday.h"
 #import "ToDoList.h"
 #import "Task.h"
@@ -15,7 +16,6 @@
 
 -(void) notified: (NSNotification *) notification
 {
-  NSLog(@"I AM AT THE RIGHT NOTIFICATION");
   self.status = (WorkdayStatus) [notification.userInfo[@"result"] intValue];
 }
 
@@ -46,23 +46,17 @@ OCDSpec2Context(WorkdaySpec) {
       [[NSNotificationCenter defaultCenter] removeObserver:observer name:@"gameOver" object:nil];
     });
     
-    // Test that you're wired to the timer
-    // Test the notifications
-    It(@"starts watching the clock at the start", ^{
+    It(@"starts the clock when the day is started", ^{
       [day start];
       
-      [ExpectBool(fakeClock.started) toBeTrue];
+      [fakeClock notifyWatcher:10];
+      
+      [ExpectInt(day.currentTimePassed) toBe:10];
     });
     
     It(@"notifies that the day is successful when there are no tasks", ^{
-      GameObserver *observer = [GameObserver new];
-      [[NSNotificationCenter defaultCenter] addObserver:observer
-                                               selector:@selector(notified:)
-                                                  name:@"gameOver"
-                                                  object:nil];
-      
       [day start];
-      [fakeClock notifyWatcher:0];
+      [day clockTicked:0];
       
       [ExpectInt(observer.status) toBe:Successful];
     });
@@ -71,7 +65,7 @@ OCDSpec2Context(WorkdaySpec) {
       [todoList add:[Task taskWithName:@"name" andDuration:10]];
       
       [day start];
-      [fakeClock notifyWatcher:28800];
+      [day clockTicked:28800];
       
       [ExpectInt(observer.status) toBe:Failed];
     });
@@ -87,10 +81,9 @@ OCDSpec2Context(WorkdaySpec) {
                                                  object:nil];
       
       [day start];
-      [fakeClock notifyWatcher:0];
+      [day clockTicked:0];
       
       [ExpectInt(observer.status) toBe:None];
-      
     });
     
 
