@@ -16,7 +16,8 @@
 
 -(void) notified: (NSNotification *) notification
 {
-  self.status = (WorkdayStatus) [notification.userInfo[@"result"] intValue];
+  if (self.status == None)
+    self.status = (WorkdayStatus) [notification.userInfo[@"result"] intValue];
 }
 
 @end
@@ -70,25 +71,48 @@ OCDSpec2Context(WorkdaySpec) {
       [ExpectInt(observer.status) toBe:Failed];
     });
     
-    It(@"doesn't notify anything if the tasks aren't done and the day isn't over", ^{
+    It(@"ends the day at 8 hours", ^{
       [todoList add:[Task taskWithName:@"name" andDuration:10]];
       
-      GameObserver *observer = [GameObserver new];
-
-      [[NSNotificationCenter defaultCenter] addObserver:observer
-                                               selector:@selector(notified:)
-                                                   name:@"gameOver"
-                                                 object:nil];
+      [day start];
+      [day clockTicked:28799];
       
+      [ExpectInt(observer.status) toBe:None];
+      
+      [day clockTicked:1];
+      
+      [ExpectInt(observer.status) toBe:Failed];
+    });
+    
+    It(@"doesn't notify anything if the tasks aren't done and the day isn't over", ^{
+      [todoList add:[Task taskWithName:@"name" andDuration:10]];
+            
       [day start];
       [day clockTicked:0];
       
       [ExpectInt(observer.status) toBe:None];
     });
     
-
+    It(@"notifies of the day success when the tasks are done", ^{
+      Task *task = [Task taskWithName:@"name" duration:1 andUpdatesPerSecond:1];
+      [todoList add:task];
+      [task updateProgress];
+      
+      [day start];
+      [day clockTicked:1];
+      
+      [ExpectInt(observer.status) toBe:Successful];
+    });
     
-    It(@"notifies of the day success when the day is over and the tasks are done", ^{
+    It(@"prefers winning to losing - if the day is over but the tasks are done, you succeeded", ^{
+      Task *task = [Task taskWithName:@"name" duration:1 andUpdatesPerSecond:1];
+      [todoList add:task];
+      [task updateProgress];
+      
+      [day start];
+      [day clockTicked:28800];
+      
+      [ExpectInt(observer.status) toBe:Successful];
     });
   });
 }

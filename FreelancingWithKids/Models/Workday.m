@@ -38,17 +38,16 @@ static NSTimeInterval EIGHT_HOUR_DAY = 28800; // 8 hours
 -(void) clockTicked:(NSTimeInterval) timeInterval
 {
   self.currentTimePassed += timeInterval;
-  
-  if (self.currentTimePassed >= EIGHT_HOUR_DAY) {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"gameOver"
-                                                        object:self
-                                                      userInfo:@{@"result": [NSNumber numberWithInt:Failed]}];
-  }
-  
+
   if ([self.tasks complete]) {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"gameOver"
                                                         object:self
                                                       userInfo:@{@"result": [NSNumber numberWithInt:Successful]}];
+  }
+  else if (self.currentTimePassed >= EIGHT_HOUR_DAY) {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"gameOver"
+                                                        object:self
+                                                      userInfo:@{@"result": [NSNumber numberWithInt:Failed]}];
   }
 }
 
