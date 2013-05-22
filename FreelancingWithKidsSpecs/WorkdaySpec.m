@@ -17,6 +17,7 @@
 
 -(void) notified: (NSNotification *) notification
 {
+  NSLog(@"NOTIFIED: @");
   if (notification.userInfo[@"successful"]) {
     self.status = @"success";
   }
@@ -24,7 +25,7 @@
 
 -(BOOL) notifiedWith: (NSString *) status
 {
-  return [self.status compare:status] == 0;
+  return (self.status != nil) && [self.status compare:status] == NSOrderedSame;
 }
 
 @end
@@ -52,7 +53,7 @@ OCDSpec2Context(WorkdaySpec) {
     It(@"notifies that the day is successful when there are no tasks", ^{
       GameObserver *observer = [GameObserver new];
       [[NSNotificationCenter defaultCenter] addObserver:observer
-                                              selector:@selector(notified)
+                                               selector:@selector(notified:)
                                                   name:@"gameOver"
                                                   object:nil];
       
@@ -62,10 +63,12 @@ OCDSpec2Context(WorkdaySpec) {
       [ExpectBool([observer notifiedWith:@"success"]) toBeTrue];
     });
     
-    It(@"doesn't notify anythign if the tasks aren't done and the day isn't over", ^{
+    It(@"doesn't notify anything if the tasks aren't done and the day isn't over", ^{
       [todoList add:[Task taskWithName:@"name" andDuration:10]];
       
       GameObserver *observer = [GameObserver new];
+      [ExpectBool([observer notifiedWith:@"success"]) toBeFalse];
+
       [[NSNotificationCenter defaultCenter] addObserver:observer
                                                selector:@selector(notified)
                                                    name:@"gameOver"

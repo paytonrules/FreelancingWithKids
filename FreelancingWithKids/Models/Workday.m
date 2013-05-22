@@ -19,7 +19,6 @@
   return day;
 }
 
-
 -(void) start
 {
   [self.itsClock start:self];

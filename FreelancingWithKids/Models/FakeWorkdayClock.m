@@ -16,6 +16,7 @@
 
 -(void) notifyWatcher
 {
+  [self.watcher clockTicked];
 }
 
 @end

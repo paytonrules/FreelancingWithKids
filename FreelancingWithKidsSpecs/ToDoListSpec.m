@@ -57,7 +57,7 @@ OCDSpec2Context(ToDoListSpec) {
       
       [list add:task];
       
-      [task.timer fire];
+      [task updateProgress];
       
       [ExpectBool([list complete]) toBeTrue];
     });

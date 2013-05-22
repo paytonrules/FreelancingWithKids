@@ -87,5 +87,16 @@ OCDSpec2Context(TaskSpec) {
       
       [ExpectFloat(task.timer.timeInterval) toBe:0.5 withPrecision:0.001];
     });
+    
+    It(@"is complete when it's completed all its updates", ^{
+      Task *task = [Task taskWithName: @"name" duration: 1 andUpdatesPerSecond:2];
+      
+      [ExpectBool([task complete]) toBeFalse];
+      
+      [task updateProgress];
+      [task updateProgress];
+      
+      [ExpectBool([task complete]) toBeTrue];
+    });
   });
 }

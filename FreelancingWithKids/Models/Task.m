@@ -35,13 +35,18 @@
   self.timer = [NSTimer scheduledTimerWithTimeInterval:self.updateInterval target:self selector:@selector(updateProgress) userInfo:nil repeats:YES];
 }
 
+-(BOOL) complete
+{
+  return self.timeSpent >= self.durationInUpdates;
+}
+
 -(void) updateProgress
 {
   self.timeSpent++;
   float progress = (float) self.timeSpent / (float) self.durationInUpdates;
   [self.view updateProgress:[[NSDecimalNumber alloc] initWithFloat:progress]];
   
-  if (self.timeSpent >= self.durationInUpdates)
+  if (self.complete)
     self.timer = nil;
 }
 

@@ -15,6 +15,8 @@
 
 @property(strong, nonatomic) NSString *name;
 @property(readonly, nonatomic) NSTimer *timer;
+@property(readonly) BOOL complete;
 -(void) start:(id<TaskView>) view;
+-(void) updateProgress;
 
 @end

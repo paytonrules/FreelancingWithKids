@@ -37,7 +37,12 @@
 -(bool) complete
 {
   if (self.count > 0) {
-    return NO;
+    for (Task *task in self.tasks) {
+      if (task.complete == NO) {
+        return NO;
+      }
+    }
+    return YES;
   } else {
     return YES;
   }
