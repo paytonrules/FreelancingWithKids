@@ -11,7 +11,6 @@
 		070B5A2F174B9B64005B35E5 /* WorkdaySpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 070B5A2E174B9B64005B35E5 /* WorkdaySpec.m */; };
 		070B5A36174B9BFE005B35E5 /* Workday.m in Sources */ = {isa = PBXBuildFile; fileRef = 070B5A35174B9BFE005B35E5 /* Workday.m */; };
 		070B5A37174B9C07005B35E5 /* Workday.m in Sources */ = {isa = PBXBuildFile; fileRef = 070B5A35174B9BFE005B35E5 /* Workday.m */; };
-		070B5A3C174B9F94005B35E5 /* FakeWorkdayClock.m in Sources */ = {isa = PBXBuildFile; fileRef = 070B5A39174B9ED3005B35E5 /* FakeWorkdayClock.m */; };
 		073C74C5174CFE850094A643 /* TickingClockSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 073C74C4174CFE850094A643 /* TickingClockSpec.m */; };
 		073E74211743B84D00393AB3 /* ToDoList.m in Sources */ = {isa = PBXBuildFile; fileRef = 073E74201743B84D00393AB3 /* ToDoList.m */; };
 		073E74221743B84D00393AB3 /* ToDoList.m in Sources */ = {isa = PBXBuildFile; fileRef = 073E74201743B84D00393AB3 /* ToDoList.m */; };
@@ -31,6 +30,7 @@
 		074A9E6E17410CFE00D4CA53 /* libOCMock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 074A9E6D17410CFE00D4CA53 /* libOCMock.a */; };
 		074C382F174D825700337FC0 /* TickingClock.m in Sources */ = {isa = PBXBuildFile; fileRef = 074C382E174D825700337FC0 /* TickingClock.m */; };
 		074C3830174D825700337FC0 /* TickingClock.m in Sources */ = {isa = PBXBuildFile; fileRef = 074C382E174D825700337FC0 /* TickingClock.m */; };
+		074C3838174D8D5500337FC0 /* FakeWorkdayClock.m in Sources */ = {isa = PBXBuildFile; fileRef = 074C3837174D8D5500337FC0 /* FakeWorkdayClock.m */; };
 		0797E32A173DAE8E004C2C62 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0797E329173DAE8E004C2C62 /* UIKit.framework */; };
 		0797E32C173DAE8E004C2C62 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0797E32B173DAE8E004C2C62 /* Foundation.framework */; };
 		0797E32E173DAE8E004C2C62 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0797E32D173DAE8E004C2C62 /* CoreGraphics.framework */; };
@@ -88,8 +88,6 @@
 		070B5A2E174B9B64005B35E5 /* WorkdaySpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WorkdaySpec.m; path = FreelancingWithKidsSpecs/WorkdaySpec.m; sourceTree = "<group>"; };
 		070B5A34174B9BFE005B35E5 /* Workday.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Workday.h; path = Models/Workday.h; sourceTree = "<group>"; };
 		070B5A35174B9BFE005B35E5 /* Workday.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Workday.m; path = Models/Workday.m; sourceTree = "<group>"; };
-		070B5A38174B9ED3005B35E5 /* FakeWorkdayClock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FakeWorkdayClock.h; path = Models/FakeWorkdayClock.h; sourceTree = "<group>"; };
-		070B5A39174B9ED3005B35E5 /* FakeWorkdayClock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FakeWorkdayClock.m; path = Models/FakeWorkdayClock.m; sourceTree = "<group>"; };
 		070B5A3B174B9EF4005B35E5 /* WallClock.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = WallClock.h; path = Models/WallClock.h; sourceTree = "<group>"; };
 		070B5A3D174BA2D3005B35E5 /* ClockWatcher.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ClockWatcher.h; path = Models/ClockWatcher.h; sourceTree = "<group>"; };
 		073C74C4174CFE850094A643 /* TickingClockSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TickingClockSpec.m; path = FreelancingWithKidsSpecs/TickingClockSpec.m; sourceTree = "<group>"; };
@@ -111,6 +109,8 @@
 		074A9E6F17410DBC00D4CA53 /* PerformWorkTaskDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PerformWorkTaskDelegate.h; path = Interactors/PerformWorkTaskDelegate.h; sourceTree = "<group>"; };
 		074C382D174D825700337FC0 /* TickingClock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TickingClock.h; path = Models/TickingClock.h; sourceTree = "<group>"; };
 		074C382E174D825700337FC0 /* TickingClock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TickingClock.m; path = Models/TickingClock.m; sourceTree = "<group>"; };
+		074C3836174D8D5500337FC0 /* FakeWorkdayClock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FakeWorkdayClock.h; path = FreelancingWithKidsSpecs/Fakes/FakeWorkdayClock.h; sourceTree = "<group>"; };
+		074C3837174D8D5500337FC0 /* FakeWorkdayClock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FakeWorkdayClock.m; path = FreelancingWithKidsSpecs/Fakes/FakeWorkdayClock.m; sourceTree = "<group>"; };
 		0797E326173DAE8E004C2C62 /* FreelancingWithKids.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FreelancingWithKids.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0797E329173DAE8E004C2C62 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		0797E32B173DAE8E004C2C62 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -166,6 +166,7 @@
 		074A9E43173E6C7E00D4CA53 /* Specs */ = {
 			isa = PBXGroup;
 			children = (
+				074C3835174D8D4500337FC0 /* Fakes */,
 				074A9E59173E6D5C00D4CA53 /* PerformWorkTasksInteractorSpec.m */,
 				074A9E69173E710300D4CA53 /* TaskSpec.m */,
 				073E74261743B94300393AB3 /* ToDoListSpec.m */,
@@ -216,14 +217,21 @@
 				073E74201743B84D00393AB3 /* ToDoList.m */,
 				070B5A34174B9BFE005B35E5 /* Workday.h */,
 				070B5A35174B9BFE005B35E5 /* Workday.m */,
-				070B5A38174B9ED3005B35E5 /* FakeWorkdayClock.h */,
-				070B5A39174B9ED3005B35E5 /* FakeWorkdayClock.m */,
 				070B5A3B174B9EF4005B35E5 /* WallClock.h */,
 				070B5A3D174BA2D3005B35E5 /* ClockWatcher.h */,
 				074C382D174D825700337FC0 /* TickingClock.h */,
 				074C382E174D825700337FC0 /* TickingClock.m */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		074C3835174D8D4500337FC0 /* Fakes */ = {
+			isa = PBXGroup;
+			children = (
+				074C3836174D8D5500337FC0 /* FakeWorkdayClock.h */,
+				074C3837174D8D5500337FC0 /* FakeWorkdayClock.m */,
+			);
+			name = Fakes;
 			sourceTree = "<group>";
 		};
 		0797E31D173DAE8E004C2C62 = {
@@ -488,10 +496,10 @@
 				070B5A37174B9C07005B35E5 /* Workday.m in Sources */,
 				073E74221743B84D00393AB3 /* ToDoList.m in Sources */,
 				073E74271743B94300393AB3 /* ToDoListSpec.m in Sources */,
-				070B5A3C174B9F94005B35E5 /* FakeWorkdayClock.m in Sources */,
 				070B5A2F174B9B64005B35E5 /* WorkdaySpec.m in Sources */,
 				073C74C5174CFE850094A643 /* TickingClockSpec.m in Sources */,
 				074C3830174D825700337FC0 /* TickingClock.m in Sources */,
+				074C3838174D8D5500337FC0 /* FakeWorkdayClock.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
