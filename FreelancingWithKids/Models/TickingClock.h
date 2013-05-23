@@ -14,6 +14,4 @@
 +(id) clockWithUpdateInterval:(NSTimeInterval) interval;
 @property(readonly) NSTimer *timer;
 
--(void) stop;
-
 @end

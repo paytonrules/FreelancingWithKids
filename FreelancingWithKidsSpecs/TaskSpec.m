@@ -2,10 +2,16 @@
 #import "OCMock/OCMock.h"
 #import "Task.h"
 #import "TaskView.h"
+#import "FakeWorkdayClock.h"
 
 OCDSpec2Context(TaskSpec) {
   
   Describe(@"Work Tasks", ^{
+    __block FakeWorkdayClock *clock;
+    
+    BeforeEach(^{
+      clock = [FakeWorkdayClock new];
+    });
     
     It(@"has a name", ^{
       Task *task = [Task taskWithName: @"name" andDuration:10];
@@ -13,15 +19,15 @@ OCDSpec2Context(TaskSpec) {
       [ExpectObj(task.name) toBeEqualTo:@"name"];
     });
     
-    It(@"updates the task with progress when the timer fires", ^{
+    It(@"updates the task with progress when the clock ticks", ^{
       id delegate = [OCMockObject mockForProtocol:@protocol(TaskView)];
 
-      Task *task = [Task taskWithName: @"name" andDuration:3];
+      Task *task = [Task taskWithName: @"name" duration:3 updatesPerSecond:0 andClock:clock];
 
       [[delegate expect] updateProgress:[OCMArg any]];
 
       [task start:delegate];
-      [task.timer fire];
+      [clock notifyWatcher:0];
       
       [delegate verify];
     });
@@ -29,14 +35,18 @@ OCDSpec2Context(TaskSpec) {
     It(@"sends the current progress when the timer is fired", ^{
       id delegate = [OCMockObject mockForProtocol:@protocol(TaskView)];
       
-      Task *task = [Task taskWithName: @"name" andDuration:4];
+      Task *task = [Task taskWithName: @"name" duration:4 updatesPerSecond:0.5 andClock:clock];
       
-      [[delegate expect] updateProgress:[OCMArg any]];
+      [[delegate expect] updateProgress:[[NSDecimalNumber alloc] initWithFloat:0.5]];
       
       [task start:delegate];
-      [task.timer fire];
+      [clock notifyWatcher:2];
       
       [delegate verify];
+    });
+    
+    It(@"uses the updates per second to configure the wall clock", ^{
+      Pending();
     });
     
     It(@"updates a configurable number of times times per second", ^{
@@ -45,11 +55,11 @@ OCDSpec2Context(TaskSpec) {
       [[delegate expect] updateProgress:[[NSDecimalNumber alloc] initWithFloat:0.5]];
       [[delegate expect] updateProgress:[[NSDecimalNumber alloc] initWithFloat:1.0]];
       
-      Task *task = [Task taskWithName: @"name" duration:1 andUpdatesPerSecond:2];
+      Task *task = [Task taskWithName: @"name" duration:1 updatesPerSecond:2 andClock:clock];
       
       [task start:delegate];
-      [task.timer fire];
-      [task.timer fire];
+      [clock notifyWatcher:2];
+      [clock notifyWatcher:4];
       
       [delegate verify];
     });
@@ -59,11 +69,11 @@ OCDSpec2Context(TaskSpec) {
       
       [[delegate expect] updateProgress:[[NSDecimalNumber alloc] initWithFloat:1.0]];
       
-      Task *task = [Task taskWithName: @"name" duration:1 andUpdatesPerSecond:1];
+      Task *task = [Task taskWithName: @"name" duration:1 updatesPerSecond:1 andClock:clock];
 
       [task start:delegate];
-      [task.timer fire];
-      [task.timer fire];
+      [clock notifyWatcher:1];
+      [clock notifyWatcher:1.2];
       
       [delegate verify];
     });
@@ -76,16 +86,11 @@ OCDSpec2Context(TaskSpec) {
       Task *task = [Task taskWithName: @"name" andDuration:1];
       
       [task start:delegate];
-      [task.timer fire];
+      [clock notifyWatcher:0.1];
     });
     
-    It(@"is a legit timer on the run loop - with a real scheduled interval", ^{
-      Task *task = [Task taskWithName: @"name" duration: 1 andUpdatesPerSecond:2];
-      id delegate = [OCMockObject niceMockForProtocol:@protocol(TaskView)];
-      
-      [task start:delegate];
-      
-      [ExpectFloat(task.timer.timeInterval) toBe:0.5 withPrecision:0.001];
+    It(@"creates a real workday clock when one isn't provided", ^{
+      Pending();
     });
     
     It(@"is complete when it's completed all its updates", ^{

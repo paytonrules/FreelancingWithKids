@@ -15,7 +15,13 @@
 
 -(void) notifyWatcher:(NSTimeInterval) timeInterval
 {
-  [self.watcher clockTicked: timeInterval];
+  if (self.watcher != nil)
+    [self.watcher clockTicked: timeInterval];
+}
+
+-(void) stop
+{
+  self.watcher = nil;
 }
 
 @end

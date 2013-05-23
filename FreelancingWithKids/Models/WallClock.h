@@ -5,5 +5,6 @@
 @protocol WallClock <NSObject>
 
 -(void) start:(id<ClockWatcher>) watcher;
+-(void) stop;
 
 @end
