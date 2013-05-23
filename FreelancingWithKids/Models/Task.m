@@ -28,6 +28,7 @@
   task.durationInUpdates = task.duration / task.updateInterval;
   
   // Create your wall clock here
+  task.clock = [TickingClock clockWithUpdateInterval:task.updateInterval];
   
   return task;
 }

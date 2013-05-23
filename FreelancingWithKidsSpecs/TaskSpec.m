@@ -3,6 +3,7 @@
 #import "Task.h"
 #import "TaskView.h"
 #import "FakeWorkdayClock.h"
+#import "TickingClock.h"
 
 OCDSpec2Context(TaskSpec) {
   
@@ -45,10 +46,6 @@ OCDSpec2Context(TaskSpec) {
       [delegate verify];
     });
     
-    It(@"uses the updates per second to configure the wall clock", ^{
-      Pending();
-    });
-    
     It(@"updates a configurable number of times times per second", ^{
       id delegate = [OCMockObject mockForProtocol:@protocol(TaskView)];
       
@@ -78,21 +75,6 @@ OCDSpec2Context(TaskSpec) {
       [delegate verify];
     });
     
-    It(@"defaults to 10 updates per second", ^{
-      id delegate = [OCMockObject mockForProtocol:@protocol(TaskView)];
-      
-      [[delegate expect] updateProgress:[[NSDecimalNumber alloc] initWithFloat:0.1]];
-      
-      Task *task = [Task taskWithName: @"name" andDuration:1];
-      
-      [task start:delegate];
-      [clock notifyWatcher:0.1];
-    });
-    
-    It(@"creates a real workday clock when one isn't provided", ^{
-      Pending();
-    });
-    
     It(@"is complete when it's completed all its updates", ^{
       Task *task = [Task taskWithName: @"name" duration: 1 andUpdatesPerSecond:2];
       
@@ -102,6 +84,31 @@ OCDSpec2Context(TaskSpec) {
       [task updateProgress];
       
       [ExpectBool([task complete]) toBeTrue];
+    });
+    
+    It(@"creates a real workday clock when one isn't provided", ^{
+      Task *task = [Task taskWithName:@"name" duration:2 andUpdatesPerSecond:3];
+      
+      [ExpectObj([task.clock class]) toBe: [TickingClock class]];
+    });
+    
+    It(@"uses the updates per second to configure the wall clock", ^{
+      Task *task = [Task taskWithName:@"name" duration:2 andUpdatesPerSecond:2];
+      
+      [ExpectFloat(((TickingClock *) task.clock).interval) toBe: 0.5 withPrecision:0.001];
+      
+      
+    });
+    
+    It(@"defaults to 10 updates per second", ^{
+      id delegate = [OCMockObject mockForProtocol:@protocol(TaskView)];
+      
+      [[delegate expect] updateProgress:[[NSDecimalNumber alloc] initWithFloat:0.1]];
+      
+      Task *task = [Task taskWithName: @"name" andDuration:1];
+      
+      [task start:delegate];
+      [clock notifyWatcher:0.1];
     });
   });
 }
