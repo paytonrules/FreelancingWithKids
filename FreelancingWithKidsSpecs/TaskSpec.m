@@ -23,7 +23,7 @@ OCDSpec2Context(TaskSpec) {
     It(@"updates the task with progress when the clock ticks", ^{
       id delegate = [OCMockObject mockForProtocol:@protocol(TaskView)];
 
-      Task *task = [Task taskWithName: @"name" duration:3 updatesPerSecond:0 andClock:clock];
+      Task *task = [Task taskWithName: @"name" duration:3 andClock:clock];
 
       [[delegate expect] updateProgress:[OCMArg any]];
 
@@ -36,7 +36,7 @@ OCDSpec2Context(TaskSpec) {
     It(@"sends the current progress when the timer is fired", ^{
       id delegate = [OCMockObject mockForProtocol:@protocol(TaskView)];
       
-      Task *task = [Task taskWithName: @"name" duration:4 updatesPerSecond:0.5 andClock:clock];
+      Task *task = [Task taskWithName: @"name" duration:4 andClock:clock];
       
       [[delegate expect] updateProgress:[[NSDecimalNumber alloc] initWithFloat:0.5]];
       
@@ -46,27 +46,12 @@ OCDSpec2Context(TaskSpec) {
       [delegate verify];
     });
     
-    It(@"updates a configurable number of times times per second", ^{
-      id delegate = [OCMockObject mockForProtocol:@protocol(TaskView)];
-      
-      [[delegate expect] updateProgress:[[NSDecimalNumber alloc] initWithFloat:0.5]];
-      [[delegate expect] updateProgress:[[NSDecimalNumber alloc] initWithFloat:1.0]];
-      
-      Task *task = [Task taskWithName: @"name" duration:1 updatesPerSecond:2 andClock:clock];
-      
-      [task start:delegate];
-      [clock notifyWatcher:2];
-      [clock notifyWatcher:4];
-      
-      [delegate verify];
-    });
-    
-    It(@"stops firing updating progress when the task is complete", ^{
+    It(@"stops updating progress when the task is complete", ^{
       id delegate = [OCMockObject mockForProtocol:@protocol(TaskView)];
       
       [[delegate expect] updateProgress:[[NSDecimalNumber alloc] initWithFloat:1.0]];
       
-      Task *task = [Task taskWithName: @"name" duration:1 updatesPerSecond:1 andClock:clock];
+      Task *task = [Task taskWithName: @"name" duration:1 andClock:clock];
 
       [task start:delegate];
       [clock notifyWatcher:1];
@@ -76,12 +61,12 @@ OCDSpec2Context(TaskSpec) {
     });
     
     It(@"is complete when it's completed all its updates", ^{
-      Task *task = [Task taskWithName: @"name" duration: 1 andUpdatesPerSecond:2];
+      Task *task = [Task taskWithName: @"name" andDuration: 1];
       
       [ExpectBool([task complete]) toBeFalse];
       
-      [task updateProgress];
-      [task updateProgress];
+      [task clockTicked:0.5];
+      [task clockTicked:0.5];
       
       [ExpectBool([task complete]) toBeTrue];
     });
@@ -96,19 +81,12 @@ OCDSpec2Context(TaskSpec) {
       Task *task = [Task taskWithName:@"name" duration:2 andUpdatesPerSecond:2];
       
       [ExpectFloat(((TickingClock *) task.clock).interval) toBe: 0.5 withPrecision:0.001];
-      
-      
     });
     
     It(@"defaults to 10 updates per second", ^{
-      id delegate = [OCMockObject mockForProtocol:@protocol(TaskView)];
-      
-      [[delegate expect] updateProgress:[[NSDecimalNumber alloc] initWithFloat:0.1]];
-      
       Task *task = [Task taskWithName: @"name" andDuration:1];
       
-      [task start:delegate];
-      [clock notifyWatcher:0.1];
+      [ExpectFloat(((TickingClock *) task.clock).interval) toBe: 0.1 withPrecision:0.001];
     });
   });
 }

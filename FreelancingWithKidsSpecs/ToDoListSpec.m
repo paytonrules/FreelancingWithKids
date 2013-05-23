@@ -53,11 +53,11 @@ OCDSpec2Context(ToDoListSpec) {
     
     It(@"is complete if all its tasks are complete", ^{
       ToDoList *list = [ToDoList new];
-      Task *task = [Task taskWithName:@"email" duration:1 andUpdatesPerSecond:1];
+      Task *task = [Task taskWithName:@"email" andDuration:1];
       
       [list add:task];
       
-      [task updateProgress];
+      [task clockTicked:1.0];
       
       [ExpectBool([list complete]) toBeTrue];
     });

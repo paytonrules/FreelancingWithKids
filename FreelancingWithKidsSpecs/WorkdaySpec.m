@@ -95,7 +95,7 @@ OCDSpec2Context(WorkdaySpec) {
     It(@"notifies of the day success when the tasks are done", ^{
       Task *task = [Task taskWithName:@"name" duration:1 andUpdatesPerSecond:1];
       [todoList add:task];
-      [task updateProgress];
+      [task clockTicked:1.0];
       
       [day start];
       [day clockTicked:1];
@@ -106,7 +106,7 @@ OCDSpec2Context(WorkdaySpec) {
     It(@"prefers winning to losing - if the day is over but the tasks are done, you succeeded", ^{
       Task *task = [Task taskWithName:@"name" duration:1 andUpdatesPerSecond:1];
       [todoList add:task];
-      [task updateProgress];
+      [task clockTicked:1.0];
       
       [day start];
       [day clockTicked:28800];
