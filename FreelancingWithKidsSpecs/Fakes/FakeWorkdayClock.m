@@ -13,6 +13,14 @@
   self.watcher = watcher;
 }
 
+-(void) start
+{
+}
+
+-(void) registerWatcher:(id<ClockWatcher>) watcher
+{
+}
+
 -(void) notifyWatcher:(NSTimeInterval) timeInterval
 {
   if (self.watcher != nil)

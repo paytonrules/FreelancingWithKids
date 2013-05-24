@@ -2,9 +2,13 @@
 #import "ToDoList.h"
 #import "Task.h"
 #import "TaskViewCell.h"
+#import "TickingClock.h"
+#import "Workday.h"
 
 @interface WorkdayController ()
 @property (strong, nonatomic) ToDoList *tasks;
+@property (strong, nonatomic) Workday *day;
+@property (strong, nonatomic) id<WallClock> tickingClock;
 @end
 
 static NSString *reuseIdentifier = @"task";
@@ -15,12 +19,15 @@ static NSString *reuseIdentifier = @"task";
 {
     [super viewDidLoad];
   
+  // Main ?
   [self.taskList registerNib:[UINib nibWithNibName:@"TaskViewCell" bundle:nil] forCellReuseIdentifier:reuseIdentifier];
+  self.tickingClock = [TickingClock clockWithUpdateInterval:18.75];
   
   self.tasks = [ToDoList new];
   [self.tasks add:[Task taskWithName:@"email" andDuration:3]];
   [self.tasks add:[Task taskWithName:@"meeting" andDuration:10]];
-	// Do any additional setup after loading the view, typically from a nib.
+
+  self.day = [Workday workdayWithTodoList:self.tasks andClock:self.tickingClock];
 }
 
 -(UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath: (NSIndexPath *)indexPath

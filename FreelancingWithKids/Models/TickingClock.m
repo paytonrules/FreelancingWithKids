@@ -4,7 +4,7 @@
 
 @property(nonatomic, strong) NSTimer *timer;
 @property(assign) NSTimeInterval interval;
-@property(nonatomic, strong) id<ClockWatcher> watcher;
+@property(nonatomic, strong) NSMutableSet *watchers;
 
 @end
 
@@ -15,6 +15,7 @@
     self = [super init];
     if (self) {
       self.interval = interval;
+      self.watchers = [NSMutableSet new];
     }
     return self;
 }
@@ -26,12 +27,23 @@
 
 -(void) start:(id<ClockWatcher>)watcher
 {
-  self.watcher = watcher;
+  [self registerWatcher: watcher];
+  [self start];
+}
+
+-(void) start
+{
   self.timer = [NSTimer scheduledTimerWithTimeInterval:self.interval
                                                 target:self
                                               selector:@selector(updateWatcher)
                                               userInfo:nil
                                                repeats:YES];
+  
+}
+
+-(void) registerWatcher:(id<ClockWatcher>)watcher
+{
+  [self.watchers addObject:watcher];
 }
 
 -(void) stop
@@ -41,7 +53,10 @@
 
 -(void) updateWatcher
 {
-  [self.watcher clockTicked:self.interval];
+  for(id<ClockWatcher> watcher in self.watchers)
+  {
+    [watcher clockTicked:self.interval];
+  }
 }
 
 @end

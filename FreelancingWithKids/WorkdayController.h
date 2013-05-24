@@ -11,4 +11,5 @@
 @interface WorkdayController : UIViewController<UITableViewDelegate, UITableViewDataSource>
 
 @property(strong, nonatomic) IBOutlet UITableView *taskList;
+@property(strong, nonatomic) IBOutlet UILabel *clockOnTheWall;
 @end
