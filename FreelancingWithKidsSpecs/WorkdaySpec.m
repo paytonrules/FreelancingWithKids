@@ -38,12 +38,12 @@ OCDSpec2Context(WorkdaySpec) {
       
       [[NSNotificationCenter defaultCenter] addObserver:observer
                                                selector:@selector(notified:)
-                                                   name:GAME_OVER_NOTIFICATION
+                                                   name:DAY_OVER_NOTIFICATION
                                                  object:nil];
     });
     
     AfterEach(^{
-      [[NSNotificationCenter defaultCenter] removeObserver:observer name:GAME_OVER_NOTIFICATION object:nil];
+      [[NSNotificationCenter defaultCenter] removeObserver:observer name:DAY_OVER_NOTIFICATION object:nil];
     });
     
     It(@"starts the clock when the day is started", ^{
@@ -105,6 +105,25 @@ OCDSpec2Context(WorkdaySpec) {
       }
       
       [ExpectInt(observer.status) toBe:Successful];
+    });
+    
+    It(@"stops the clock when the day is over", ^{
+      Task *task = [Task taskWithName:@"name" duration:1 andUpdatesPerSecond:1];
+      [todoList add:task];
+
+      [day start];
+      for (int i = 0; i < EIGHT_HOUR_DAY; i++) {
+        [day clockTicked:0];
+      }
+      
+      [ExpectBool(fakeClock.started) toBeFalse];
+    });
+    
+    It(@"stops the clock when the day is over because tasks are done", ^{
+      [day start];
+      [day clockTicked:0];
+      
+      [ExpectBool(fakeClock.started) toBeFalse];
     });
   });
 }

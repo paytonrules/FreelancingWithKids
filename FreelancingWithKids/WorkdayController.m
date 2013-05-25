@@ -25,7 +25,7 @@ static NSString *reuseIdentifier = @"task";
   
   // Main ?
   [self.taskList registerNib:[UINib nibWithNibName:@"TaskViewCell" bundle:nil] forCellReuseIdentifier:reuseIdentifier];
-  self.tickingClock = [TickingClock clockWithUpdateInterval:1];
+  self.tickingClock = [TickingClock clockWithUpdateInterval:18.5];
   [self.tickingClock registerWatcher:self];
   
   self.tasks = [ToDoList new];
@@ -34,7 +34,7 @@ static NSString *reuseIdentifier = @"task";
 
   self.day = [Workday workdayWithTodoList:self.tasks andClock:self.tickingClock];
   
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gameOver:) name:GAME_OVER_NOTIFICATION object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gameOver:) name:DAY_OVER_NOTIFICATION object:nil];
   [self updateClockOnTheWall];
   [self.day start];
 }
@@ -78,6 +78,7 @@ static NSString *reuseIdentifier = @"task";
   } else {
     alert.message = @"YOU LOSE";
   }
+  
   [alert show];
 }
 

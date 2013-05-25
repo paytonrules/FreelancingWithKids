@@ -9,7 +9,7 @@ enum _WorkdayStatus {
 };
 
 typedef enum _WorkdayStatus WorkdayStatus;
-FOUNDATION_EXPORT NSString *const GAME_OVER_NOTIFICATION;
+FOUNDATION_EXPORT NSString *const DAY_OVER_NOTIFICATION;
 FOUNDATION_EXPORT NSString *const DAY_RESULT;
 
 extern int const EIGHT_HOUR_DAY;
