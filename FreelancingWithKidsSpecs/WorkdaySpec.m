@@ -16,7 +16,7 @@
 -(void) notified: (NSNotification *) notification
 {
   if (self.status == None)
-    self.status = (WorkdayStatus) [notification.userInfo[@"result"] intValue];
+    self.status = (WorkdayStatus) [notification.userInfo[DAY_RESULT] intValue];
 }
 
 @end
@@ -38,12 +38,12 @@ OCDSpec2Context(WorkdaySpec) {
       
       [[NSNotificationCenter defaultCenter] addObserver:observer
                                                selector:@selector(notified:)
-                                                   name:@"gameOver"
+                                                   name:GAME_OVER_NOTIFICATION
                                                  object:nil];
     });
     
     AfterEach(^{
-      [[NSNotificationCenter defaultCenter] removeObserver:observer name:@"gameOver" object:nil];
+      [[NSNotificationCenter defaultCenter] removeObserver:observer name:GAME_OVER_NOTIFICATION object:nil];
     });
     
     It(@"starts the clock when the day is started", ^{

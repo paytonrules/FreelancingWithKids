@@ -34,7 +34,7 @@ static NSString *reuseIdentifier = @"task";
 
   self.day = [Workday workdayWithTodoList:self.tasks andClock:self.tickingClock];
   
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gameOver:) name:@"gameOver" object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gameOver:) name:GAME_OVER_NOTIFICATION object:nil];
   [self updateClockOnTheWall];
   [self.day start];
 }
@@ -73,7 +73,7 @@ static NSString *reuseIdentifier = @"task";
 -(void) gameOver:(NSNotification *) notification
 {
   UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Day Over" message:nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-  if ([notification.userInfo[@"result"] intValue] == Successful) {
+  if ([notification.userInfo[DAY_RESULT] intValue] == Successful) {
     alert.message = @"YOU WIN";
   } else {
     alert.message = @"YOU LOSE";

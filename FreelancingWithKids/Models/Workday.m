@@ -11,6 +11,8 @@
 @end
 
 int const EIGHT_HOUR_DAY = 32;
+NSString *const GAME_OVER_NOTIFICATION = @"gameOver";
+NSString *const DAY_RESULT = @"result";
 
 @implementation Workday
 
@@ -42,14 +44,14 @@ int const EIGHT_HOUR_DAY = 32;
   self.numTicks += 1;
 
   if ([self.tasks complete]) {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"gameOver"
+    [[NSNotificationCenter defaultCenter] postNotificationName:GAME_OVER_NOTIFICATION
                                                         object:self
-                                                      userInfo:@{@"result": [NSNumber numberWithInt:Successful]}];
+                                                      userInfo:@{DAY_RESULT: [NSNumber numberWithInt:Successful]}];
   }
   else if (self.numTicks >= EIGHT_HOUR_DAY) {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"gameOver"
+    [[NSNotificationCenter defaultCenter] postNotificationName:GAME_OVER_NOTIFICATION
                                                         object:self
-                                                      userInfo:@{@"result": [NSNumber numberWithInt:Failed]}];
+                                                      userInfo:@{DAY_RESULT: [NSNumber numberWithInt:Failed]}];
   }
 }
 
