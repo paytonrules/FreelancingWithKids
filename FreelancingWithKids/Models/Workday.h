@@ -10,12 +10,13 @@ enum _WorkdayStatus {
 
 typedef enum _WorkdayStatus WorkdayStatus;
 
+extern int const EIGHT_HOUR_DAY;
+
 @class ToDoList;
 
 @interface Workday : NSObject<ClockWatcher>
 
 +(id) workdayWithTodoList: (ToDoList *)todoList andClock: (id<WallClock>) fakeClock;
-@property (assign) NSTimeInterval currentTimePassed;
 -(void) start;
 
 @end

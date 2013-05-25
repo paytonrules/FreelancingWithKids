@@ -49,9 +49,7 @@ OCDSpec2Context(WorkdaySpec) {
     It(@"starts the clock when the day is started", ^{
       [day start];
       
-      [fakeClock notifyWatcher:10];
-      
-      [ExpectInt(day.currentTimePassed) toBe:10];
+      [ExpectBool(fakeClock.started) toBeTrue];
     });
     
     It(@"notifies that the day is successful when there are no tasks", ^{
@@ -61,24 +59,17 @@ OCDSpec2Context(WorkdaySpec) {
       [ExpectInt(observer.status) toBe:Successful];
     });
     
-    It(@"notifies of the day failed when the day is over but the tasks aren't done", ^{
+    It(@"notifies that the day failed when the day is over (32 ticks of the clock) but the tasks aren't done", ^{
       [todoList add:[Task taskWithName:@"name" andDuration:10]];
       
       [day start];
-      [day clockTicked:28800];
-      
-      [ExpectInt(observer.status) toBe:Failed];
-    });
-    
-    It(@"ends the day at 8 hours", ^{
-      [todoList add:[Task taskWithName:@"name" andDuration:10]];
-      
-      [day start];
-      [day clockTicked:28799];
+      [day clockTicked:0];
       
       [ExpectInt(observer.status) toBe:None];
       
-      [day clockTicked:1];
+      for (int i = 0; i < EIGHT_HOUR_DAY; i++) {
+        [day clockTicked:0];
+      }
       
       [ExpectInt(observer.status) toBe:Failed];
     });
@@ -95,10 +86,10 @@ OCDSpec2Context(WorkdaySpec) {
     It(@"notifies of the day success when the tasks are done", ^{
       Task *task = [Task taskWithName:@"name" duration:1 andUpdatesPerSecond:1];
       [todoList add:task];
-      [task clockTicked:1.0];
+      [task clockTicked:1];
       
       [day start];
-      [day clockTicked:1];
+      [day clockTicked:0];
       
       [ExpectInt(observer.status) toBe:Successful];
     });
@@ -109,7 +100,9 @@ OCDSpec2Context(WorkdaySpec) {
       [task clockTicked:1.0];
       
       [day start];
-      [day clockTicked:28800];
+      for (int i = 0; i < EIGHT_HOUR_DAY; i++) {
+        [day clockTicked:0];
+      }
       
       [ExpectInt(observer.status) toBe:Successful];
     });

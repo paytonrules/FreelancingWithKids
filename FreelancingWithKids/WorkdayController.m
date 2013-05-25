@@ -16,7 +16,7 @@
 static NSString *reuseIdentifier = @"task";
 
 @implementation WorkdayController
-
+   
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -25,7 +25,7 @@ static NSString *reuseIdentifier = @"task";
   
   // Main ?
   [self.taskList registerNib:[UINib nibWithNibName:@"TaskViewCell" bundle:nil] forCellReuseIdentifier:reuseIdentifier];
-  self.tickingClock = [TickingClock clockWithUpdateInterval:18.75];
+  self.tickingClock = [TickingClock clockWithUpdateInterval:1];
   [self.tickingClock registerWatcher:self];
   
   self.tasks = [ToDoList new];
@@ -33,6 +33,9 @@ static NSString *reuseIdentifier = @"task";
   [self.tasks add:[Task taskWithName:@"meeting" andDuration:10]];
 
   self.day = [Workday workdayWithTodoList:self.tasks andClock:self.tickingClock];
+  
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gameOver:) name:@"gameOver" object:nil];
+  [self updateClockOnTheWall];
   [self.day start];
 }
 
@@ -54,10 +57,28 @@ static NSString *reuseIdentifier = @"task";
 -(void) clockTicked:(NSTimeInterval)interval
 {
   self.increments++;
-  int hours = 8 + (self.increments / 4);
+  [self updateClockOnTheWall];
+}
+
+-(void) updateClockOnTheWall
+{
+  int hours = 9 + (self.increments / 4);
+  if (hours > 12)
+    hours -= 12;
   int minutes = 15 * (self.increments % 4);
   
   self.clockOnTheWall.text = [NSString stringWithFormat:@"%d:%02d", hours, minutes];
+}
+
+-(void) gameOver:(NSNotification *) notification
+{
+  UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Day Over" message:nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+  if ([notification.userInfo[@"result"] intValue] == Successful) {
+    alert.message = @"YOU WIN";
+  } else {
+    alert.message = @"YOU LOSE";
+  }
+  [alert show];
 }
 
 - (void)didReceiveMemoryWarning

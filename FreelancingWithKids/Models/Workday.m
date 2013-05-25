@@ -6,9 +6,11 @@
 
 @property (nonatomic, strong) id<WallClock> itsClock;
 @property (nonatomic, strong) ToDoList *tasks;
+@property (assign) int numTicks;
+
 @end
 
-static NSTimeInterval EIGHT_HOUR_DAY = 28800; // 8 hours
+int const EIGHT_HOUR_DAY = 32;
 
 @implementation Workday
 
@@ -25,7 +27,7 @@ static NSTimeInterval EIGHT_HOUR_DAY = 28800; // 8 hours
     if (self) {
       self.itsClock = fakeClock;
       self.tasks = todoList;
-      self.currentTimePassed = 0;
+      self.numTicks = 0;
     }
     return self;
 }
@@ -37,14 +39,14 @@ static NSTimeInterval EIGHT_HOUR_DAY = 28800; // 8 hours
 
 -(void) clockTicked:(NSTimeInterval) timeInterval
 {
-  self.currentTimePassed += timeInterval;
+  self.numTicks += 1;
 
   if ([self.tasks complete]) {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"gameOver"
                                                         object:self
                                                       userInfo:@{@"result": [NSNumber numberWithInt:Successful]}];
   }
-  else if (self.currentTimePassed >= EIGHT_HOUR_DAY) {
+  else if (self.numTicks >= EIGHT_HOUR_DAY) {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"gameOver"
                                                         object:self
                                                       userInfo:@{@"result": [NSNumber numberWithInt:Failed]}];
