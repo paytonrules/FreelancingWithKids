@@ -1,12 +1,14 @@
 
 #import "Workday.h"
 #import "ToDoList.h"
+#import "Task.h"
 
 @interface Workday ()
 
 @property (nonatomic, strong) id<WallClock> itsClock;
 @property (nonatomic, strong) ToDoList *tasks;
 @property (assign) int numTicks;
+@property (assign) int stress;
 
 @end
 
@@ -42,6 +44,7 @@ NSString *const DAY_RESULT = @"result";
 -(void) clockTicked:(NSTimeInterval) timeInterval
 {
   self.numTicks += 1;
+  self.stress -= 10;
 
   if ([self.tasks complete]) {
     [[NSNotificationCenter defaultCenter] postNotificationName:DAY_OVER_NOTIFICATION
@@ -55,7 +58,16 @@ NSString *const DAY_RESULT = @"result";
                                                       userInfo:@{DAY_RESULT: [NSNumber numberWithInt:Failed]}];
     [self.itsClock stop];
   }
-  
+}
+
+-(void) startWorkingOn:(NSString *) taskName withDelegate: (id<TaskView>) view
+{
+  [[self.tasks taskNumber:0] start:view];
+}
+
+
+-(void) playWithKid
+{
   
 }
 

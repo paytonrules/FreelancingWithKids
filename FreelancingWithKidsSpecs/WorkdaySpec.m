@@ -1,4 +1,5 @@
 #import <OCDSpec2/OCDSpec2.h>
+#import <OCMock/OCMock.h>
 #import "Workday.h"
 #import "ToDoList.h"
 #import "Task.h"
@@ -125,5 +126,37 @@ OCDSpec2Context(WorkdaySpec) {
       
       [ExpectBool(fakeClock.started) toBeFalse];
     });
+    
+    
+    It(@"begins stress at 0", ^{
+      [ExpectInt(day.stress) toBe:0];
+    });
+    
+    It(@"starts working on a task", ^{
+      id delegate = [OCMockObject mockForProtocol:@protocol(TaskView)];
+      id task = [OCMockObject mockForClass:[Task class]];
+//      [[[task stub] andReturn:@"Name"] name]
+      [todoList add:task];
+      
+      [[task expect] start:delegate];
+      
+      [day startWorkingOn:@"Name" withDelegate: delegate];
+      
+      [task verify];
+      
+      /*[day start];
+      [day playWithKid];*/
+    });
+    
+    It(@"Only allows one task at a time - so stop a task if another is started", ^{
+    });
+    
+    It(@"moves stress negatively when you are working (kids stress)", ^{
+      [day start];
+      [day clockTicked:0];
+      
+      [ExpectInt(day.stress) toBe:-10];
+    });
+    
   });
 }
