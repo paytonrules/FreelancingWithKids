@@ -9,6 +9,8 @@
 @property (strong, nonatomic) ToDoList *tasks;
 @property (strong, nonatomic) Workday *day;
 @property (strong, nonatomic) id<WallClock> tickingClock;
+
+@property (assign) int increments;
 @end
 
 static NSString *reuseIdentifier = @"task";
@@ -19,15 +21,19 @@ static NSString *reuseIdentifier = @"task";
 {
     [super viewDidLoad];
   
+  self.increments = 0;
+  
   // Main ?
   [self.taskList registerNib:[UINib nibWithNibName:@"TaskViewCell" bundle:nil] forCellReuseIdentifier:reuseIdentifier];
   self.tickingClock = [TickingClock clockWithUpdateInterval:18.75];
+  [self.tickingClock registerWatcher:self];
   
   self.tasks = [ToDoList new];
   [self.tasks add:[Task taskWithName:@"email" andDuration:3]];
   [self.tasks add:[Task taskWithName:@"meeting" andDuration:10]];
 
   self.day = [Workday workdayWithTodoList:self.tasks andClock:self.tickingClock];
+  [self.day start];
 }
 
 -(UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath: (NSIndexPath *)indexPath
@@ -44,6 +50,16 @@ static NSString *reuseIdentifier = @"task";
 {
   return self.tasks.count;
 }
+
+-(void) clockTicked:(NSTimeInterval)interval
+{
+  self.increments++;
+  int hours = 8 + (self.increments / 4);
+  int minutes = 15 * (self.increments % 4);
+  
+  self.clockOnTheWall.text = [NSString stringWithFormat:@"%d:%02d", hours, minutes];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

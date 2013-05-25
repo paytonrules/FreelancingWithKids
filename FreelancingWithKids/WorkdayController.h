@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ClockWatcher.h"
 
-@interface WorkdayController : UIViewController<UITableViewDelegate, UITableViewDataSource>
+@interface WorkdayController : UIViewController<UITableViewDelegate, UITableViewDataSource, ClockWatcher>
 
 @property(strong, nonatomic) IBOutlet UITableView *taskList;
 @property(strong, nonatomic) IBOutlet UILabel *clockOnTheWall;
