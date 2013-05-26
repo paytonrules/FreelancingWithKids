@@ -4,7 +4,7 @@
 
 @interface ToDoList()
 
-@property(nonatomic, strong) NSMutableArray *tasks;
+@property(nonatomic, strong) NSMutableDictionary *tasks;
 
 @end
 
@@ -14,19 +14,14 @@
 {
     self = [super init];
     if (self) {
-      self.tasks = [NSMutableArray new];
+      self.tasks = [NSMutableDictionary new];
     }
     return self;
 }
 
--(Task *) taskNumber:(NSInteger) taskNumber
-{
-  return [self.tasks objectAtIndex:taskNumber];
-}
-
 -(void) add:(Task *)task
 {
-  [self.tasks addObject:task];
+  self.tasks[task.name] = task;
 }
 
 -(int) count
@@ -36,21 +31,19 @@
 
 -(Task *) taskByName:(id)name
 {
-  NSArray *matchingTasks =  [self.tasks filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(Task *evaluatedObject, NSDictionary *bindings) {
-    return [evaluatedObject.name caseInsensitiveCompare:name] == NSOrderedSame;
-  }]];
-  
-  return matchingTasks[0];
+  return self.tasks[name];
 }
 
 -(bool) complete
 {
   if (self.count > 0) {
-    for (Task *task in self.tasks) {
+    for (NSString* name in self.tasks) {
+      Task *task = [self.tasks objectForKey:name];
       if (task.complete == NO) {
         return NO;
       }
     }
+    
     return YES;
   } else {
     return YES;

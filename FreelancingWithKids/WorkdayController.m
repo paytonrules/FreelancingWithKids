@@ -42,9 +42,9 @@ static NSString *reuseIdentifier = @"task";
 -(UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath: (NSIndexPath *)indexPath
 {
   TaskViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
-  Task *task = (Task *)[self.tasks taskNumber:indexPath.row];
+ // Task *task = (Task *)[self.tasks taskNumber:indexPath.row];
 
-  cell.task = task;
+  //cell.task = task;
   
   return cell;
 }

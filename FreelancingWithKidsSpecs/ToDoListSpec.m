@@ -11,7 +11,7 @@ OCDSpec2Context(ToDoListSpec) {
       
       [list add:[Task taskWithName: @"email" andDuration:1]];
       
-      Task *task = [list taskNumber:0];
+      Task *task = [list taskByName:@"email"];
       
       [ExpectObj(task.name) toBe:@"email"];
     });
@@ -22,7 +22,7 @@ OCDSpec2Context(ToDoListSpec) {
       [list add:[Task taskWithName:@"email" andDuration:1]];
       [list add:[Task taskWithName: @"meeting" andDuration:1]];
       
-      Task *task = [list taskNumber:0];
+      Task *task = [list taskByName:@"email"];
       
       [ExpectObj(task.name) toBe:@"email"];
     });
@@ -60,6 +60,20 @@ OCDSpec2Context(ToDoListSpec) {
       [task clockTicked:1.0];
       
       [ExpectBool([list complete]) toBeTrue];
+    });
+    
+    It(@"allows me to find a task by name", ^{
+      ToDoList *list = [ToDoList new];
+      Task *task = [Task taskWithName:@"email" andDuration:1];
+      Task *taskTwo = [Task taskWithName:@"jimmy" andDuration:1];
+      
+      [list add:task];
+      [list add:taskTwo];
+      
+      Task *foundTask = [list taskByName:@"jimmy"];
+      
+      [ExpectObj(taskTwo) toBe:foundTask];
+    
     });
   });
 }

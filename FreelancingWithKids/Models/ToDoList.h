@@ -11,7 +11,6 @@
 
 @interface ToDoList : NSObject
 
--(Task *) taskNumber:(NSInteger) task;
 -(void) add:(Task *)task;
 -(Task *) taskByName:(NSString *) name;
 -(bool) complete;
