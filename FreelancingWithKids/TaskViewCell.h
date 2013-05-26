@@ -10,9 +10,11 @@
 #import "TaskView.h"
 
 @class Task;
+@class Workday;
 
 @interface TaskViewCell : UITableViewCell<TaskView>
 
-@property(nonatomic, strong) Task *task;
+@property(nonatomic, strong) NSString *name;
+@property(nonatomic, strong) Workday *day;
 
 @end

@@ -24,6 +24,7 @@ static NSString *reuseIdentifier = @"task";
   self.increments = 0;
   
   // Main ?
+  // Beginning of state machine
   [self.taskList registerNib:[UINib nibWithNibName:@"TaskViewCell" bundle:nil] forCellReuseIdentifier:reuseIdentifier];
   self.tickingClock = [TickingClock clockWithUpdateInterval:18.5];
   [self.tickingClock registerWatcher:self];
@@ -42,9 +43,10 @@ static NSString *reuseIdentifier = @"task";
 -(UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath: (NSIndexPath *)indexPath
 {
   TaskViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
- // Task *task = (Task *)[self.tasks taskNumber:indexPath.row];
+  Task *task = (Task *)[self.tasks taskNumber:indexPath.row];
 
-  //cell.task = task;
+  cell.name = task.name;
+  cell.day = self.day;
   
   return cell;
 }

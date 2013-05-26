@@ -1,5 +1,5 @@
 #import "TaskViewCell.h"
-#import "Task.h"
+#import "Workday.h"
 
 @interface TaskViewCell()
 
@@ -22,15 +22,16 @@
     return self;
 }
 
--(void) setTask:(Task *)task
+-(void) setName:(NSString *)name
 {
-  _task = task;
-  self.taskName.text = task.name;
+  _name = name;
+  self.taskName.text = name;
 }
 
 -(IBAction) startTask:(id)sender
 {
-  [self.task start:self];
+  [self.day startWorkingOn: self.name withDelegate:self];
+//  [self.day
 }
 
 -(void) updateProgress:(NSDecimalNumber *)progress

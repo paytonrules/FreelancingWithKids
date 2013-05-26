@@ -13,6 +13,7 @@
 
 -(void) add:(Task *)task;
 -(Task *) taskByName:(NSString *) name;
+-(Task *) taskNumber:(NSInteger) task;
 -(bool) complete;
 
 @property(readonly) int count;

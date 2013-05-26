@@ -73,7 +73,26 @@ OCDSpec2Context(ToDoListSpec) {
       Task *foundTask = [list taskByName:@"jimmy"];
       
       [ExpectObj(taskTwo) toBe:foundTask];
+    });
     
+    It(@"keeps the order of the tasks as they are added", ^{
+      ToDoList *list = [ToDoList new];
+      Task *task = [Task taskWithName:@"email" andDuration:1];
+      Task *taskTwo = [Task taskWithName:@"jimmy" andDuration:1];
+      Task *taskThree = [Task taskWithName:@"chicken" andDuration:1];
+      
+      [list add:task];
+      [list add:taskTwo];
+      [list add:taskThree];
+      
+      Task *foundTask = [list taskNumber:0];
+      [ExpectObj(foundTask) toBe:task];
+      
+      foundTask = [list taskNumber:1];
+      [ExpectObj(foundTask) toBe:taskTwo];
+      
+      foundTask = [list taskNumber:2];
+      [ExpectObj(foundTask) toBe:taskThree];
     });
   });
 }
