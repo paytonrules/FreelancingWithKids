@@ -22,5 +22,6 @@
 @property(readonly, nonatomic) id<WallClock> clock;
 @property(readonly) BOOL complete;
 -(void) start:(id<TaskView>) view;
+-(void) stop;
 
 @end

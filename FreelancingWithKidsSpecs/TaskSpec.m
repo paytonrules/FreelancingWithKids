@@ -88,5 +88,15 @@ OCDSpec2Context(TaskSpec) {
       
       [ExpectFloat(((TickingClock *) task.clock).interval) toBe: 0.1 withPrecision:0.001];
     });
+    
+    It(@"allows you to stop a task by stopping its clock", ^{
+      id delegate = [OCMockObject mockForProtocol:@protocol(TaskView)];
+      Task *task = [Task taskWithName: @"name" duration:1 andClock:clock];
+      
+      [task start:delegate];
+      [task stop];
+      
+      [ExpectBool(clock.started) toBeFalse];
+    });
   });
 }

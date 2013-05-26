@@ -34,6 +34,15 @@
   return self.tasks.count;
 }
 
+-(Task *) taskByName:(id)name
+{
+  NSArray *matchingTasks =  [self.tasks filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(Task *evaluatedObject, NSDictionary *bindings) {
+    return [evaluatedObject.name caseInsensitiveCompare:name] == NSOrderedSame;
+  }]];
+  
+  return matchingTasks[0];
+}
+
 -(bool) complete
 {
   if (self.count > 0) {

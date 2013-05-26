@@ -134,8 +134,10 @@ OCDSpec2Context(WorkdaySpec) {
     
     It(@"starts working on a task", ^{
       id delegate = [OCMockObject mockForProtocol:@protocol(TaskView)];
+      
       id task = [OCMockObject mockForClass:[Task class]];
-//      [[[task stub] andReturn:@"Name"] name]
+      [[[task stub] andReturn:@"Name"] name];
+      
       [todoList add:task];
       
       [[task expect] start:delegate];
@@ -143,13 +145,29 @@ OCDSpec2Context(WorkdaySpec) {
       [day startWorkingOn:@"Name" withDelegate: delegate];
       
       [task verify];
-      
-      /*[day start];
-      [day playWithKid];*/
     });
     
-    It(@"Only allows one task at a time - so stop a task if another is started", ^{
+    It(@"stops an old task to start a new one", ^{
+      id delegate = [OCMockObject mockForProtocol:@protocol(TaskView)];
+      id taskOne = [OCMockObject niceMockForClass:[Task class]];
+      [[[taskOne stub] andReturn:@"NameOne"] name];
+      id taskTwo = [OCMockObject mockForClass:[Task class]];
+      [[[taskTwo stub] andReturn:@"NameTwo"] name];
+      
+      [todoList add:taskOne];
+      [todoList add:taskTwo];
+      
+      [[taskOne expect] stop];
+      [[taskTwo expect] start:delegate];
+      
+      [day startWorkingOn:@"NameOne" withDelegate: delegate];
+      [day startWorkingOn:@"NameTwo" withDelegate: delegate];
+      
+      [taskOne verify];
+      [taskTwo verify];
     });
+    
+    
     
     It(@"moves stress negatively when you are working (kids stress)", ^{
       [day start];

@@ -9,6 +9,7 @@
 @property (nonatomic, strong) ToDoList *tasks;
 @property (assign) int numTicks;
 @property (assign) int stress;
+@property (nonatomic, strong) Task *currentTask;
 
 @end
 
@@ -62,7 +63,11 @@ NSString *const DAY_RESULT = @"result";
 
 -(void) startWorkingOn:(NSString *) taskName withDelegate: (id<TaskView>) view
 {
-  [[self.tasks taskNumber:0] start:view];
+  if (self.currentTask != nil)
+    [self.currentTask stop];
+  
+  self.currentTask = [self.tasks taskByName:taskName];
+  [self.currentTask start:view];
 }
 
 

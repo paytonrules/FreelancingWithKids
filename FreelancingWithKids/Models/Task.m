@@ -54,6 +54,11 @@
   [self.view updateProgress:[[NSDecimalNumber alloc] initWithFloat:progress]];
   
   if (self.complete)
-    [self.clock stop];
+    [self stop];
+}
+
+-(void) stop
+{
+  [self.clock stop];
 }
 @end
