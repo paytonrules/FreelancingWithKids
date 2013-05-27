@@ -9,4 +9,6 @@
 -(void) registerWatcher:(id<ClockWatcher>) watcher;
 -(void) stop;
 
+@property(readonly) BOOL ticking;
+
 @end

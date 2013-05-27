@@ -81,5 +81,30 @@ OCDSpec2Context(TickingClockSpec) {
       
       [ExpectBool(clock.timer.isValid) toBeFalse];
     });
+    
+    It(@"is not ticking until you start it", ^{
+      TickingClock *clock = [TickingClock clockWithUpdateInterval:600];
+      
+      [ExpectBool(clock.ticking) toBeFalse];
+    });
+    
+    It(@"is ticking after you start it", ^{
+      id delegate = [OCMockObject mockForProtocol:@protocol(ClockWatcher)];
+      TickingClock *clock = [TickingClock clockWithUpdateInterval:600];
+      
+      [clock start:delegate];
+
+      [ExpectBool(clock.ticking) toBeTrue];
+    });
+    
+    It(@"is not ticking after you invalidate it", ^{
+      id delegate = [OCMockObject mockForProtocol:@protocol(ClockWatcher)];
+      TickingClock *clock = [TickingClock clockWithUpdateInterval:600];
+      
+      [clock start:delegate];
+      [clock stop];
+      
+      [ExpectBool(clock.ticking) toBeFalse];
+    });
   });
 }

@@ -42,6 +42,11 @@
   [self.clock start:self];
 }
 
+-(BOOL) started
+{
+  return [self.clock ticking];
+}
+
 -(BOOL) complete
 {
   return self.timeSpent >= self.duration;

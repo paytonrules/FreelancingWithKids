@@ -36,4 +36,11 @@
   self.watcher = nil;
 }
 
+-(BOOL) ticking
+{
+  return self.started;
+}
+
+
+
 @end

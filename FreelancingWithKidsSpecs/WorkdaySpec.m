@@ -127,53 +127,54 @@ OCDSpec2Context(WorkdaySpec) {
       [ExpectBool(fakeClock.started) toBeFalse];
     });
     
-    
     It(@"begins stress at 0", ^{
       [ExpectInt(day.stress) toBe:0];
     });
     
     It(@"starts working on a task", ^{
       id delegate = [OCMockObject mockForProtocol:@protocol(TaskView)];
-      
-      id task = [OCMockObject mockForClass:[Task class]];
-      [[[task stub] andReturn:@"Name"] name];
+      Task *task = [Task taskWithName:@"Name" andDuration:10];
       
       [todoList add:task];
       
-      [[task expect] start:delegate];
-      
       [day startWorkingOn:@"Name" withDelegate: delegate];
       
-      [task verify];
+      [ExpectBool(task.started) toBeTrue];
     });
     
     It(@"stops an old task to start a new one", ^{
       id delegate = [OCMockObject mockForProtocol:@protocol(TaskView)];
-      id taskOne = [OCMockObject niceMockForClass:[Task class]];
-      [[[taskOne stub] andReturn:@"NameOne"] name];
-      id taskTwo = [OCMockObject mockForClass:[Task class]];
-      [[[taskTwo stub] andReturn:@"NameTwo"] name];
+      Task *taskOne = [Task taskWithName:@"NameOne" andDuration:10];
+      Task *taskTwo = [Task taskWithName:@"NameTwo" andDuration:10];
       
       [todoList add:taskOne];
       [todoList add:taskTwo];
-      
-      [[taskOne expect] stop];
-      [[taskTwo expect] start:delegate];
-      
+            
       [day startWorkingOn:@"NameOne" withDelegate: delegate];
       [day startWorkingOn:@"NameTwo" withDelegate: delegate];
       
-      [taskOne verify];
-      [taskTwo verify];
+      [ExpectBool(taskOne.started) toBeFalse];
+      [ExpectBool(taskTwo.started) toBeTrue];
     });
     
-    
-    
     It(@"moves stress negatively when you are working (kids stress)", ^{
+      Task *task = [Task taskWithName:@"me" andDuration:10];
+      [todoList add:task];
+      
       [day start];
+      [day startWorkingOn:@"me" withDelegate:nil];
+      
       [day clockTicked:0];
       
       [ExpectInt(day.stress) toBe:-10];
+    });
+    
+    It(@"moves positively when you are playing (work stress)", ^{
+      [day start];
+      [day playWithKid];
+      [day clockTicked:0];
+      
+      [ExpectInt(day.stress) toBe:10];
     });
     
   });

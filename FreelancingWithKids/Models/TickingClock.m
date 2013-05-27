@@ -51,6 +51,13 @@
   [self.timer invalidate];
 }
 
+-(BOOL) ticking
+{
+  if (self.timer)
+    return [self.timer isValid];
+  return NO;
+}
+
 -(void) updateWatcher
 {
   for(id<ClockWatcher> watcher in self.watchers)

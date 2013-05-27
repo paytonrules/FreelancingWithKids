@@ -11,6 +11,7 @@
 @property (assign) int stress;
 @property (nonatomic, strong) Task *currentTask;
 
+-(void) clearCurrentTask;
 @end
 
 int const EIGHT_HOUR_DAY = 32;
@@ -45,7 +46,10 @@ NSString *const DAY_RESULT = @"result";
 -(void) clockTicked:(NSTimeInterval) timeInterval
 {
   self.numTicks += 1;
-  self.stress -= 10;
+  if (self.currentTask == nil)
+    self.stress += 10;
+  else
+    self.stress -= 10;
 
   if ([self.tasks complete]) {
     [[NSNotificationCenter defaultCenter] postNotificationName:DAY_OVER_NOTIFICATION
@@ -63,8 +67,7 @@ NSString *const DAY_RESULT = @"result";
 
 -(void) startWorkingOn:(NSString *) taskName withDelegate: (id<TaskView>) view
 {
-  if (self.currentTask != nil)
-    [self.currentTask stop];
+  [self clearCurrentTask];
   
   self.currentTask = [self.tasks taskByName:taskName];
   [self.currentTask start:view];
@@ -73,7 +76,15 @@ NSString *const DAY_RESULT = @"result";
 
 -(void) playWithKid
 {
+  [self clearCurrentTask];
+}
+
+-(void) clearCurrentTask
+{
+  if (self.currentTask != nil)
+    [self.currentTask stop];
   
+  self.currentTask = nil;
 }
 
 @end

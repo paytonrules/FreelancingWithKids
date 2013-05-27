@@ -20,6 +20,12 @@ OCDSpec2Context(TaskSpec) {
       [ExpectObj(task.name) toBeEqualTo:@"name"];
     });
     
+    It(@"is not started at the beginning", ^{
+      Task *task = [Task taskWithName: @"name" andDuration:10];
+
+      [ExpectBool(task.started) toBeFalse];
+    });
+    
     It(@"updates the task with progress when the clock ticks", ^{
       id delegate = [OCMockObject mockForProtocol:@protocol(TaskView)];
 
@@ -31,6 +37,14 @@ OCDSpec2Context(TaskSpec) {
       [clock notifyWatcher:0];
       
       [delegate verify];
+    });
+   
+    It(@"is started after you start it", ^{
+      Task *task = [Task taskWithName: @"name" andDuration:10];
+      
+      [task start:nil];
+      
+      [ExpectBool(task.started) toBeTrue];
     });
     
     It(@"sends the current progress when the timer is fired", ^{
@@ -58,6 +72,19 @@ OCDSpec2Context(TaskSpec) {
       [clock notifyWatcher:1.2];
       
       [delegate verify];
+    });
+    
+    It(@"is not started after it is complete", ^{
+      id delegate = [OCMockObject mockForProtocol:@protocol(TaskView)];
+      
+      [[delegate expect] updateProgress:[[NSDecimalNumber alloc] initWithFloat:1.0]];
+      
+      Task *task = [Task taskWithName: @"name" duration:1 andClock:clock];
+      
+      [task start:delegate];
+      [clock notifyWatcher:1];
+      
+      [ExpectBool(task.started) toBeFalse];
     });
     
     It(@"is complete when it's completed all its updates", ^{

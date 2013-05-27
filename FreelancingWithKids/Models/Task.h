@@ -21,6 +21,9 @@
 @property(strong, nonatomic) NSString *name;
 @property(readonly, nonatomic) id<WallClock> clock;
 @property(readonly) BOOL complete;
+@property(readonly) BOOL started;
+
+
 -(void) start:(id<TaskView>) view;
 -(void) stop;
 
