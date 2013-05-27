@@ -37,6 +37,9 @@ static NSString *reuseIdentifier = @"task";
   
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gameOver:) name:DAY_OVER_NOTIFICATION object:nil];
   [self updateClockOnTheWall];
+  
+  [self.day addObserver:self forKeyPath:@"stress" options:NSKeyValueObservingOptionNew context:nil];
+  
   [self.day start];
 }
 
@@ -85,7 +88,22 @@ static NSString *reuseIdentifier = @"task";
   [alert show];
 }
 
-- (void)didReceiveMemoryWarning
+//observeValueForKeyPath:ofObject:change:context
+-(void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+  if ([keyPath isEqual:@"stress"]) {
+    float percentage = ([[change objectForKey:NSKeyValueChangeNewKey] floatValue] + 50.0f) / 100.0f;
+    
+    [self.stressBar setProgress:percentage animated:YES];
+
+//    self.stressBar
+//        [openingBalanceInspectorField setObjectValue:
+  //       [change objectForKey:NSKeyValueChangeNewKey]];
+      }
+  
+  //[super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+}
+
+-(void) didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

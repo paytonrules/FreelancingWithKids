@@ -13,4 +13,5 @@
 
 @property(strong, nonatomic) IBOutlet UITableView *taskList;
 @property(strong, nonatomic) IBOutlet UILabel *clockOnTheWall;
+@property(strong, nonatomic) IBOutlet UIProgressView *stressBar;
 @end

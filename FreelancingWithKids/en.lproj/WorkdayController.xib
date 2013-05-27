@@ -151,7 +151,6 @@
 						<string key="NSFrame">{{266, 94}, {487, 890}}</string>
 						<reference key="NSSuperview" ref="766721923"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<reference key="IBUIBackgroundColor" ref="118617683"/>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -209,6 +208,14 @@
 						<reference key="destination" ref="423934962"/>
 					</object>
 					<int key="connectionID">117</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">stressBar</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="408449793"/>
+					</object>
+					<int key="connectionID">131</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
@@ -487,7 +494,7 @@
 						<int key="objectID">20</int>
 						<reference key="object" ref="423934962"/>
 						<array class="NSMutableArray" key="children">
-							<object class="IBNSLayoutConstraint" id="890087943">
+							<object class="IBNSLayoutConstraint" id="361710272">
 								<reference key="firstItem" ref="423934962"/>
 								<int key="firstAttribute">7</int>
 								<int key="relation">0</int>
@@ -684,7 +691,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">129</int>
-						<reference key="object" ref="890087943"/>
+						<reference key="object" ref="361710272"/>
 						<reference key="parent" ref="423934962"/>
 					</object>
 					<object class="IBObjectRecord">
@@ -722,7 +729,7 @@
 				<string key="20.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<array class="NSMutableArray" key="20.IBViewMetadataConstraints">
 					<reference ref="1000001577"/>
-					<reference ref="890087943"/>
+					<reference ref="361710272"/>
 				</array>
 				<boolean value="NO" key="20.IBViewMetadataTranslatesAutoresizingMaskIntoConstraints"/>
 				<string key="4.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -765,7 +772,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">130</int>
+			<int key="maxID">131</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -782,12 +789,17 @@
 					<string key="superclassName">UIViewController</string>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="clockOnTheWall">UILabel</string>
+						<string key="stressBar">UIProgressView</string>
 						<string key="taskList">UITableView</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
 						<object class="IBToOneOutletInfo" key="clockOnTheWall">
 							<string key="name">clockOnTheWall</string>
 							<string key="candidateClassName">UILabel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="stressBar">
+							<string key="name">stressBar</string>
+							<string key="candidateClassName">UIProgressView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="taskList">
 							<string key="name">taskList</string>
