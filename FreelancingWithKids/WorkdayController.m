@@ -1,16 +1,10 @@
 #import "WorkdayController.h"
-#import "ToDoList.h"
-#import "Task.h"
 #import "TaskViewCell.h"
-#import "TickingClock.h"
-#import "Workday.h"
+#import "WorkdayPresenter.h"
 
 @interface WorkdayController ()
-@property (strong, nonatomic) ToDoList *tasks;
-@property (strong, nonatomic) Workday *day;
-@property (strong, nonatomic) id<WallClock> tickingClock;
 
-@property (assign) int increments;
+@property (strong, nonatomic) WorkdayPresenter *presenter;
 @end
 
 static NSString *reuseIdentifier = @"task";
@@ -19,88 +13,55 @@ static NSString *reuseIdentifier = @"task";
    
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
+  [super viewDidLoad];
   
-  self.increments = 0;
+  self.presenter = [WorkdayPresenter presenterWithView:self];
+  [self.presenter startDay];
   
-  // Main ?
-  // Beginning of state machine
   [self.taskList registerNib:[UINib nibWithNibName:@"TaskViewCell" bundle:nil] forCellReuseIdentifier:reuseIdentifier];
-  self.tickingClock = [TickingClock clockWithUpdateInterval:18.5];
-  [self.tickingClock registerWatcher:self];
-  
-  self.tasks = [ToDoList new];
-  [self.tasks add:[Task taskWithName:@"email" andDuration:3]];
-  [self.tasks add:[Task taskWithName:@"meeting" andDuration:10]];
-
-  self.day = [Workday workdayWithTodoList:self.tasks andClock:self.tickingClock];
-  
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gameOver:) name:DAY_OVER_NOTIFICATION object:nil];
-  [self updateClockOnTheWall];
-  
-  [self.day addObserver:self forKeyPath:@"stress" options:NSKeyValueObservingOptionNew context:nil];
-  
-  [self.day start];
 }
 
 -(UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath: (NSIndexPath *)indexPath
 {
   TaskViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
-  Task *task = (Task *)[self.tasks taskNumber:indexPath.row];
+  NSString *taskName = [self.presenter taskNameAt:indexPath.row];
 
-  cell.name = task.name;
-  cell.day = self.day;
+  cell.name = taskName;
+  cell.controller = self; // Self will delegate to the presenter
   
   return cell;
 }
 
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-  return self.tasks.count;
+  return self.presenter.taskCount;
 }
 
--(void) clockTicked:(NSTimeInterval)interval
+-(void) updateClockWith:(NSString *)time
 {
-  self.increments++;
-  [self updateClockOnTheWall];
+  self.clockOnTheWall.text = time;
 }
 
-// Test?
--(void) updateClockOnTheWall
+-(void) startWorkingOn: (NSString *) name withDelegate:(id<TaskView>) view
 {
-  int hours = 9 + (self.increments / 4);
-  if (hours > 12)
-    hours -= 12;
-  int minutes = 15 * (self.increments % 4);
-  
-  self.clockOnTheWall.text = [NSString stringWithFormat:@"%d:%02d", hours, minutes];
+  [self.presenter startWorkingOn:name withDelegate:view];
 }
 
--(void) gameOver:(NSNotification *) notification
+-(void) showYouWin
 {
-  UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Day Over" message:nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-  if ([notification.userInfo[DAY_RESULT] intValue] == Successful) {
-    alert.message = @"YOU WIN";
-  } else {
-    alert.message = @"YOU LOSE";
-  }
-  
+  UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Day Over" message:@"YOU WIN" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
   [alert show];
 }
 
-//observeValueForKeyPath:ofObject:change:context
--(void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-  if ([keyPath isEqual:@"stress"]) {
-    float percentage = ([[change objectForKey:NSKeyValueChangeNewKey] floatValue] + 50.0f) / 100.0f;
-    
-    [self.stressBar setProgress:percentage animated:YES];
+-(void) showYouLose
+{
+  UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Day Over" message:@"YOU LOSE" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+  [alert show];  
+}
 
-//    self.stressBar
-//        [openingBalanceInspectorField setObjectValue:
-  //       [change objectForKey:NSKeyValueChangeNewKey]];
-      }
-  
-  //[super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+-(void) updateProgress:(float) progress
+{
+  [self.stressBar setProgress:percentage animated:YES];
 }
 
 -(void) didReceiveMemoryWarning

@@ -1,5 +1,5 @@
 #import "TaskViewCell.h"
-#import "Workday.h"
+#import "WorkdayController.h"
 
 @interface TaskViewCell()
 
@@ -30,8 +30,7 @@
 
 -(IBAction) startTask:(id)sender
 {
-  [self.day startWorkingOn: self.name withDelegate:self];
-//  [self.day
+  [self.controller startWorkingOn: self.name withDelegate:self];
 }
 
 -(void) updateProgress:(NSDecimalNumber *)progress

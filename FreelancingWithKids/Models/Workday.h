@@ -16,7 +16,6 @@ FOUNDATION_EXPORT NSString *const DAY_RESULT;
 extern int const EIGHT_HOUR_DAY;
 
 @class ToDoList;
-@class Task;
 
 @interface Workday : NSObject<ClockWatcher>
 

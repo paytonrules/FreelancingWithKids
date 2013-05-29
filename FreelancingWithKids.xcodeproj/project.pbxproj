@@ -20,9 +20,6 @@
 		074A9E4C173E6D3400D4CA53 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0797E32D173DAE8E004C2C62 /* CoreGraphics.framework */; };
 		074A9E52173E6D3400D4CA53 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 074A9E50173E6D3400D4CA53 /* InfoPlist.strings */; };
 		074A9E54173E6D3400D4CA53 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 074A9E53173E6D3400D4CA53 /* main.m */; };
-		074A9E5A173E6D5C00D4CA53 /* PerformWorkTasksInteractorSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 074A9E59173E6D5C00D4CA53 /* PerformWorkTasksInteractorSpec.m */; };
-		074A9E5F173E6E2900D4CA53 /* PerformWorkTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 074A9E5E173E6E2900D4CA53 /* PerformWorkTask.m */; };
-		074A9E60173E6E2900D4CA53 /* PerformWorkTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 074A9E5E173E6E2900D4CA53 /* PerformWorkTask.m */; };
 		074A9E65173E6FED00D4CA53 /* Task.m in Sources */ = {isa = PBXBuildFile; fileRef = 074A9E64173E6FED00D4CA53 /* Task.m */; };
 		074A9E66173E6FED00D4CA53 /* Task.m in Sources */ = {isa = PBXBuildFile; fileRef = 074A9E64173E6FED00D4CA53 /* Task.m */; };
 		074A9E68173E708400D4CA53 /* libOCDSpec2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 07D01639173DB1E2005F488B /* libOCDSpec2.a */; };
@@ -31,6 +28,7 @@
 		074C382F174D825700337FC0 /* TickingClock.m in Sources */ = {isa = PBXBuildFile; fileRef = 074C382E174D825700337FC0 /* TickingClock.m */; };
 		074C3830174D825700337FC0 /* TickingClock.m in Sources */ = {isa = PBXBuildFile; fileRef = 074C382E174D825700337FC0 /* TickingClock.m */; };
 		074C3838174D8D5500337FC0 /* FakeWorkdayClock.m in Sources */ = {isa = PBXBuildFile; fileRef = 074C3837174D8D5500337FC0 /* FakeWorkdayClock.m */; };
+		076DBAF217558F2600382602 /* WorkdayPresenterSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 076DBAF117558F2600382602 /* WorkdayPresenterSpec.m */; };
 		0797E32A173DAE8E004C2C62 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0797E329173DAE8E004C2C62 /* UIKit.framework */; };
 		0797E32C173DAE8E004C2C62 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0797E32B173DAE8E004C2C62 /* Foundation.framework */; };
 		0797E32E173DAE8E004C2C62 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0797E32D173DAE8E004C2C62 /* CoreGraphics.framework */; };
@@ -42,6 +40,8 @@
 		0797E340173DAE8E004C2C62 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0797E33F173DAE8E004C2C62 /* Default-568h@2x.png */; };
 		0797E343173DAE8E004C2C62 /* WorkdayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0797E342173DAE8E004C2C62 /* WorkdayController.m */; };
 		0797E346173DAE8E004C2C62 /* WorkdayController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0797E344173DAE8E004C2C62 /* WorkdayController.xib */; };
+		07A1B18E1754CDB00099733E /* WorkdayPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 07A1B18D1754CDB00099733E /* WorkdayPresenter.m */; };
+		07A1B18F1754CDB00099733E /* WorkdayPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 07A1B18D1754CDB00099733E /* WorkdayPresenter.m */; };
 		07A5C80A1744FD9200665282 /* TaskViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 07A5C8091744FD9200665282 /* TaskViewCell.m */; };
 		07F5819B17470E1100A2640A /* TaskViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07F5819A17470E1100A2640A /* TaskViewCell.xib */; };
 /* End PBXBuildFile section */
@@ -99,18 +99,15 @@
 		074A9E51173E6D3400D4CA53 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		074A9E53173E6D3400D4CA53 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		074A9E55173E6D3400D4CA53 /* FreelancingWithKidsSpecs-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FreelancingWithKidsSpecs-Prefix.pch"; sourceTree = "<group>"; };
-		074A9E59173E6D5C00D4CA53 /* PerformWorkTasksInteractorSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PerformWorkTasksInteractorSpec.m; path = FreelancingWithKidsSpecs/PerformWorkTasksInteractorSpec.m; sourceTree = "<group>"; };
-		074A9E5D173E6E2900D4CA53 /* PerformWorkTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PerformWorkTask.h; path = Interactors/PerformWorkTask.h; sourceTree = "<group>"; };
-		074A9E5E173E6E2900D4CA53 /* PerformWorkTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PerformWorkTask.m; path = Interactors/PerformWorkTask.m; sourceTree = "<group>"; };
 		074A9E63173E6FED00D4CA53 /* Task.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Task.h; path = Models/Task.h; sourceTree = "<group>"; };
 		074A9E64173E6FED00D4CA53 /* Task.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Task.m; path = Models/Task.m; sourceTree = "<group>"; };
 		074A9E69173E710300D4CA53 /* TaskSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TaskSpec.m; path = FreelancingWithKidsSpecs/TaskSpec.m; sourceTree = "<group>"; };
 		074A9E6D17410CFE00D4CA53 /* libOCMock.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libOCMock.a; path = include/OCMock/libOCMock.a; sourceTree = "<group>"; };
-		074A9E6F17410DBC00D4CA53 /* PerformWorkTaskDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PerformWorkTaskDelegate.h; path = Interactors/PerformWorkTaskDelegate.h; sourceTree = "<group>"; };
 		074C382D174D825700337FC0 /* TickingClock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TickingClock.h; path = Models/TickingClock.h; sourceTree = "<group>"; };
 		074C382E174D825700337FC0 /* TickingClock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TickingClock.m; path = Models/TickingClock.m; sourceTree = "<group>"; };
 		074C3836174D8D5500337FC0 /* FakeWorkdayClock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FakeWorkdayClock.h; path = FreelancingWithKidsSpecs/Fakes/FakeWorkdayClock.h; sourceTree = "<group>"; };
 		074C3837174D8D5500337FC0 /* FakeWorkdayClock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FakeWorkdayClock.m; path = FreelancingWithKidsSpecs/Fakes/FakeWorkdayClock.m; sourceTree = "<group>"; };
+		076DBAF117558F2600382602 /* WorkdayPresenterSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WorkdayPresenterSpec.m; path = FreelancingWithKidsSpecs/WorkdayPresenterSpec.m; sourceTree = "<group>"; };
 		0797E326173DAE8E004C2C62 /* FreelancingWithKids.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FreelancingWithKids.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0797E329173DAE8E004C2C62 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		0797E32B173DAE8E004C2C62 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -127,6 +124,9 @@
 		0797E341173DAE8E004C2C62 /* WorkdayController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WorkdayController.h; sourceTree = "<group>"; };
 		0797E342173DAE8E004C2C62 /* WorkdayController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WorkdayController.m; sourceTree = "<group>"; };
 		0797E345173DAE8E004C2C62 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/WorkdayController.xib; sourceTree = "<group>"; };
+		07A1B18C1754CDB00099733E /* WorkdayPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WorkdayPresenter.h; path = Presenters/WorkdayPresenter.h; sourceTree = "<group>"; };
+		07A1B18D1754CDB00099733E /* WorkdayPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WorkdayPresenter.m; path = Presenters/WorkdayPresenter.m; sourceTree = "<group>"; };
+		07A1B1901754CE280099733E /* WorkdayView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = WorkdayView.h; path = Presenters/WorkdayView.h; sourceTree = "<group>"; };
 		07A5C8081744FD9200665282 /* TaskViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskViewCell.h; sourceTree = "<group>"; };
 		07A5C8091744FD9200665282 /* TaskViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskViewCell.m; sourceTree = "<group>"; };
 		07A5C8481746617100665282 /* TaskView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TaskView.h; sourceTree = "<group>"; };
@@ -166,8 +166,9 @@
 		074A9E43173E6C7E00D4CA53 /* Specs */ = {
 			isa = PBXGroup;
 			children = (
+				076DBAF117558F2600382602 /* WorkdayPresenterSpec.m */,
+				07A1B1911754D9290099733E /* Presenters */,
 				074C3835174D8D4500337FC0 /* Fakes */,
-				074A9E59173E6D5C00D4CA53 /* PerformWorkTasksInteractorSpec.m */,
 				074A9E69173E710300D4CA53 /* TaskSpec.m */,
 				073E74261743B94300393AB3 /* ToDoListSpec.m */,
 				070B5A2E174B9B64005B35E5 /* WorkdaySpec.m */,
@@ -195,16 +196,6 @@
 				074A9E55173E6D3400D4CA53 /* FreelancingWithKidsSpecs-Prefix.pch */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		074A9E5B173E6DB200D4CA53 /* Interactors */ = {
-			isa = PBXGroup;
-			children = (
-				074A9E5D173E6E2900D4CA53 /* PerformWorkTask.h */,
-				074A9E5E173E6E2900D4CA53 /* PerformWorkTask.m */,
-				074A9E6F17410DBC00D4CA53 /* PerformWorkTaskDelegate.h */,
-			);
-			name = Interactors;
 			sourceTree = "<group>";
 		};
 		074A9E67173E6FF300D4CA53 /* Models */ = {
@@ -270,17 +261,12 @@
 		0797E32F173DAE8E004C2C62 /* FreelancingWithKids */ = {
 			isa = PBXGroup;
 			children = (
+				07A1B18B1754CD940099733E /* Presenters */,
+				07A1B18A1754CD700099733E /* ViewControllers */,
 				074A9E67173E6FF300D4CA53 /* Models */,
-				074A9E5B173E6DB200D4CA53 /* Interactors */,
 				0797E338173DAE8E004C2C62 /* AppDelegate.h */,
 				0797E339173DAE8E004C2C62 /* AppDelegate.m */,
-				0797E341173DAE8E004C2C62 /* WorkdayController.h */,
-				0797E342173DAE8E004C2C62 /* WorkdayController.m */,
-				0797E344173DAE8E004C2C62 /* WorkdayController.xib */,
 				0797E330173DAE8E004C2C62 /* Supporting Files */,
-				07A5C8081744FD9200665282 /* TaskViewCell.h */,
-				07A5C8091744FD9200665282 /* TaskViewCell.m */,
-				07F5819A17470E1100A2640A /* TaskViewCell.xib */,
 			);
 			path = FreelancingWithKids;
 			sourceTree = "<group>";
@@ -297,6 +283,36 @@
 				0797E33F173DAE8E004C2C62 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		07A1B18A1754CD700099733E /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				0797E344173DAE8E004C2C62 /* WorkdayController.xib */,
+				07A5C8081744FD9200665282 /* TaskViewCell.h */,
+				07A5C8091744FD9200665282 /* TaskViewCell.m */,
+				07F5819A17470E1100A2640A /* TaskViewCell.xib */,
+				0797E341173DAE8E004C2C62 /* WorkdayController.h */,
+				0797E342173DAE8E004C2C62 /* WorkdayController.m */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		07A1B18B1754CD940099733E /* Presenters */ = {
+			isa = PBXGroup;
+			children = (
+				07A1B18C1754CDB00099733E /* WorkdayPresenter.h */,
+				07A1B18D1754CDB00099733E /* WorkdayPresenter.m */,
+				07A1B1901754CE280099733E /* WorkdayView.h */,
+			);
+			name = Presenters;
+			sourceTree = "<group>";
+		};
+		07A1B1911754D9290099733E /* Presenters */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Presenters;
 			sourceTree = "<group>";
 		};
 		07D01632173DB1E2005F488B /* Products */ = {
@@ -489,8 +505,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				074A9E54173E6D3400D4CA53 /* main.m in Sources */,
-				074A9E5A173E6D5C00D4CA53 /* PerformWorkTasksInteractorSpec.m in Sources */,
-				074A9E60173E6E2900D4CA53 /* PerformWorkTask.m in Sources */,
 				074A9E66173E6FED00D4CA53 /* Task.m in Sources */,
 				074A9E6A173E710300D4CA53 /* TaskSpec.m in Sources */,
 				070B5A37174B9C07005B35E5 /* Workday.m in Sources */,
@@ -500,6 +514,8 @@
 				073C74C5174CFE850094A643 /* TickingClockSpec.m in Sources */,
 				074C3830174D825700337FC0 /* TickingClock.m in Sources */,
 				074C3838174D8D5500337FC0 /* FakeWorkdayClock.m in Sources */,
+				07A1B18F1754CDB00099733E /* WorkdayPresenter.m in Sources */,
+				076DBAF217558F2600382602 /* WorkdayPresenterSpec.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -510,12 +526,12 @@
 				0797E336173DAE8E004C2C62 /* main.m in Sources */,
 				0797E33A173DAE8E004C2C62 /* AppDelegate.m in Sources */,
 				0797E343173DAE8E004C2C62 /* WorkdayController.m in Sources */,
-				074A9E5F173E6E2900D4CA53 /* PerformWorkTask.m in Sources */,
 				074A9E65173E6FED00D4CA53 /* Task.m in Sources */,
 				073E74211743B84D00393AB3 /* ToDoList.m in Sources */,
 				07A5C80A1744FD9200665282 /* TaskViewCell.m in Sources */,
 				070B5A36174B9BFE005B35E5 /* Workday.m in Sources */,
 				074C382F174D825700337FC0 /* TickingClock.m in Sources */,
+				07A1B18E1754CDB00099733E /* WorkdayPresenter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

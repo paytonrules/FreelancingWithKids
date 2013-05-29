@@ -23,7 +23,6 @@
 @end
 
 OCDSpec2Context(WorkdaySpec) {
-
   
   Describe(@"the workday", ^{
     __block FakeWorkdayClock *fakeClock;
@@ -176,6 +175,6 @@ OCDSpec2Context(WorkdaySpec) {
       
       [ExpectInt(day.stress) toBe:10];
     });
-    
+        
   });
 }
