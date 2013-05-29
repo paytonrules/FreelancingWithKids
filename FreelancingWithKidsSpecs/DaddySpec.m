@@ -22,18 +22,18 @@
 
 @end
 
-OCDSpec2Context(WorkdaySpec) {
+OCDSpec2Context(DaddySpec) {
   
   Describe(@"the workday with a fake clock and provided task list", ^{
     __block FakeWorkdayClock *fakeClock;
     __block ToDoList *todoList;
-    __block Daddy *day;
+    __block Daddy *dad;
     __block GameObserver *observer;
     
     BeforeEach(^{
       fakeClock = [FakeWorkdayClock new];
       todoList = [ToDoList new];
-      day = [Daddy workdayWithTodoList: todoList andClock: fakeClock];
+      dad = [Daddy workdayWithTodoList: todoList andClock: fakeClock];
       observer = [GameObserver new];
       
       [[NSNotificationCenter defaultCenter] addObserver:observer
@@ -47,14 +47,14 @@ OCDSpec2Context(WorkdaySpec) {
     });
     
     It(@"starts the clock when the day is started", ^{
-      [day start];
+      [dad start];
       
       [ExpectBool(fakeClock.started) toBeTrue];
     });
     
     It(@"notifies that the day is successful when there are no tasks", ^{
-      [day start];
-      [day clockTicked:0];
+      [dad start];
+      [dad clockTicked:0];
       
       [ExpectInt(observer.status) toBe:Successful];
     });
@@ -62,13 +62,13 @@ OCDSpec2Context(WorkdaySpec) {
     It(@"notifies that the day failed when the day is over (32 ticks of the clock) but the tasks aren't done", ^{
       [todoList add:[Task taskWithName:@"name" andDuration:10]];
       
-      [day start];
-      [day clockTicked:0];
+      [dad start];
+      [dad clockTicked:0];
       
       [ExpectInt(observer.status) toBe:None];
       
       for (int i = 0; i < EIGHT_HOUR_DAY; i++) {
-        [day clockTicked:0];
+        [dad clockTicked:0];
       }
       
       [ExpectInt(observer.status) toBe:Failed];
@@ -77,8 +77,8 @@ OCDSpec2Context(WorkdaySpec) {
     It(@"doesn't notify anything if the tasks aren't done and the day isn't over", ^{
       [todoList add:[Task taskWithName:@"name" andDuration:10]];
             
-      [day start];
-      [day clockTicked:0];
+      [dad start];
+      [dad clockTicked:0];
       
       [ExpectInt(observer.status) toBe:None];
     });
@@ -88,8 +88,8 @@ OCDSpec2Context(WorkdaySpec) {
       [todoList add:task];
       [task clockTicked:1];
       
-      [day start];
-      [day clockTicked:0];
+      [dad start];
+      [dad clockTicked:0];
       
       [ExpectInt(observer.status) toBe:Successful];
     });
@@ -99,9 +99,9 @@ OCDSpec2Context(WorkdaySpec) {
       [todoList add:task];
       [task clockTicked:1.0];
       
-      [day start];
+      [dad start];
       for (int i = 0; i < EIGHT_HOUR_DAY; i++) {
-        [day clockTicked:0];
+        [dad clockTicked:0];
       }
       
       [ExpectInt(observer.status) toBe:Successful];
@@ -111,23 +111,23 @@ OCDSpec2Context(WorkdaySpec) {
       Task *task = [Task taskWithName:@"name" duration:1 andUpdatesPerSecond:1];
       [todoList add:task];
 
-      [day start];
+      [dad start];
       for (int i = 0; i < EIGHT_HOUR_DAY; i++) {
-        [day clockTicked:0];
+        [dad clockTicked:0];
       }
       
       [ExpectBool(fakeClock.started) toBeFalse];
     });
     
     It(@"stops the clock when the day is over because tasks are done", ^{
-      [day start];
-      [day clockTicked:0];
+      [dad start];
+      [dad clockTicked:0];
       
       [ExpectBool(fakeClock.started) toBeFalse];
     });
     
     It(@"begins stress at 0", ^{
-      [ExpectInt(day.stress) toBe:0];
+      [ExpectInt(dad.stress) toBe:0];
     });
     
     It(@"starts working on a task", ^{
@@ -136,7 +136,7 @@ OCDSpec2Context(WorkdaySpec) {
       
       [todoList add:task];
       
-      [day startWorkingOn:@"Name" withDelegate: delegate];
+      [dad startWorkingOn:@"Name" withDelegate: delegate];
       
       [ExpectBool(task.started) toBeTrue];
     });
@@ -149,8 +149,8 @@ OCDSpec2Context(WorkdaySpec) {
       [todoList add:taskOne];
       [todoList add:taskTwo];
             
-      [day startWorkingOn:@"NameOne" withDelegate: delegate];
-      [day startWorkingOn:@"NameTwo" withDelegate: delegate];
+      [dad startWorkingOn:@"NameOne" withDelegate: delegate];
+      [dad startWorkingOn:@"NameTwo" withDelegate: delegate];
       
       [ExpectBool(taskOne.started) toBeFalse];
       [ExpectBool(taskTwo.started) toBeTrue];
@@ -160,20 +160,20 @@ OCDSpec2Context(WorkdaySpec) {
       Task *task = [Task taskWithName:@"me" andDuration:10];
       [todoList add:task];
       
-      [day start];
-      [day startWorkingOn:@"me" withDelegate:nil];
+      [dad start];
+      [dad startWorkingOn:@"me" withDelegate:nil];
       
-      [day clockTicked:0];
+      [dad clockTicked:0];
       
-      [ExpectInt(day.stress) toBe:-10];
+      [ExpectInt(dad.stress) toBe:-10];
     });
     
     It(@"moves positively when you are playing (work stress)", ^{
-      [day start];
-      [day playWithKid];
-      [day clockTicked:0];
+      [dad start];
+      [dad playWithKid];
+      [dad clockTicked:0];
       
-      [ExpectInt(day.stress) toBe:10];
+      [ExpectInt(dad.stress) toBe:10];
     });
   });
 }
