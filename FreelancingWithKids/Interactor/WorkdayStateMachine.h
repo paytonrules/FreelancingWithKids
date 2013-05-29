@@ -1,14 +1,9 @@
-//
-//  WorkdayStateMachine.h
-//  FreelancingWithKids
-//
-//  Created by Eric Smith on 5/29/13.
-//  Copyright (c) 2013 Eric Smith. All rights reserved.
-//
-
 #import <Foundation/Foundation.h>
+#import "Freelancer.h"
 
 @interface WorkdayStateMachine : NSObject
+
++(id) machineWithFreeLancer:(id<Freelancer>) daddy;
 
 -(void) start;
 

@@ -2,12 +2,13 @@
 #import <OCMock/OCMock.h>
 #import "WorkdayStateMachine.h"
 #import "ToDoList.h"
+#import "Freelancer.h"
 
 OCDSpec2Context(WorkdayStateMachineSpec) {
   
   Describe(@"the workday state machine / interactor", ^{
     
-    It(@"initializes things when the day is started", ^{
+    It(@"notifies any observer with the task list when the day is started", ^{
       WorkdayStateMachine *machine = [WorkdayStateMachine new];
       id observer = [OCMockObject observerMock];
       [[NSNotificationCenter defaultCenter] addMockObserver:observer
@@ -21,6 +22,17 @@ OCDSpec2Context(WorkdayStateMachineSpec) {
       [machine start];
       
       [observer verify];
+    });
+    
+    It(@"starts daddys workday", ^{
+      id freelancer = [OCMockObject mockForProtocol:@protocol(Freelancer)];
+      WorkdayStateMachine *machine = [WorkdayStateMachine machineWithFreeLancer:freelancer];
+
+      [(id<Freelancer>)[freelancer expect] start];
+      
+      [machine start];
+      
+      [freelancer verify];
     });
     
   });

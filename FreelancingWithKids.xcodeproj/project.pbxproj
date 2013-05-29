@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		00FB3E98FDD34AF6896BB865 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 520B81D9BB504CF280B298E5 /* libPods.a */; };
+		02FC243D09944D2BBF09D2AE /* libPods-FreelancingWithKidsSpecs.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD33250ABE7B42C6987360FE /* libPods-FreelancingWithKidsSpecs.a */; };
 		070B5A2F174B9B64005B35E5 /* DaddySpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 070B5A2E174B9B64005B35E5 /* DaddySpec.m */; };
 		070B5A36174B9BFE005B35E5 /* Daddy.m in Sources */ = {isa = PBXBuildFile; fileRef = 070B5A35174B9BFE005B35E5 /* Daddy.m */; };
 		070B5A37174B9C07005B35E5 /* Daddy.m in Sources */ = {isa = PBXBuildFile; fileRef = 070B5A35174B9BFE005B35E5 /* Daddy.m */; };
@@ -114,6 +115,7 @@
 		076DBAF4175614FB00382602 /* WorkdayStateMachine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WorkdayStateMachine.h; path = Interactor/WorkdayStateMachine.h; sourceTree = "<group>"; };
 		076DBAF5175614FB00382602 /* WorkdayStateMachine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WorkdayStateMachine.m; path = Interactor/WorkdayStateMachine.m; sourceTree = "<group>"; };
 		076DBAFB1756177D00382602 /* WorkdayStateMachineSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WorkdayStateMachineSpec.m; path = FreelancingWithKidsSpecs/WorkdayStateMachineSpec.m; sourceTree = "<group>"; };
+		076DBAFE1756216600382602 /* Freelancer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Freelancer.h; path = Interactor/Freelancer.h; sourceTree = "<group>"; };
 		0797E326173DAE8E004C2C62 /* FreelancingWithKids.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FreelancingWithKids.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0797E329173DAE8E004C2C62 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		0797E32B173DAE8E004C2C62 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -140,6 +142,8 @@
 		07F5819A17470E1100A2640A /* TaskViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TaskViewCell.xib; sourceTree = "<group>"; };
 		0DDBF41F4B2E4983A99CBF1E /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		520B81D9BB504CF280B298E5 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A60289401D07474DAB7963DD /* Pods-FreelancingWithKidsSpecs.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FreelancingWithKidsSpecs.xcconfig"; path = "Pods/Pods-FreelancingWithKidsSpecs.xcconfig"; sourceTree = SOURCE_ROOT; };
+		CD33250ABE7B42C6987360FE /* libPods-FreelancingWithKidsSpecs.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FreelancingWithKidsSpecs.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,6 +156,7 @@
 				074A9E4B173E6D3400D4CA53 /* Foundation.framework in Frameworks */,
 				074A9E68173E708400D4CA53 /* libOCDSpec2.a in Frameworks */,
 				074A9E4C173E6D3400D4CA53 /* CoreGraphics.framework in Frameworks */,
+				02FC243D09944D2BBF09D2AE /* libPods-FreelancingWithKidsSpecs.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -237,6 +242,7 @@
 			children = (
 				076DBAF4175614FB00382602 /* WorkdayStateMachine.h */,
 				076DBAF5175614FB00382602 /* WorkdayStateMachine.m */,
+				076DBAFE1756216600382602 /* Freelancer.h */,
 			);
 			name = Interactor;
 			sourceTree = "<group>";
@@ -251,6 +257,7 @@
 				0797E328173DAE8E004C2C62 /* Frameworks */,
 				0797E327173DAE8E004C2C62 /* Products */,
 				0DDBF41F4B2E4983A99CBF1E /* Pods.xcconfig */,
+				A60289401D07474DAB7963DD /* Pods-FreelancingWithKidsSpecs.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -270,6 +277,7 @@
 				0797E32B173DAE8E004C2C62 /* Foundation.framework */,
 				0797E32D173DAE8E004C2C62 /* CoreGraphics.framework */,
 				520B81D9BB504CF280B298E5 /* libPods.a */,
+				CD33250ABE7B42C6987360FE /* libPods-FreelancingWithKidsSpecs.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -350,10 +358,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 074A9E56173E6D3400D4CA53 /* Build configuration list for PBXNativeTarget "FreelancingWithKidsSpecs" */;
 			buildPhases = (
+				B8B78BA40FB24C1A9646EC72 /* Check Pods Manifest.lock */,
 				074A9E44173E6D3400D4CA53 /* Sources */,
 				074A9E45173E6D3400D4CA53 /* Frameworks */,
 				074A9E46173E6D3400D4CA53 /* Resources */,
 				074A9E47173E6D3400D4CA53 /* ShellScript */,
+				00E60AD411114B7582A62A8B /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -473,6 +483,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		00E60AD411114B7582A62A8B /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-FreelancingWithKidsSpecs-resources.sh\"\n";
+		};
 		074A9E47173E6D3400D4CA53 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -513,6 +537,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+		};
+		B8B78BA40FB24C1A9646EC72 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -595,13 +633,15 @@
 /* Begin XCBuildConfiguration section */
 		074A9E57173E6D3400D4CA53 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A60289401D07474DAB7963DD /* Pods-FreelancingWithKidsSpecs.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FreelancingWithKidsSpecs/FreelancingWithKidsSpecs-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/OCDSpec2",
-					"\"$(SRCROOT)/include",
+					"\"$(SRCROOT)/include\"",
+					"$(inherited)",
 				);
 				INFOPLIST_FILE = "";
 				LIBRARY_SEARCH_PATHS = (
@@ -612,6 +652,7 @@
 					"-force_load",
 					"\"$(SRCROOT)/include/OCMock/libOCMock.a\"",
 					"-ObjC",
+					"$(inherited)",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -620,13 +661,15 @@
 		};
 		074A9E58173E6D3400D4CA53 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A60289401D07474DAB7963DD /* Pods-FreelancingWithKidsSpecs.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FreelancingWithKidsSpecs/FreelancingWithKidsSpecs-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/OCDSpec2",
-					"\"$(SRCROOT)/include",
+					"\"$(SRCROOT)/include\"",
+					"$(inherited)",
 				);
 				INFOPLIST_FILE = "";
 				LIBRARY_SEARCH_PATHS = (
@@ -637,6 +680,7 @@
 					"-force_load",
 					"\"$(SRCROOT)/include/OCMock/libOCMock.a\"",
 					"-ObjC",
+					"$(inherited)",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
