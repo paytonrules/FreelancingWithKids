@@ -1,6 +1,6 @@
 #import <OCDSpec2/OCDSpec2.h>
 #import <OCMock/OCMock.h>
-#import "Workday.h"
+#import "Daddy.h"
 #import "ToDoList.h"
 #import "Task.h"
 #import "FakeWorkdayClock.h"
@@ -24,16 +24,16 @@
 
 OCDSpec2Context(WorkdaySpec) {
   
-  Describe(@"the workday", ^{
+  Describe(@"the workday with a fake clock and provided task list", ^{
     __block FakeWorkdayClock *fakeClock;
     __block ToDoList *todoList;
-    __block Workday *day;
+    __block Daddy *day;
     __block GameObserver *observer;
     
     BeforeEach(^{
       fakeClock = [FakeWorkdayClock new];
       todoList = [ToDoList new];
-      day = [Workday workdayWithTodoList: todoList andClock: fakeClock];
+      day = [Daddy workdayWithTodoList: todoList andClock: fakeClock];
       observer = [GameObserver new];
       
       [[NSNotificationCenter defaultCenter] addObserver:observer
@@ -175,6 +175,5 @@ OCDSpec2Context(WorkdaySpec) {
       
       [ExpectInt(day.stress) toBe:10];
     });
-        
   });
 }

@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		00FB3E98FDD34AF6896BB865 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 520B81D9BB504CF280B298E5 /* libPods.a */; };
 		070B5A2F174B9B64005B35E5 /* WorkdaySpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 070B5A2E174B9B64005B35E5 /* WorkdaySpec.m */; };
-		070B5A36174B9BFE005B35E5 /* Workday.m in Sources */ = {isa = PBXBuildFile; fileRef = 070B5A35174B9BFE005B35E5 /* Workday.m */; };
-		070B5A37174B9C07005B35E5 /* Workday.m in Sources */ = {isa = PBXBuildFile; fileRef = 070B5A35174B9BFE005B35E5 /* Workday.m */; };
+		070B5A36174B9BFE005B35E5 /* Daddy.m in Sources */ = {isa = PBXBuildFile; fileRef = 070B5A35174B9BFE005B35E5 /* Daddy.m */; };
+		070B5A37174B9C07005B35E5 /* Daddy.m in Sources */ = {isa = PBXBuildFile; fileRef = 070B5A35174B9BFE005B35E5 /* Daddy.m */; };
 		073C74C5174CFE850094A643 /* TickingClockSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 073C74C4174CFE850094A643 /* TickingClockSpec.m */; };
 		073E74211743B84D00393AB3 /* ToDoList.m in Sources */ = {isa = PBXBuildFile; fileRef = 073E74201743B84D00393AB3 /* ToDoList.m */; };
 		073E74221743B84D00393AB3 /* ToDoList.m in Sources */ = {isa = PBXBuildFile; fileRef = 073E74201743B84D00393AB3 /* ToDoList.m */; };
@@ -86,8 +86,8 @@
 
 /* Begin PBXFileReference section */
 		070B5A2E174B9B64005B35E5 /* WorkdaySpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WorkdaySpec.m; path = FreelancingWithKidsSpecs/WorkdaySpec.m; sourceTree = "<group>"; };
-		070B5A34174B9BFE005B35E5 /* Workday.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Workday.h; path = Models/Workday.h; sourceTree = "<group>"; };
-		070B5A35174B9BFE005B35E5 /* Workday.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Workday.m; path = Models/Workday.m; sourceTree = "<group>"; };
+		070B5A34174B9BFE005B35E5 /* Daddy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Daddy.h; path = Models/Daddy.h; sourceTree = "<group>"; };
+		070B5A35174B9BFE005B35E5 /* Daddy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Daddy.m; path = Models/Daddy.m; sourceTree = "<group>"; };
 		070B5A3B174B9EF4005B35E5 /* WallClock.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = WallClock.h; path = Models/WallClock.h; sourceTree = "<group>"; };
 		070B5A3D174BA2D3005B35E5 /* ClockWatcher.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ClockWatcher.h; path = Models/ClockWatcher.h; sourceTree = "<group>"; };
 		073C74C4174CFE850094A643 /* TickingClockSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TickingClockSpec.m; path = FreelancingWithKidsSpecs/TickingClockSpec.m; sourceTree = "<group>"; };
@@ -206,8 +206,8 @@
 				074A9E64173E6FED00D4CA53 /* Task.m */,
 				073E741F1743B84D00393AB3 /* ToDoList.h */,
 				073E74201743B84D00393AB3 /* ToDoList.m */,
-				070B5A34174B9BFE005B35E5 /* Workday.h */,
-				070B5A35174B9BFE005B35E5 /* Workday.m */,
+				070B5A34174B9BFE005B35E5 /* Daddy.h */,
+				070B5A35174B9BFE005B35E5 /* Daddy.m */,
 				070B5A3B174B9EF4005B35E5 /* WallClock.h */,
 				070B5A3D174BA2D3005B35E5 /* ClockWatcher.h */,
 				074C382D174D825700337FC0 /* TickingClock.h */,
@@ -507,7 +507,7 @@
 				074A9E54173E6D3400D4CA53 /* main.m in Sources */,
 				074A9E66173E6FED00D4CA53 /* Task.m in Sources */,
 				074A9E6A173E710300D4CA53 /* TaskSpec.m in Sources */,
-				070B5A37174B9C07005B35E5 /* Workday.m in Sources */,
+				070B5A37174B9C07005B35E5 /* Daddy.m in Sources */,
 				073E74221743B84D00393AB3 /* ToDoList.m in Sources */,
 				073E74271743B94300393AB3 /* ToDoListSpec.m in Sources */,
 				070B5A2F174B9B64005B35E5 /* WorkdaySpec.m in Sources */,
@@ -529,7 +529,7 @@
 				074A9E65173E6FED00D4CA53 /* Task.m in Sources */,
 				073E74211743B84D00393AB3 /* ToDoList.m in Sources */,
 				07A5C80A1744FD9200665282 /* TaskViewCell.m in Sources */,
-				070B5A36174B9BFE005B35E5 /* Workday.m in Sources */,
+				070B5A36174B9BFE005B35E5 /* Daddy.m in Sources */,
 				074C382F174D825700337FC0 /* TickingClock.m in Sources */,
 				07A1B18E1754CDB00099733E /* WorkdayPresenter.m in Sources */,
 			);

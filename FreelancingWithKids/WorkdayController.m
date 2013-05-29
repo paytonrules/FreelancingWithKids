@@ -61,7 +61,7 @@ static NSString *reuseIdentifier = @"task";
 
 -(void) updateProgress:(float) progress
 {
-  [self.stressBar setProgress:percentage animated:YES];
+  [self.stressBar setProgress:progress animated:YES];
 }
 
 -(void) didReceiveMemoryWarning

@@ -1,9 +1,9 @@
 
-#import "Workday.h"
+#import "Daddy.h"
 #import "ToDoList.h"
 #import "Task.h"
 
-@interface Workday ()
+@interface Daddy ()
 
 @property (nonatomic, strong) id<WallClock> itsClock;
 @property (nonatomic, strong) ToDoList *tasks;
@@ -18,20 +18,30 @@ int const EIGHT_HOUR_DAY = 32;
 NSString *const DAY_OVER_NOTIFICATION = @"gameOver";
 NSString *const DAY_RESULT = @"result";
 
-@implementation Workday
+@implementation Daddy
 
-+(id) workdayWithTodoList: (ToDoList *)todoList andClock: (id<WallClock>) fakeClock
++(id) workdayWithTodoList: (ToDoList *)todoList andClock: (id<WallClock>) clock
 {
-  Workday *day = [[Workday alloc] initWithList:todoList andClock:fakeClock];
+  Daddy *day = [[Daddy alloc] initWithList:todoList andClock:clock];
   
   return day;
 }
 
-- (id)initWithList: (ToDoList *)todoList andClock: (id<WallClock>) fakeClock
+- (id)init
+{
+  id<WallClock> clock;
+  ToDoList *tasks = [ToDoList new];
+  [tasks add:[Task taskWithName:@"email" andDuration:3]];
+  [tasks add:[Task taskWithName:@"meeting" andDuration:10]];
+  
+  return [self initWithList:tasks andClock:clock];
+}
+
+- (id)initWithList: (ToDoList *)todoList andClock: (id<WallClock>) clock
 {
     self = [super init];
     if (self) {
-      self.itsClock = fakeClock;
+      self.itsClock = clock;
       self.tasks = todoList;
       self.numTicks = 0;
     }

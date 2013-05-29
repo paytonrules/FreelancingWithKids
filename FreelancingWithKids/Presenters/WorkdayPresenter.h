@@ -11,7 +11,7 @@
 #import "ClockWatcher.h"
 #import "TaskView.h"
 
-@class Workday;
+@class Daddy;
 
 @interface WorkdayPresenter : NSObject<ClockWatcher>
 
@@ -22,7 +22,7 @@
 -(void) startDay;
 -(void) startWorkingOn: (NSString *) name withDelegate:(id<TaskView>) view;
 
-@property (strong, nonatomic) Workday *day;
+@property (strong, nonatomic) Daddy *day;
 @property (readonly) int taskCount;
 
 @end

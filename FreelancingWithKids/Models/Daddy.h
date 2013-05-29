@@ -17,12 +17,13 @@ extern int const EIGHT_HOUR_DAY;
 
 @class ToDoList;
 
-@interface Workday : NSObject<ClockWatcher>
+@interface Daddy : NSObject<ClockWatcher>
 
-+(id) workdayWithTodoList: (ToDoList *)todoList andClock: (id<WallClock>) fakeClock;
++(id) workdayWithTodoList: (ToDoList *)todoList andClock: (id<WallClock>) clock;
 -(void) start;
 -(void) playWithKid;
 -(void) startWorkingOn:(NSString *) taskName withDelegate: (id<TaskView>) view;
-
 @property(readonly) int stress;
+@property(readonly) ToDoList *tasks;
+
 @end

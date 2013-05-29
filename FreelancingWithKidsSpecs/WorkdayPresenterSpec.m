@@ -2,7 +2,7 @@
 #import "OCMock/OCMock.h"
 #import "WorkdayView.h"
 #import "WorkdayPresenter.h"
-#import "Workday.h"
+#import "Daddy.h"
 
 OCDSpec2Context(WorkdayPresenterSpec) {
   
@@ -10,7 +10,7 @@ OCDSpec2Context(WorkdayPresenterSpec) {
     
     It(@"delegates starting a workday to its day", ^{
       id view = [OCMockObject mockForProtocol:@protocol(WorkdayView)];
-      id day = [OCMockObject mockForClass:[Workday class]];
+      id day = [OCMockObject mockForClass:[Daddy class]];
       WorkdayPresenter *presenter = [WorkdayPresenter presenterWithView:nil];
       presenter.day = day;
       

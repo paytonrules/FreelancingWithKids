@@ -2,7 +2,7 @@
 #import "WorkdayView.h"
 #import "TickingClock.h"
 #import "ToDoList.h"
-#import "Workday.h"
+#import "Daddy.h"
 #import "Task.h"
 
 @interface WorkdayPresenter()
@@ -47,7 +47,7 @@
   [self.tasks add:[Task taskWithName:@"meeting" andDuration:10]];
   
   // self.day should become a "new day" command
-  self.day = [Workday workdayWithTodoList:self.tasks andClock:self.tickingClock];
+  self.day = [Daddy workdayWithTodoList:self.tasks andClock:self.tickingClock];
   
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gameOver:) name:DAY_OVER_NOTIFICATION object:nil];
   [self.day addObserver:self forKeyPath:@"stress" options:NSKeyValueObservingOptionNew context:nil];
