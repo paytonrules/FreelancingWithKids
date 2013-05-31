@@ -141,6 +141,7 @@
 		07D01631173DB1E2005F488B /* OCDSpec2.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OCDSpec2.xcodeproj; path = OCDSpec2/OCDSpec2.xcodeproj; sourceTree = "<group>"; };
 		07F5819A17470E1100A2640A /* TaskViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TaskViewCell.xib; sourceTree = "<group>"; };
 		0DDBF41F4B2E4983A99CBF1E /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
+		2FA28EE2D64658CB2607EB15 /* StateMachine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StateMachine.h; path = Interactor/StateMachine.h; sourceTree = "<group>"; };
 		520B81D9BB504CF280B298E5 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A60289401D07474DAB7963DD /* Pods-FreelancingWithKidsSpecs.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FreelancingWithKidsSpecs.xcconfig"; path = "Pods/Pods-FreelancingWithKidsSpecs.xcconfig"; sourceTree = SOURCE_ROOT; };
 		CD33250ABE7B42C6987360FE /* libPods-FreelancingWithKidsSpecs.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FreelancingWithKidsSpecs.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -243,6 +244,7 @@
 				076DBAF4175614FB00382602 /* WorkdayStateMachine.h */,
 				076DBAF5175614FB00382602 /* WorkdayStateMachine.m */,
 				076DBAFE1756216600382602 /* Freelancer.h */,
+				2FA28EE2D64658CB2607EB15 /* StateMachine.h */,
 			);
 			name = Interactor;
 			sourceTree = "<group>";

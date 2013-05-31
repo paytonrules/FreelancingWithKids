@@ -12,17 +12,18 @@
 #import "TaskView.h"
 
 @class Daddy;
+@protocol StateMachine;
 
 @interface WorkdayPresenter : NSObject<ClockWatcher>
 
--(id) initWithView:(id<WorkdayView>) view;
-+(id) presenterWithView:(id<WorkdayView>) view;
+- (id)initWithMachine:(id <StateMachine>)machine view:(id <WorkdayView>)view;
++ (id)presenterWithMachine:(id <StateMachine>)machine view:(id <WorkdayView>)view;
 
--(NSString *) taskNameAt:(NSInteger) row;
 -(void) startDay;
 -(void) startWorkingOn: (NSString *) name withDelegate:(id<TaskView>) view;
+-(NSString *) taskNameAt:(NSInteger) row;
 
-@property (strong, nonatomic) Daddy *day;
+@property (strong, nonatomic) Daddy *daddy;
 @property (readonly) int taskCount;
 
 @end

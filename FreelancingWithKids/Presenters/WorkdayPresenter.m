@@ -1,14 +1,16 @@
 #import "WorkdayPresenter.h"
-#import "WorkdayView.h"
 #import "TickingClock.h"
 #import "ToDoList.h"
 #import "Daddy.h"
 #import "Task.h"
+#import "WorkdayStateMachine.h"
+#import "StateMachine.h"
 
 @interface WorkdayPresenter()
 
 @property(nonatomic, retain) id<WorkdayView> view;
 @property (strong, nonatomic) ToDoList *tasks;
+@property(strong, nonatomic) WorkdayStateMachine *machine;
 @property (strong, nonatomic) id<WallClock> tickingClock;
 
 // I don't like this guy
@@ -20,40 +22,56 @@
 
 @implementation WorkdayPresenter
 
-+(id) presenterWithView:(id<WorkdayView>) view
-{
-  return [[WorkdayPresenter alloc] initWithView:view];
+- (id)initWithMachine:(id <StateMachine>)machine view:(id <WorkdayView>)view {
+  self = [super init];
+  if (self) {
+    self.view = view;
+    self.machine = machine;
+    self.increments = 0;
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(storeTasks:)
+                                                 name:@"initialized"
+                                               object:nil];
+  }
+  return self;
 }
 
-- (id)initWithView:(id<WorkdayView>) view
-{
-    self = [super init];
-    if (self) {
-      self.view = view;
-      self.increments = 0;
-    }
-    return self;
++(id) presenterWithMachine:(id <StateMachine>)machine view:(id <WorkdayView>)view {
+  return [[WorkdayPresenter alloc] initWithMachine: machine view:view];
 }
 
 -(void) startDay
 {
   // I'm not sure the presenter should have a clock
+  // It doesn't but....
+
   self.tickingClock = [TickingClock clockWithUpdateInterval:18.5];
   [self.tickingClock registerWatcher:self];
-  
-  // This won't belong here once generating tasks becomes part of the game
-  self.tasks = [ToDoList new];
-  [self.tasks add:[Task taskWithName:@"email" andDuration:3]];
-  [self.tasks add:[Task taskWithName:@"meeting" andDuration:10]];
-  
+
   // self.day should become a "new day" command
-  self.day = [Daddy workdayWithTodoList:self.tasks andClock:self.tickingClock];
-  
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gameOver:) name:DAY_OVER_NOTIFICATION object:nil];
-  [self.day addObserver:self forKeyPath:@"stress" options:NSKeyValueObservingOptionNew context:nil];
-  
+  self.daddy = [Daddy workdayWithTodoList:self.tasks andClock:self.tickingClock];
+
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(gameOver:)
+                                               name:DAY_OVER_NOTIFICATION
+                                             object:nil];
+
+  [self.daddy addObserver:self
+               forKeyPath:@"stress"
+                  options:NSKeyValueObservingOptionNew
+                  context:nil];
+
+
+  [self.machine start];
+
+  // Needed?
   [self updateClockOnTheWall];
-  [self.day start];
+}
+
+-(void) storeTasks:(NSNotification *) notification
+{
+  self.tasks = notification.userInfo[@"tasks"];
 }
 
 -(NSString *) taskNameAt:(NSInteger) row
@@ -63,7 +81,7 @@
 
 -(void) startWorkingOn: (NSString *) name withDelegate:(id<TaskView>) view
 {
-  [self.day startWorkingOn:name withDelegate:view];
+  [self.daddy startWorkingOn:name withDelegate:view];
 }
 
 -(void) clockTicked:(NSTimeInterval)interval

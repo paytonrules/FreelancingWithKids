@@ -14,8 +14,9 @@ static NSString *reuseIdentifier = @"task";
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-  
-  self.presenter = [WorkdayPresenter presenterWithView:self];
+
+  id<StateMachine> machine = nil;
+  self.presenter = [WorkdayPresenter presenterWithMachine:machine view:self];
   [self.presenter startDay];
   
   [self.taskList registerNib:[UINib nibWithNibName:@"TaskViewCell" bundle:nil] forCellReuseIdentifier:reuseIdentifier];
