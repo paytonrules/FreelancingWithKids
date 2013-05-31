@@ -83,7 +83,6 @@ NSString *const DAY_RESULT = @"result";
   [self.currentTask start:view];
 }
 
-
 -(void) playWithKid
 {
   [self clearCurrentTask];

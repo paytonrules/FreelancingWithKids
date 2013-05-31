@@ -2,7 +2,7 @@
 #import <OCMock/OCMock.h>
 #import "WorkdayStateMachine.h"
 #import "ToDoList.h"
-#import "Freelancer.h"
+#import "FakeWorkdayClock.h"
 
 OCDSpec2Context(WorkdayStateMachineSpec) {
   
@@ -23,8 +23,28 @@ OCDSpec2Context(WorkdayStateMachineSpec) {
       
       [observer verify];
     });
-    
-    It(@"starts daddys workday", ^{
+
+    It(@"watches clock ticks and fires notifications for others", ^{
+      FakeWorkdayClock *clock = [FakeWorkdayClock new];
+      WorkdayStateMachine *machine = [WorkdayStateMachine machineWithFreeLancer:nil clock:clock];
+
+      id observer = [OCMockObject observerMock];
+      [[NSNotificationCenter defaultCenter] addMockObserver:observer
+                                                       name:@"clockTicked"
+                                                     object:machine];
+      [[observer expect] notificationWithName:@"clockTicked" object:machine userInfo:nil];
+
+      [clock notifyWatcher:100];
+
+      [observer verify];
+    });
+
+    It(@"Will stop starting daddy's workday, and instead will increase his stress on clock ticks", ^{
+
+    });
+
+    It(@"starts daddy's workday", ^{
+      PendingStr(@"Deprecated");
       id freelancer = [OCMockObject mockForProtocol:@protocol(Freelancer)];
       WorkdayStateMachine *machine = [WorkdayStateMachine machineWithFreeLancer:freelancer];
 

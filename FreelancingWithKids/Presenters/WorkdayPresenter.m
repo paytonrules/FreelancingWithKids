@@ -8,9 +8,9 @@
 
 @interface WorkdayPresenter()
 
-@property(nonatomic, retain) id<WorkdayView> view;
+@property(nonatomic, strong) id<WorkdayView> view;
 @property (strong, nonatomic) ToDoList *tasks;
-@property(strong, nonatomic) WorkdayStateMachine *machine;
+@property(strong, nonatomic) id<StateMachine> machine;
 @property (strong, nonatomic) id<WallClock> tickingClock;
 
 // I don't like this guy
@@ -33,6 +33,11 @@
                                              selector:@selector(storeTasks:)
                                                  name:@"initialized"
                                                object:nil];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(clockTicked:)
+                                                 name:@"clockTick"
+                                               object:nil];
   }
   return self;
 }
@@ -45,28 +50,30 @@
 {
   // I'm not sure the presenter should have a clock
   // It doesn't but....
-
+/*
   self.tickingClock = [TickingClock clockWithUpdateInterval:18.5];
   [self.tickingClock registerWatcher:self];
 
   // self.day should become a "new day" command
-  self.daddy = [Daddy workdayWithTodoList:self.tasks andClock:self.tickingClock];
+  self.daddy = [Daddy workdayWithTodoList:self.tasks andClock:self.tickingClock];*/
 
   [[NSNotificationCenter defaultCenter] addObserver:self
                                            selector:@selector(gameOver:)
                                                name:DAY_OVER_NOTIFICATION
                                              object:nil];
+  // Know when a clock ticks
 
+/*
   [self.daddy addObserver:self
                forKeyPath:@"stress"
                   options:NSKeyValueObservingOptionNew
-                  context:nil];
+                  context:nil];        */
 
 
   [self.machine start];
 
   // Needed?
-  [self updateClockOnTheWall];
+//  [self updateClockOnTheWall];
 }
 
 -(void) storeTasks:(NSNotification *) notification
@@ -97,7 +104,7 @@
   if (hours > 12)
     hours -= 12;
   int minutes = 15 * (self.increments % 4);
-  
+
   [self.view updateClockWith:[NSString stringWithFormat:@"%d:%02d", hours, minutes]];
 }
 
