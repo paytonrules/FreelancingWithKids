@@ -3,6 +3,6 @@
 
 @protocol Freelancer <NSObject>
 
--(void) start;
+-(void) clockTicked;
 
 @end

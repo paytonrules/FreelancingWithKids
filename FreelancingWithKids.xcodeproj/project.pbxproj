@@ -94,6 +94,7 @@
 		070B5A35174B9BFE005B35E5 /* Daddy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Daddy.m; path = Models/Daddy.m; sourceTree = "<group>"; };
 		070B5A3B174B9EF4005B35E5 /* WallClock.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = WallClock.h; path = Models/WallClock.h; sourceTree = "<group>"; };
 		070B5A3D174BA2D3005B35E5 /* ClockWatcher.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ClockWatcher.h; path = Models/ClockWatcher.h; sourceTree = "<group>"; };
+		07224DF81759B133009FA575 /* libOCDSpec2.a.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = libOCDSpec2.a.framework; path = Library/Frameworks/libOCDSpec2.a.framework; sourceTree = DEVELOPER_DIR; };
 		073C74C4174CFE850094A643 /* TickingClockSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TickingClockSpec.m; path = FreelancingWithKidsSpecs/TickingClockSpec.m; sourceTree = "<group>"; };
 		073E741F1743B84D00393AB3 /* ToDoList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ToDoList.h; path = Models/ToDoList.h; sourceTree = "<group>"; };
 		073E74201743B84D00393AB3 /* ToDoList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ToDoList.m; path = Models/ToDoList.m; sourceTree = "<group>"; };
@@ -280,6 +281,7 @@
 				0797E32D173DAE8E004C2C62 /* CoreGraphics.framework */,
 				520B81D9BB504CF280B298E5 /* libPods.a */,
 				CD33250ABE7B42C6987360FE /* libPods-FreelancingWithKidsSpecs.a */,
+				07224DF81759B133009FA575 /* libOCDSpec2.a.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

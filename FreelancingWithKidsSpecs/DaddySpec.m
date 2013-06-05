@@ -1,57 +1,18 @@
 #import <OCDSpec2/OCDSpec2.h>
 #import <OCMock/OCMock.h>
 #import "Daddy.h"
-#import "ToDoList.h"
 #import "Task.h"
-#import "FakeWorkdayClock.h"
-
-@interface GameObserver : NSObject
-
--(void) notified: (NSNotification *) notification;
-@property(assign) WorkdayStatus status;
-
-@end
-
-@implementation GameObserver
-
--(void) notified: (NSNotification *) notification
-{
-  if (self.status == None)
-    self.status = (WorkdayStatus) [notification.userInfo[DAY_RESULT] intValue];
-}
-
-@end
 
 OCDSpec2Context(DaddySpec) {
   
   Describe(@"the workday with a fake clock and provided task list", ^{
-    __block FakeWorkdayClock *fakeClock;
-    __block ToDoList *todoList;
     __block Daddy *dad;
-    __block GameObserver *observer;
-    
+
     BeforeEach(^{
-      fakeClock = [FakeWorkdayClock new];
-      todoList = [ToDoList new];
-      dad = [Daddy workdayWithTodoList: todoList andClock: fakeClock];
-      observer = [GameObserver new];
-      
-      [[NSNotificationCenter defaultCenter] addObserver:observer
-                                               selector:@selector(notified:)
-                                                   name:DAY_OVER_NOTIFICATION
-                                                 object:nil];
+      dad = [Daddy new];
     });
-    
-    AfterEach(^{
-      [[NSNotificationCenter defaultCenter] removeObserver:observer name:DAY_OVER_NOTIFICATION object:nil];
-    });
-    
-    It(@"starts the clock when the day is started", ^{
-      [dad start];
-      
-      [ExpectBool(fakeClock.started) toBeTrue];
-    });
-    
+
+    /*
     It(@"notifies that the day is successful when there are no tasks", ^{
       [dad start];
       [dad clockTicked:0];
@@ -124,7 +85,7 @@ OCDSpec2Context(DaddySpec) {
       [dad clockTicked:0];
       
       [ExpectBool(fakeClock.started) toBeFalse];
-    });
+    });*/
     
     It(@"begins stress at 0", ^{
       [ExpectInt(dad.stress) toBe:0];
@@ -133,10 +94,8 @@ OCDSpec2Context(DaddySpec) {
     It(@"starts working on a task", ^{
       id delegate = [OCMockObject mockForProtocol:@protocol(TaskView)];
       Task *task = [Task taskWithName:@"Name" andDuration:10];
-      
-      [todoList add:task];
-      
-      [dad startWorkingOn:@"Name" withDelegate: delegate];
+
+      [dad startWorkingOn:task withDelegate: delegate];
       
       [ExpectBool(task.started) toBeTrue];
     });
@@ -145,12 +104,9 @@ OCDSpec2Context(DaddySpec) {
       id delegate = [OCMockObject mockForProtocol:@protocol(TaskView)];
       Task *taskOne = [Task taskWithName:@"NameOne" andDuration:10];
       Task *taskTwo = [Task taskWithName:@"NameTwo" andDuration:10];
-      
-      [todoList add:taskOne];
-      [todoList add:taskTwo];
             
-      [dad startWorkingOn:@"NameOne" withDelegate: delegate];
-      [dad startWorkingOn:@"NameTwo" withDelegate: delegate];
+      [dad startWorkingOn:taskOne withDelegate: delegate];
+      [dad startWorkingOn:taskTwo withDelegate: delegate];
       
       [ExpectBool(taskOne.started) toBeFalse];
       [ExpectBool(taskTwo.started) toBeTrue];
@@ -158,20 +114,17 @@ OCDSpec2Context(DaddySpec) {
     
     It(@"moves stress negatively when you are working (kids stress)", ^{
       Task *task = [Task taskWithName:@"me" andDuration:10];
-      [todoList add:task];
+
+      [dad startWorkingOn:task withDelegate:nil];
       
-      [dad start];
-      [dad startWorkingOn:@"me" withDelegate:nil];
-      
-      [dad clockTicked:0];
+      [dad clockTicked];
       
       [ExpectInt(dad.stress) toBe:-10];
     });
     
     It(@"moves positively when you are playing (work stress)", ^{
-      [dad start];
       [dad playWithKid];
-      [dad clockTicked:0];
+      [dad clockTicked];
       
       [ExpectInt(dad.stress) toBe:10];
     });

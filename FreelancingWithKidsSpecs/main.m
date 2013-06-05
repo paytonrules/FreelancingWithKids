@@ -1,28 +1,32 @@
-//
-//  main.m
-//  FreelancingWithKidsSpecs
-//
-//  Created by Eric Smith on 5/11/13.
-//  Copyright (c) 2013 Eric Smith. All rights reserved.
-//
 
 #import <UIKit/UIKit.h>
-
 #import <OCDSpec2/OCDSpec2.h>
 
-@interface OCDSpec2EntryPoint : NSObject
+@interface OCDSpec2AppDelegate :NSObject <UIApplicationDelegate>
 @end
 
-@implementation OCDSpec2EntryPoint
+@implementation OCDSpec2AppDelegate
+@end
 
-- (void) applicationDidFinishLaunching:(UIApplication*)app {
-  exit(OCDSpec2RunAllTests());
+@interface OCDSpec2ApplicationRunner : UIApplication
+@end
+
+@implementation OCDSpec2ApplicationRunner
+
+-(id) init {
+  if (self = [super init]) {
+    if (OCDSpec2RunAllTests() > 0) {
+      [NSException raise:NSGenericException format:@""];
+    }
+  }
+  
+  return self;
 }
-
 @end
+
 int main(int argc, char *argv[])
 {
   @autoreleasepool {
-    return OCDSpec2RunAllTests();
+    return UIApplicationMain(argc, argv, NSStringFromClass([OCDSpec2ApplicationRunner class]), @"OCDSpec2AppDelegate");
   }
 }

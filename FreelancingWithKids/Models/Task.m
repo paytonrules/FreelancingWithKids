@@ -66,4 +66,9 @@
 {
   [self.clock stop];
 }
+
+-(void)forceCompletion
+{
+  self.timeSpent = self.duration + 1.0;
+}
 @end

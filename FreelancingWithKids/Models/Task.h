@@ -26,5 +26,6 @@
 
 -(void) start:(id<TaskView>) view;
 -(void) stop;
+-(void) forceCompletion;
 
 @end
