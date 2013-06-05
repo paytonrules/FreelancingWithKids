@@ -31,7 +31,7 @@
 
 void RunToEndOfDay(WorkdayStateMachine *machine)
 {
-  for (int i = 0; i <= EIGHT_HOUR_DAY; i++)
+  for (int i = 0; i < EIGHT_HOUR_DAY; i++)
     [machine clockTicked:1];
 }
 
@@ -172,5 +172,36 @@ OCDSpec2Context(WorkdayStateMachineSpec) {
       [ExpectBool(clock.started) toBeFalse];
     });
 
+    It(@"doesn't notify anything if the tasks aren't done and the day isn't over", ^{
+      WorkdayStateMachine *machine = [WorkdayStateMachine machineWithFreeLancer:nil clock:nil];
+      [[NSNotificationCenter defaultCenter] addMockObserver:gameOverObserver name:DAY_OVER_NOTIFICATION object:nil];
+
+      [machine start];
+      [machine clockTicked:2];
+
+      // Kinda strange - but since I've setup no expectations this will fail if I got an unexpected notification
+      [gameOverObserver verify];
+    });
+
+    It(@"prefers winning to losing - if the day is over but the tasks are done, you succeeded", ^{
+      WorkdayStateMachine *machine = [WorkdayStateMachine machineWithFreeLancer:nil clock:nil];
+      [[NSNotificationCenter defaultCenter] addMockObserver:gameOverObserver name:DAY_OVER_NOTIFICATION object:nil];
+      [[NSNotificationCenter defaultCenter] addObserver:taskObserver
+                                               selector:@selector(initializeTasks:)
+                                                   name:@"initialized"
+                                                 object:nil];
+
+      [[gameOverObserver expect] notificationWithName:DAY_OVER_NOTIFICATION
+                                               object:machine
+                                             userInfo:[OCMArg checkWithBlock:^BOOL(NSDictionary *userInfo) {
+                                               return userInfo[DAY_RESULT] == [NSNumber numberWithInt:Successful];
+                                             }]];
+
+      [machine start];
+      [taskObserver completeAllTasks];
+      RunToEndOfDay(machine);
+
+      [gameOverObserver verify];
+    });
   });
 }

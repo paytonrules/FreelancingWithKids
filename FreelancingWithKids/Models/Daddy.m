@@ -19,19 +19,6 @@
     self.stress += 10;
   else
     self.stress -= 10;
-/*
-  if ([self.tasks complete]) {
-    [[NSNotificationCenter defaultCenter] postNotificationName:DAY_OVER_NOTIFICATION
-                                                        object:self
-                                                      userInfo:@{DAY_RESULT: [NSNumber numberWithInt:Successful]}];
-    [self.itsClock stop];
-  }
-  else if (self.numTicks >= EIGHT_HOUR_DAY) {
-    [[NSNotificationCenter defaultCenter] postNotificationName:DAY_OVER_NOTIFICATION
-                                                        object:self
-                                                      userInfo:@{DAY_RESULT: [NSNumber numberWithInt:Failed]}];
-    [self.itsClock stop];
-  }*/
 }
 
 -(void) startWorkingOn:(Task *) task withDelegate: (id<TaskView>) view
