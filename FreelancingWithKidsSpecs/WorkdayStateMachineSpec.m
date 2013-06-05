@@ -29,6 +29,12 @@
 }
 @end
 
+void RunToEndOfDay(WorkdayStateMachine *machine)
+{
+  for (int i = 0; i <= EIGHT_HOUR_DAY; i++)
+    [machine clockTicked:1];
+}
+
 OCDSpec2Context(WorkdayStateMachineSpec) {
   __block TaskObserver *taskObserver;
   __block id gameOverObserver;
@@ -130,19 +136,41 @@ OCDSpec2Context(WorkdayStateMachineSpec) {
 
       [machine start];
 
-      for (int i = 0; i < EIGHT_HOUR_DAY; i++)
-        [machine clockTicked:1];
-
-      [machine clockTicked:0];
+      RunToEndOfDay(machine);
 
       [gameOverObserver verify];
     });
 
-    It(@"counts an empty task list as a day over", ^{
-      PendingStr(@"Pending day over with no tasks");
+    It(@"Stops the clock when the day is over", ^{
+      FakeWorkdayClock *clock = [FakeWorkdayClock new];
+      WorkdayStateMachine *machine = [WorkdayStateMachine machineWithFreeLancer:nil clock:clock];
+
+      [[NSNotificationCenter defaultCenter] addObserver:taskObserver
+                                               selector:@selector(initializeTasks:)
+                                                   name:@"initialized"
+                                                 object:nil];
+      [machine start];
+      RunToEndOfDay(machine);
+
+
+      [ExpectBool(clock.started) toBeFalse];
     });
 
-    It(@"Stops the clock when the day is over", ^{});
+    It(@"Stops the clock on a successful day too", ^{
+      FakeWorkdayClock *clock = [FakeWorkdayClock new];
+      WorkdayStateMachine *machine = [WorkdayStateMachine machineWithFreeLancer:nil clock:clock];
+
+      [[NSNotificationCenter defaultCenter] addObserver:taskObserver
+                                               selector:@selector(initializeTasks:)
+                                                   name:@"initialized"
+                                                 object:nil];
+
+      [machine start];
+      [taskObserver completeAllTasks];
+      [machine clockTicked:1];
+
+      [ExpectBool(clock.started) toBeFalse];
+    });
 
   });
 }

@@ -69,6 +69,7 @@ NSString *const DAY_OVER_NOTIFICATION = @"gameOver";
                                                    toState:successfulDay];
     [successfulDay setDidEnterStateBlock:^(TKState *state, TKStateMachine *stateMachine) {
       [self notifyOfSuccessfulDay];
+      [self stopClock];
     }];
 
     TKState *failedDay = [TKState stateWithName:@"failedDay"];
@@ -77,8 +78,8 @@ NSString *const DAY_OVER_NOTIFICATION = @"gameOver";
                                                toState:failedDay];
     [failedDay setDidEnterStateBlock:^(TKState *state, TKStateMachine *stateMachine) {
       [self notifyOfFailedDay];
+      [self stopClock];
     }];
-
 
     [self.stateMachine addStatesFromArray:@[wakingUp, working, checkingClock, successfulDay, failedDay]];
     [self.stateMachine addEventsFromArray:@[viewMessage, tickMessage, successfulDayMessage, stillWorking, failedDayMessage]];
@@ -101,6 +102,10 @@ NSString *const DAY_OVER_NOTIFICATION = @"gameOver";
 
 -(void) startClock {
   [self.clock start:self];
+}
+
+-(void) stopClock {
+  [self.clock stop];
 }
 
 -(void) setupInitialTasks
@@ -126,7 +131,6 @@ NSString *const DAY_OVER_NOTIFICATION = @"gameOver";
     [self.stateMachine fireEvent:@"stillWorking" error:&error];
   }
 }
-
 -(void) tickClock
 {
   self.numTicks++;
