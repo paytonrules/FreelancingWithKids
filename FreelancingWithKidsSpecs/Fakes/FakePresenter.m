@@ -36,5 +36,10 @@
   return self.todoList.count;
 }
 
+-(NSString *) taskNameAt:(NSInteger)row
+{
+  return [[self.todoList taskNumber:row] name];
+}
+
 
 @end

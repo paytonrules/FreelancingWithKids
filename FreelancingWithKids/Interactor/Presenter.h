@@ -9,5 +9,6 @@
 -(void) clockTicked;
 -(void) gameOver:(WorkdayStatus) status;
 @property (readonly) int taskCount;
+-(NSString *) taskNameAt:(NSInteger) row;
 
 @end

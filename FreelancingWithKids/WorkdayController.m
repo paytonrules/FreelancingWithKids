@@ -3,10 +3,13 @@
 #import "WorkdayPresenter.h"
 #import "Daddy.h"
 #import "WorkdayStateMachine.h"
+#import "Presenter.h"
+#import "StateMachine.h"
 
 @interface WorkdayController ()
 
-@property (strong, nonatomic) WorkdayPresenter *presenter;
+@property (strong, nonatomic) id<Presenter> presenter;
+@property (strong, nonatomic) id<StateMachine> machine;
 @end
 
 static NSString *reuseIdentifier = @"task";
@@ -18,9 +21,11 @@ static NSString *reuseIdentifier = @"task";
   [super viewDidLoad];
 
   Daddy *daddy = [Daddy new];
-  id<StateMachine> machine = [WorkdayStateMachine machineWithFreeLancer:daddy presenter: nil];
+
   self.presenter = [WorkdayPresenter presenterWithView:self];
-  //[self.presenter startDay];
+  self.machine = [WorkdayStateMachine machineWithFreeLancer:daddy presenter: self.presenter];
+
+  [self.machine start];
 
   [self.taskList registerNib:[UINib nibWithNibName:@"TaskViewCell" bundle:nil] forCellReuseIdentifier:reuseIdentifier];
 }

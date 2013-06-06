@@ -1,3 +1,4 @@
+#import "WorkdayStatus.h"
 #import "WorkdayPresenter.h"
 #import "ToDoList.h"
 #import "Task.h"
@@ -58,7 +59,7 @@
   return self.todoList.count;
 }
 
--(void) gameOver:(enum _WorkdayStatus) status
+-(void) gameOver:(WorkdayStatus) status
 {
   if ( status == Successful) {
     [self.view showYouWin];
