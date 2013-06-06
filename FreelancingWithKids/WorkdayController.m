@@ -18,9 +18,9 @@ static NSString *reuseIdentifier = @"task";
   [super viewDidLoad];
 
   Daddy *daddy = [Daddy new];
-  id<StateMachine> machine = [WorkdayStateMachine machineWithFreeLancer:daddy];
-  self.presenter = [WorkdayPresenter presenterWithMachine:machine view:self];
-  [self.presenter startDay];
+  id<StateMachine> machine = [WorkdayStateMachine machineWithFreeLancer:daddy presenter: nil];
+  self.presenter = [WorkdayPresenter presenterWithView:self];
+  //[self.presenter startDay];
 
   [self.taskList registerNib:[UINib nibWithNibName:@"TaskViewCell" bundle:nil] forCellReuseIdentifier:reuseIdentifier];
 }
@@ -48,7 +48,7 @@ static NSString *reuseIdentifier = @"task";
 
 -(void) startWorkingOn: (NSString *) name withDelegate:(id<TaskView>) view
 {
-  [self.presenter startWorkingOn:name withDelegate:view];
+//  [self.presenter startWorkingOn:name withDelegate:view];
 }
 
 -(void) showYouWin

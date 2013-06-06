@@ -20,7 +20,7 @@ OCDSpec2Context(DaddySpec) {
       id delegate = [OCMockObject mockForProtocol:@protocol(TaskView)];
       Task *task = [Task taskWithName:@"Name" andDuration:10];
 
-      [dad startWorkingOn:task withDelegate: delegate];
+      [dad startTask:task withDelegate: delegate];
       
       [ExpectBool(task.started) toBeTrue];
     });
@@ -30,8 +30,8 @@ OCDSpec2Context(DaddySpec) {
       Task *taskOne = [Task taskWithName:@"NameOne" andDuration:10];
       Task *taskTwo = [Task taskWithName:@"NameTwo" andDuration:10];
             
-      [dad startWorkingOn:taskOne withDelegate: delegate];
-      [dad startWorkingOn:taskTwo withDelegate: delegate];
+      [dad startTask:taskOne withDelegate: delegate];
+      [dad startTask:taskTwo withDelegate: delegate];
       
       [ExpectBool(taskOne.started) toBeFalse];
       [ExpectBool(taskTwo.started) toBeTrue];
@@ -40,7 +40,7 @@ OCDSpec2Context(DaddySpec) {
     It(@"moves stress negatively when you are working (kids stress)", ^{
       Task *task = [Task taskWithName:@"me" andDuration:10];
 
-      [dad startWorkingOn:task withDelegate:nil];
+      [dad startTask:task withDelegate:nil];
       
       [dad clockTicked];
       

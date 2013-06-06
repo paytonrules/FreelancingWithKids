@@ -4,6 +4,9 @@
 #import "ToDoList.h"
 #import "FakeWorkdayClock.h"
 #import "Task.h"
+#import "WorkdayPresenter.h"
+#import "FakePresenter.h"
+#import "WorkdayStatus.h"
 
 @interface TaskObserver : NSObject
 @property(strong, nonatomic) ToDoList *tasks;
@@ -35,57 +38,47 @@ void RunToEndOfDay(WorkdayStateMachine *machine)
     [machine clockTicked:1];
 }
 
+void CompleteAllTasks(ToDoList *tasks)
+{
+  for(int i = 0; i < tasks.count; i++) {
+    [[tasks taskNumber:i] forceCompletion];
+  }
+}
+
 OCDSpec2Context(WorkdayStateMachineSpec) {
-  __block TaskObserver *taskObserver;
-  __block id gameOverObserver;
-  __block id clockObserver;
-  
+
   Describe(@"the workday state machine / interactor", ^{
 
-    BeforeEach(^{
-      gameOverObserver = [OCMockObject observerMock];
-      clockObserver = [OCMockObject observerMock];
-      taskObserver = [TaskObserver new];
-    });
+    It(@"sets its presenter with the task list when the day is started", ^{
+      FakePresenter *presenter = [FakePresenter new];
+      WorkdayStateMachine *machine = [WorkdayStateMachine machineWithFreeLancer:nil presenter:presenter];
 
-    AfterEach(^{
-      [[NSNotificationCenter defaultCenter] removeObserver:taskObserver];
-      [[NSNotificationCenter defaultCenter] removeObserver:gameOverObserver];
-      [[NSNotificationCenter defaultCenter] removeObserver:clockObserver];
-    });
-
-    It(@"notifies any observer with the task list when the day is started", ^{
-      WorkdayStateMachine *machine = [WorkdayStateMachine new];
-      [[NSNotificationCenter defaultCenter] addObserver:taskObserver
-                                               selector:@selector(initializeTasks:)
-                                                   name:@"initialized"
-                                                 object:machine];
-      
       [machine start];
 
-      [ExpectInt([taskObserver taskCount]) toBe:2];
+      [ExpectInt(presenter.taskCount) toBe:2];
     });
 
-    It(@"watches clock ticks and fires notifications for others", ^{
+    It(@"watches clock ticks and tells its presenter", ^{
       FakeWorkdayClock *clock = [FakeWorkdayClock new];
-      WorkdayStateMachine *machine = [WorkdayStateMachine machineWithFreeLancer:nil clock:clock];
+      id presenter = [OCMockObject niceMockForProtocol:@protocol(Presenter)];
+
+      WorkdayStateMachine *machine = [WorkdayStateMachine machineWithFreeLancer:nil
+                                                                      presenter:presenter
+                                                                          clock:clock];
       [machine start];
 
-      [[NSNotificationCenter defaultCenter] addMockObserver:clockObserver
-                                                       name:@"clockTicked"
-                                                     object:machine];
-      [[clockObserver expect] notificationWithName:@"clockTicked" object:machine userInfo:nil];
+      [[presenter expect] clockTicked];
 
       [clock notifyWatcher:100];
 
-      [clockObserver verify];
+      [presenter verify];
     });
 
     It(@"Will inform the employee of clock ticks", ^{
       id daddy = [OCMockObject mockForProtocol:@protocol(Freelancer)];
       FakeWorkdayClock *clock = [FakeWorkdayClock new];
 
-      WorkdayStateMachine *machine = [WorkdayStateMachine machineWithFreeLancer:daddy clock:clock];
+      WorkdayStateMachine *machine = [WorkdayStateMachine machineWithFreeLancer:daddy presenter:nil clock:clock];
       [machine start];
 
       [[daddy expect] clockTicked];
@@ -95,113 +88,85 @@ OCDSpec2Context(WorkdayStateMachineSpec) {
       [daddy verify];
     });
 
-    It(@"Announces the day is over if all the tasks are complete on a tick", ^{
-      WorkdayStateMachine *machine = [WorkdayStateMachine machineWithFreeLancer:nil clock:nil];
-
-      [[NSNotificationCenter defaultCenter] addObserver:taskObserver
-                                               selector:@selector(initializeTasks:)
-                                                   name:@"initialized"
-                                                 object:nil];
-
-      [[NSNotificationCenter defaultCenter] addMockObserver:gameOverObserver name:DAY_OVER_NOTIFICATION object:nil];
-
-      [[gameOverObserver expect] notificationWithName:DAY_OVER_NOTIFICATION
-                                               object:machine
-                                             userInfo:[OCMArg checkWithBlock:^BOOL(NSDictionary *userInfo) {
-                                               return userInfo[DAY_RESULT] == [NSNumber numberWithInt:Successful];
-                                             }]];
+    It(@"Announces the day is successful if all the tasks are complete on a tick", ^{
+      FakePresenter *presenter = [FakePresenter new];
+      WorkdayStateMachine *machine = [WorkdayStateMachine machineWithFreeLancer:nil presenter:presenter clock:nil];
 
       [machine start];
-      [taskObserver completeAllTasks];
+      [presenter completeAllTasks];
       [machine clockTicked:1];
 
-      [gameOverObserver verify];
+      [ExpectBool([presenter gameOverWith:Successful]) toBeTrue];
     });
 
     It(@"Announces the day is over and you failed if time is up on a tick, but tasks aren't complete", ^{
-      WorkdayStateMachine *machine = [WorkdayStateMachine machineWithFreeLancer:nil clock:nil];
-
-      [[NSNotificationCenter defaultCenter] addObserver:taskObserver
-                                               selector:@selector(initializeTasks:)
-                                                   name:@"initialized"
-                                                 object:nil];
-
-      [[NSNotificationCenter defaultCenter] addMockObserver:gameOverObserver name:DAY_OVER_NOTIFICATION object:nil];
-
-      [[gameOverObserver expect] notificationWithName:DAY_OVER_NOTIFICATION
-                                       object:machine
-                                     userInfo:[OCMArg checkWithBlock:^BOOL(NSDictionary *userInfo) {
-                                       return userInfo[DAY_RESULT] == [NSNumber numberWithInt:Failed];
-                                     }]];
+      FakePresenter *presenter = [FakePresenter new];
+      WorkdayStateMachine *machine = [WorkdayStateMachine machineWithFreeLancer:nil presenter:presenter clock:nil];
 
       [machine start];
 
       RunToEndOfDay(machine);
 
-      [gameOverObserver verify];
+      [ExpectBool([presenter gameOverWith:Failed]) toBeTrue];
     });
 
     It(@"Stops the clock when the day is over", ^{
       FakeWorkdayClock *clock = [FakeWorkdayClock new];
-      WorkdayStateMachine *machine = [WorkdayStateMachine machineWithFreeLancer:nil clock:clock];
+      FakePresenter *presenter = [FakePresenter new];
+      WorkdayStateMachine *machine = [WorkdayStateMachine machineWithFreeLancer:nil presenter: presenter clock:clock];
 
-      [[NSNotificationCenter defaultCenter] addObserver:taskObserver
-                                               selector:@selector(initializeTasks:)
-                                                   name:@"initialized"
-                                                 object:nil];
       [machine start];
       RunToEndOfDay(machine);
-
 
       [ExpectBool(clock.started) toBeFalse];
     });
 
     It(@"Stops the clock on a successful day too", ^{
       FakeWorkdayClock *clock = [FakeWorkdayClock new];
-      WorkdayStateMachine *machine = [WorkdayStateMachine machineWithFreeLancer:nil clock:clock];
-
-      [[NSNotificationCenter defaultCenter] addObserver:taskObserver
-                                               selector:@selector(initializeTasks:)
-                                                   name:@"initialized"
-                                                 object:nil];
+      FakePresenter *presenter = [FakePresenter new];
+      WorkdayStateMachine *machine = [WorkdayStateMachine machineWithFreeLancer:nil presenter:presenter clock:clock];
 
       [machine start];
-      [taskObserver completeAllTasks];
+      [presenter completeAllTasks];
       [machine clockTicked:1];
 
       [ExpectBool(clock.started) toBeFalse];
     });
 
     It(@"doesn't notify anything if the tasks aren't done and the day isn't over", ^{
-      WorkdayStateMachine *machine = [WorkdayStateMachine machineWithFreeLancer:nil clock:nil];
-      [[NSNotificationCenter defaultCenter] addMockObserver:gameOverObserver name:DAY_OVER_NOTIFICATION object:nil];
+      FakePresenter *presenter = [FakePresenter new];
+      WorkdayStateMachine *machine = [WorkdayStateMachine machineWithFreeLancer:nil presenter:presenter clock:nil];
 
       [machine start];
       [machine clockTicked:2];
 
-      // Kinda strange - but since I've setup no expectations this will fail if I got an unexpected notification
-      [gameOverObserver verify];
+      [ExpectBool([presenter gameOverWith:None]) toBeTrue];
     });
 
     It(@"prefers winning to losing - if the day is over but the tasks are done, you succeeded", ^{
-      WorkdayStateMachine *machine = [WorkdayStateMachine machineWithFreeLancer:nil clock:nil];
-      [[NSNotificationCenter defaultCenter] addMockObserver:gameOverObserver name:DAY_OVER_NOTIFICATION object:nil];
-      [[NSNotificationCenter defaultCenter] addObserver:taskObserver
-                                               selector:@selector(initializeTasks:)
-                                                   name:@"initialized"
-                                                 object:nil];
-
-      [[gameOverObserver expect] notificationWithName:DAY_OVER_NOTIFICATION
-                                               object:machine
-                                             userInfo:[OCMArg checkWithBlock:^BOOL(NSDictionary *userInfo) {
-                                               return userInfo[DAY_RESULT] == [NSNumber numberWithInt:Successful];
-                                             }]];
+      FakePresenter *presenter = [FakePresenter new];
+      WorkdayStateMachine *machine = [WorkdayStateMachine machineWithFreeLancer:nil presenter:presenter clock:nil];
 
       [machine start];
-      [taskObserver completeAllTasks];
+      [presenter completeAllTasks];
       RunToEndOfDay(machine);
 
-      [gameOverObserver verify];
+      [ExpectBool([presenter gameOverWith:Successful]) toBeTrue];
+    });
+
+    It(@"starts the right task on daddy", ^{
+      id daddy = [OCMockObject mockForProtocol:@protocol(Freelancer)];
+      id view = [OCMockObject mockForProtocol:@protocol(TaskView)];
+      WorkdayStateMachine *machine = [WorkdayStateMachine machineWithFreeLancer:daddy presenter:nil];
+
+      [[daddy expect] startTask:[OCMArg checkWithBlock:^BOOL(Task *task) {
+        return [task.name isEqualToString:@"meeting"];
+      }] withDelegate:view];
+
+      [machine start];
+      [machine startTask:@"meeting" withDelegate:view];
+
+      [daddy verify];
     });
   });
 }

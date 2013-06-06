@@ -21,7 +21,7 @@
     self.stress -= 10;
 }
 
--(void) startWorkingOn:(Task *) task withDelegate: (id<TaskView>) view
+-(void) startTask:(Task *) task withDelegate: (id<TaskView>) view
 {
   [self clearCurrentTask];
   self.currentTask = task;

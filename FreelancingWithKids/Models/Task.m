@@ -1,6 +1,7 @@
 #import "Task.h"
 #import "TaskView.h"
 #import "TickingClock.h"
+#import "WorkdayView.h"
 
 @interface Task()
 @property(assign) NSTimeInterval timeSpent;

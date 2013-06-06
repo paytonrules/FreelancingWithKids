@@ -2,12 +2,14 @@
 #import "OCMock/OCMock.h"
 #import "WorkdayView.h"
 #import "WorkdayPresenter.h"
-#import "StateMachine.h"
 #import "ToDoList.h"
 #import "Task.h"
 
 @interface SimpleView : NSObject<WorkdayView>
 @property (nonatomic, strong) NSString *timeAsString;
+@property (assign) float progress;
+@property (assign) BOOL showedYouWin;
+@property (assign) BOOL showedYouLose;
 @end
 
 @implementation SimpleView
@@ -17,68 +19,94 @@
   self.timeAsString = timeAsString;
 }
 
-- (void)showYouWin {
-
+- (void)showYouWin
+{
+  self.showedYouWin = YES;
 }
 
-- (void)showYouLose {
-
+- (void)showYouLose
+{
+  self.showedYouLose = YES;
 }
 
-- (void)updateProgress:(float)progress {
-
+- (void)updateProgress:(float)progress
+{
+  self.progress = progress;
 }
 @end
 
 OCDSpec2Context(WorkdayPresenterSpec) {
-
-  // stateMachine requires daddy and view
-  // presenter requires state machine
-  // controller creates state machine/workday/daddy and wires.
-
   Describe(@"Workday Presenter", ^{
 
-    It(@"delegates starting a workday to its machine", ^{
-      id machine = [OCMockObject mockForProtocol:@protocol(StateMachine)];
-      WorkdayPresenter *presenter = [WorkdayPresenter presenterWithMachine:machine view:nil];
-      [(id<StateMachine>)[machine expect] start];
-
-      [presenter startDay];
-
-      [machine verify];
-    });
-
-    It(@"monitors the intialized task list", ^{
-      WorkdayPresenter *presenter = [WorkdayPresenter presenterWithMachine:nil view:nil];
+    It(@"gets a copy of the task list", ^{
+      WorkdayPresenter *presenter = [WorkdayPresenter presenterWithView:nil];
 
       ToDoList *tasks = [ToDoList new];
       [tasks add:[Task taskWithName:@"hello" andDuration:0]];
 
-      [[NSNotificationCenter defaultCenter] postNotificationName:@"initialized"
-                                                          object:self
-                                                        userInfo:@{@"tasks": tasks}];
+      presenter.todoList = tasks;
 
       [ExpectObj([presenter taskNameAt:0]) toBe:@"hello"];
     });
 
-    It(@"updates the view on a clock tick event", ^{
+    It(@"updates the view when the clock ticks", ^{
       SimpleView *view = [SimpleView new];
-      [WorkdayPresenter presenterWithMachine:nil view:view];
+      WorkdayPresenter *presenter = [WorkdayPresenter presenterWithView: view];
 
-      [[NSNotificationCenter defaultCenter] postNotificationName:@"clockTick"
-                                                          object:self
-                                                        userInfo:nil];
+      [presenter clockTicked];
 
       [ExpectObj(view.timeAsString) toBeEqualTo:@"9:15"];
+
+      [presenter clockTicked];
+
+      [ExpectObj(view.timeAsString) toBeEqualTo:@"9:30"];
     });
 
-    It(@"monitors the stress of the daddy?  Updates? I forgot", ^{
-      Pending();
+    It(@"updates the stress of daddy for the minimum", ^{
+      SimpleView *view = [SimpleView new];
+      WorkdayPresenter *presenter = [WorkdayPresenter presenterWithView:view];
 
+      [presenter updateStress:-50];
+
+      [ExpectFloat(view.progress) toBe:0.0f withPrecision:0.0001f];
     });
 
-    // There are gaps in the testing here.  Originally I did not have this code tested, as it was part of the controller.
-    // In an effort to prevent overengineering, I'm adding tests on an as-needed basis.
+    It(@"updates the stress for the maximum", ^{
+      SimpleView *view = [SimpleView new];
+      WorkdayPresenter *presenter = [WorkdayPresenter presenterWithView:view];
+
+      [presenter updateStress:50];
+
+      [ExpectFloat(view.progress) toBe:1.0f withPrecision:0.0001f];
+    });
+
+    It(@"shows you win when the game is successful", ^{
+      SimpleView *view = [SimpleView new];
+      WorkdayPresenter *presenter = [WorkdayPresenter presenterWithView: view];
+
+      [presenter gameOver:Successful];
+
+      [ExpectBool(view.showedYouWin) toBeTrue];
+    });
+
+    It(@"Shows you lose otherwise", ^{
+      SimpleView *view = [SimpleView new];
+      WorkdayPresenter *presenter = [WorkdayPresenter presenterWithView:view];
+
+      [presenter gameOver:Failed];
+
+      [ExpectBool(view.showedYouLose) toBeTrue];
+    });
+
+    It(@"provides the task count", ^{
+      ToDoList *tasks = [ToDoList new];
+      [tasks add:[Task taskWithName:@"hello" andDuration:0]];
+      [tasks add:[Task taskWithName:@"helloAgain" andDuration:0]];
+
+      WorkdayPresenter *presenter = [WorkdayPresenter presenterWithView:nil];
+      presenter.todoList = tasks;
+
+      [ExpectInt(presenter.taskCount) toBe:2];
+    });
   });
-
 }

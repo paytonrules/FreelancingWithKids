@@ -8,6 +8,5 @@
 @interface Daddy : NSObject<Freelancer>
 
 -(void) playWithKid;
--(void) startWorkingOn:(Task *) task withDelegate: (id<TaskView>) view;
 @property(readonly) int stress;
 @end

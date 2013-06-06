@@ -2,11 +2,10 @@
 #import "WorkdayStateMachine.h"
 #import "ToDoList.h"
 #import "Task.h"
+#import "WorkdayStatus.h"
+#import "Presenter.h"
 
 int const EIGHT_HOUR_DAY = 32;
-NSString *const DAY_RESULT = @"result";
-NSString *const DAY_OVER_NOTIFICATION = @"gameOver";
-
 
 @interface WorkdayStateMachine()
 
@@ -14,27 +13,32 @@ NSString *const DAY_OVER_NOTIFICATION = @"gameOver";
 @property(nonatomic, strong) TKStateMachine *stateMachine;
 @property(nonatomic, strong) id<WallClock> clock;
 @property(nonatomic, strong) ToDoList *tasks;
+@property(nonatomic, strong) id<Presenter> presenter;
 @property(assign) int numTicks;
 
 @end
 
 @implementation WorkdayStateMachine
+
+@synthesize stress;
+
 -(id) init
 {
-  return [self initWithFreeLancer:nil];
+  return [self initWithFreeLancer:nil presenter:nil];
 }
 
--(id) initWithFreeLancer:(id<Freelancer>) employee
+-(id) initWithFreeLancer:(id<Freelancer>) employee presenter:(id<Presenter>) presenter
 {
-  return [self initWithFreeLancer:employee clock:nil];
+  return [self initWithFreeLancer:employee presenter:presenter clock:nil];
 }
 
--(id) initWithFreeLancer:(id<Freelancer>) employee clock:(id<WallClock>) clock
+-(id) initWithFreeLancer:(id<Freelancer>) employee presenter:(id<Presenter>) presenter clock:(id<WallClock>) clock
 {
   self = [super init];
   if (self) {
     self.employee = employee;
     self.clock = clock;
+    self.presenter = presenter;
 
     self.stateMachine = [TKStateMachine new];
 
@@ -91,13 +95,14 @@ NSString *const DAY_OVER_NOTIFICATION = @"gameOver";
   return self;
 }
 
-+(id) machineWithFreeLancer:(id<Freelancer>)employee
++(id) machineWithFreeLancer:(id<Freelancer>) freelancer presenter:(id<Presenter>) presenter
 {
-  return [[WorkdayStateMachine new] initWithFreeLancer:employee];
+  return [[WorkdayStateMachine alloc] initWithFreeLancer:freelancer presenter:presenter];
 }
 
-+(id) machineWithFreeLancer:(id <Freelancer>)freelancer clock:(id <WallClock>)clock {
-  return [[WorkdayStateMachine new] initWithFreeLancer:freelancer clock:clock];
++(id) machineWithFreeLancer:(id<Freelancer>) freelancer presenter:(id<Presenter>) presenter clock:(id <WallClock>)clock
+{
+  return [[WorkdayStateMachine alloc] initWithFreeLancer:freelancer presenter:presenter clock:clock];
 }
 
 -(void) startClock {
@@ -113,10 +118,8 @@ NSString *const DAY_OVER_NOTIFICATION = @"gameOver";
   self.tasks = [ToDoList new];
   [self.tasks add:[Task taskWithName:@"email" andDuration:3]];
   [self.tasks add:[Task taskWithName:@"meeting" andDuration:10]];
-  
-  [[NSNotificationCenter defaultCenter] postNotificationName:@"initialized"
-                                                      object:self
-                                                    userInfo:@{@"tasks": self.tasks}];
+
+  self.presenter.todoList = self.tasks;
 }
 
 -(void) checkDayStatus
@@ -131,27 +134,28 @@ NSString *const DAY_OVER_NOTIFICATION = @"gameOver";
     [self.stateMachine fireEvent:@"stillWorking" error:&error];
   }
 }
+
 -(void) tickClock
 {
   self.numTicks++;
-  [[NSNotificationCenter defaultCenter] postNotificationName:@"clockTicked"
-                                                      object: self];
-
   [self.employee clockTicked];
+  [self.presenter clockTicked];
 }
 
 -(void) notifyOfSuccessfulDay
 {
-  [[NSNotificationCenter defaultCenter] postNotificationName:DAY_OVER_NOTIFICATION
-                                                      object:self
-                                                    userInfo:@{DAY_RESULT: [NSNumber numberWithInt:Successful]}];
+  [self.presenter gameOver:Successful];
 }
 
 -(void) notifyOfFailedDay
 {
-  [[NSNotificationCenter defaultCenter] postNotificationName:DAY_OVER_NOTIFICATION
-                                                      object:self
-                                                    userInfo:@{DAY_RESULT: [NSNumber numberWithInt:Failed]}];
+  [self.presenter gameOver:Failed];
+}
+
+- (void)startTask:(NSString *)taskName withDelegate:(id <TaskView>)view
+{
+  Task *task = [self.tasks taskByName:taskName];
+  [self.employee startTask:task withDelegate:view];
 }
 
 -(void) start

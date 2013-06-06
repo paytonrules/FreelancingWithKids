@@ -48,6 +48,8 @@
 		07A1B18F1754CDB00099733E /* WorkdayPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 07A1B18D1754CDB00099733E /* WorkdayPresenter.m */; };
 		07A5C80A1744FD9200665282 /* TaskViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 07A5C8091744FD9200665282 /* TaskViewCell.m */; };
 		07F5819B17470E1100A2640A /* TaskViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07F5819A17470E1100A2640A /* TaskViewCell.xib */; };
+		2FA281AD60C4005E427D2FA2 /* FakePresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FA289AF409AE425496AA6B6 /* FakePresenter.m */; };
+		2FA28542047545AD9DE2CBC4 /* FakeStateMachine.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FA2869B7FA109388B81337E /* FakeStateMachine.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -135,13 +137,19 @@
 		0797E345173DAE8E004C2C62 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/WorkdayController.xib; sourceTree = "<group>"; };
 		07A1B18C1754CDB00099733E /* WorkdayPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WorkdayPresenter.h; path = Presenters/WorkdayPresenter.h; sourceTree = "<group>"; };
 		07A1B18D1754CDB00099733E /* WorkdayPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WorkdayPresenter.m; path = Presenters/WorkdayPresenter.m; sourceTree = "<group>"; };
-		07A1B1901754CE280099733E /* WorkdayView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = WorkdayView.h; path = Presenters/WorkdayView.h; sourceTree = "<group>"; };
 		07A5C8081744FD9200665282 /* TaskViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskViewCell.h; sourceTree = "<group>"; };
 		07A5C8091744FD9200665282 /* TaskViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskViewCell.m; sourceTree = "<group>"; };
 		07A5C8481746617100665282 /* TaskView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TaskView.h; sourceTree = "<group>"; };
 		07D01631173DB1E2005F488B /* OCDSpec2.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OCDSpec2.xcodeproj; path = OCDSpec2/OCDSpec2.xcodeproj; sourceTree = "<group>"; };
 		07F5819A17470E1100A2640A /* TaskViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TaskViewCell.xib; sourceTree = "<group>"; };
 		0DDBF41F4B2E4983A99CBF1E /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
+		2FA28090FD30563D2360C2B9 /* FakePresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FakePresenter.h; path = FreelancingWithKidsSpecs/Fakes/FakePresenter.h; sourceTree = "<group>"; };
+		2FA282ED7A8B54EFD80824BA /* WorkdayStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WorkdayStatus.h; path = Interactor/WorkdayStatus.h; sourceTree = "<group>"; };
+		2FA285255A9A52CDD22B7B20 /* Presenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Presenter.h; path = Interactor/Presenter.h; sourceTree = "<group>"; };
+		2FA2857E2631B67F3E9CD726 /* WorkdayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WorkdayView.h; path = Presenters/WorkdayView.h; sourceTree = "<group>"; };
+		2FA2869B7FA109388B81337E /* FakeStateMachine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FakeStateMachine.m; path = FreelancingWithKidsSpecs/Fakes/FakeStateMachine.m; sourceTree = "<group>"; };
+		2FA28916A592146B48FDEE2F /* FakeStateMachine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FakeStateMachine.h; path = FreelancingWithKidsSpecs/Fakes/FakeStateMachine.h; sourceTree = "<group>"; };
+		2FA289AF409AE425496AA6B6 /* FakePresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FakePresenter.m; path = FreelancingWithKidsSpecs/Fakes/FakePresenter.m; sourceTree = "<group>"; };
 		2FA28EE2D64658CB2607EB15 /* StateMachine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StateMachine.h; path = Interactor/StateMachine.h; sourceTree = "<group>"; };
 		520B81D9BB504CF280B298E5 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A60289401D07474DAB7963DD /* Pods-FreelancingWithKidsSpecs.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FreelancingWithKidsSpecs.xcconfig"; path = "Pods/Pods-FreelancingWithKidsSpecs.xcconfig"; sourceTree = SOURCE_ROOT; };
@@ -235,6 +243,10 @@
 			children = (
 				074C3836174D8D5500337FC0 /* FakeWorkdayClock.h */,
 				074C3837174D8D5500337FC0 /* FakeWorkdayClock.m */,
+				2FA2869B7FA109388B81337E /* FakeStateMachine.m */,
+				2FA28916A592146B48FDEE2F /* FakeStateMachine.h */,
+				2FA289AF409AE425496AA6B6 /* FakePresenter.m */,
+				2FA28090FD30563D2360C2B9 /* FakePresenter.h */,
 			);
 			name = Fakes;
 			sourceTree = "<group>";
@@ -246,6 +258,8 @@
 				076DBAF5175614FB00382602 /* WorkdayStateMachine.m */,
 				076DBAFE1756216600382602 /* Freelancer.h */,
 				2FA28EE2D64658CB2607EB15 /* StateMachine.h */,
+				2FA285255A9A52CDD22B7B20 /* Presenter.h */,
+				2FA282ED7A8B54EFD80824BA /* WorkdayStatus.h */,
 			);
 			name = Interactor;
 			sourceTree = "<group>";
@@ -332,7 +346,7 @@
 			children = (
 				07A1B18C1754CDB00099733E /* WorkdayPresenter.h */,
 				07A1B18D1754CDB00099733E /* WorkdayPresenter.m */,
-				07A1B1901754CE280099733E /* WorkdayView.h */,
+				2FA2857E2631B67F3E9CD726 /* WorkdayView.h */,
 			);
 			name = Presenters;
 			sourceTree = "<group>";
@@ -577,6 +591,8 @@
 				076DBAF217558F2600382602 /* WorkdayPresenterSpec.m in Sources */,
 				076DBAF7175614FB00382602 /* WorkdayStateMachine.m in Sources */,
 				076DBAFD1756177D00382602 /* WorkdayStateMachineSpec.m in Sources */,
+				2FA28542047545AD9DE2CBC4 /* FakeStateMachine.m in Sources */,
+				2FA281AD60C4005E427D2FA2 /* FakePresenter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
