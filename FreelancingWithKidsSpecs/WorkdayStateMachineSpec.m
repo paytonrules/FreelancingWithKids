@@ -7,6 +7,7 @@
 #import "Task.h"
 #import "WorkdayPresenter.h"
 #import "FakePresenter.h"
+#import "Daddy.h"
 
 @interface TaskObserver : NSObject
 @property(strong, nonatomic) ToDoList *tasks;
@@ -185,6 +186,17 @@ OCDSpec2Context(WorkdayStateMachineSpec) {
 
       [machine start];
       [machine startTask:@"meeting" withDelegate:view];
+
+      [daddy verify];
+    });
+
+    It(@"plays with the kids", ^{
+      id daddy = [OCMockObject mockForProtocol:@protocol(Freelancer)];
+      WorkdayStateMachine *machine = [WorkdayStateMachine machineWithFreeLancer:daddy presenter:nil];
+
+      [[daddy expect] playWithKid];
+
+      [machine playWithKid];
 
       [daddy verify];
     });

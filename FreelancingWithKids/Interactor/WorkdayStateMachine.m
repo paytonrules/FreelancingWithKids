@@ -160,6 +160,11 @@ int const EIGHT_HOUR_DAY = 32;
   [self.employee startTask:task withDelegate:view];
 }
 
+-(void) playWithKid
+{
+  [self.employee playWithKid];
+}
+
 -(void) start
 {
   NSError *error = nil;

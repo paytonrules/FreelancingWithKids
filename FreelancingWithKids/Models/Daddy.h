@@ -6,6 +6,4 @@
 @class Task;
 
 @interface Daddy : NSObject<Freelancer>
-
--(void) playWithKid;
 @end
