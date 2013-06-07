@@ -7,5 +7,6 @@
 
 -(void) clockTicked;
 -(void) startTask:(Task *)task withDelegate:(id<TaskView>) view;
+@property(readonly) int stress;
 
 @end

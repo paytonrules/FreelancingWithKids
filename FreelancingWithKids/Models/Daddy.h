@@ -8,5 +8,4 @@
 @interface Daddy : NSObject<Freelancer>
 
 -(void) playWithKid;
-@property(readonly) int stress;
 @end

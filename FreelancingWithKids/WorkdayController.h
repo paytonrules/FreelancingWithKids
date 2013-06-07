@@ -12,7 +12,7 @@
 @property(strong, nonatomic) IBOutlet UILabel *clockOnTheWall;
 @property(strong, nonatomic) IBOutlet UIProgressView *stressBar;
 @property(readonly) id<Presenter> presenter;
-@property(readonly) id<StateMachine> machine;
+@property (strong, nonatomic) id<StateMachine> machine;
 
 -(void) startWorkingOn: (NSString *) name withDelegate:(id<TaskView>) view;
 @end

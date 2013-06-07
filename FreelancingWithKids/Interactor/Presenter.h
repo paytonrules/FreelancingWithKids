@@ -5,10 +5,13 @@
 
 @protocol Presenter <NSObject>
 
-@property(strong, nonatomic) ToDoList *todoList;
 -(void) clockTicked;
 -(void) gameOver:(WorkdayStatus) status;
-@property (readonly) int taskCount;
 -(NSString *) taskNameAt:(NSInteger) row;
+-(void) updateStress:(int) stressAmount;
+
+@property(strong, nonatomic) ToDoList *todoList;
+@property (readonly) int taskCount;
+@property(readonly) NSString *currentTime;
 
 @end

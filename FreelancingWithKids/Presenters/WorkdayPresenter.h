@@ -10,6 +10,4 @@
 
 - (id)initWithView:(id <WorkdayView>)view;
 + (id)presenterWithView:(id <WorkdayView>)view;
-
--(void) updateStress:(int) stressAmount;
 @end

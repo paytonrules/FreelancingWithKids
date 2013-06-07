@@ -4,6 +4,7 @@
 
 @interface FakePresenter()
 @property(assign) BOOL status;
+@property(assign) int stress;
 @end
 
 @implementation FakePresenter
@@ -41,5 +42,9 @@
   return [[self.todoList taskNumber:row] name];
 }
 
+-(void) updateStress:(int) stressAmount
+{
+  self.stress = stressAmount;
+}
 
 @end

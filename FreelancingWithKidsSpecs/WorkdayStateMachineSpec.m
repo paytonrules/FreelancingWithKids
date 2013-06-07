@@ -3,10 +3,10 @@
 #import "WorkdayStateMachine.h"
 #import "ToDoList.h"
 #import "FakeWorkdayClock.h"
+#import "TickingClock.h"
 #import "Task.h"
 #import "WorkdayPresenter.h"
 #import "FakePresenter.h"
-#import "WorkdayStatus.h"
 
 @interface TaskObserver : NSObject
 @property(strong, nonatomic) ToDoList *tasks;
@@ -58,6 +58,12 @@ OCDSpec2Context(WorkdayStateMachineSpec) {
       [ExpectInt(presenter.taskCount) toBe:2];
     });
 
+    It(@"creates a clock if one isn't provided", ^{
+      WorkdayStateMachine *machine = [WorkdayStateMachine machineWithFreeLancer:nil presenter:nil];
+
+      [ExpectObj(machine.clock) toBeKindOfClass:[TickingClock class]];
+    });
+
     It(@"watches clock ticks and tells its presenter", ^{
       FakeWorkdayClock *clock = [FakeWorkdayClock new];
       id presenter = [OCMockObject niceMockForProtocol:@protocol(Presenter)];
@@ -75,7 +81,7 @@ OCDSpec2Context(WorkdayStateMachineSpec) {
     });
 
     It(@"Will inform the employee of clock ticks", ^{
-      id daddy = [OCMockObject mockForProtocol:@protocol(Freelancer)];
+      id daddy = [OCMockObject niceMockForProtocol:@protocol(Freelancer)];
       FakeWorkdayClock *clock = [FakeWorkdayClock new];
 
       WorkdayStateMachine *machine = [WorkdayStateMachine machineWithFreeLancer:daddy presenter:nil clock:clock];
@@ -86,6 +92,20 @@ OCDSpec2Context(WorkdayStateMachineSpec) {
       [clock notifyWatcher:100];
 
       [daddy verify];
+    });
+
+    It(@"Updates the presenter with daddy stress after the daddy is updated", ^{
+      id daddy = [OCMockObject niceMockForProtocol:@protocol(Freelancer)];
+      [[[daddy stub] andReturnValue:OCMOCK_VALUE((int){-20})] stress];
+      FakePresenter *presenter = [FakePresenter new];
+      FakeWorkdayClock *clock = [FakeWorkdayClock new];
+
+      WorkdayStateMachine *machine = [WorkdayStateMachine machineWithFreeLancer:daddy presenter:presenter clock:clock];
+
+      [machine start];
+      [clock notifyWatcher:100];
+
+      [ExpectInt(presenter.stress) toBe:-20];
     });
 
     It(@"Announces the day is successful if all the tasks are complete on a tick", ^{

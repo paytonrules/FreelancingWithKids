@@ -9,14 +9,13 @@
 @interface WorkdayController ()
 
 @property (strong, nonatomic) id<Presenter> presenter;
-@property (strong, nonatomic) id<StateMachine> machine;
 @end
 
 static NSString *reuseIdentifier = @"task";
 
 @implementation WorkdayController
    
-- (void)viewDidLoad
+-(void) viewDidLoad
 {
   [super viewDidLoad];
 
@@ -28,6 +27,7 @@ static NSString *reuseIdentifier = @"task";
   [self.machine start];
 
   [self.taskList registerNib:[UINib nibWithNibName:@"TaskViewCell" bundle:nil] forCellReuseIdentifier:reuseIdentifier];
+  [self updateClockWith:self.presenter.currentTime];
 }
 
 -(UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath: (NSIndexPath *)indexPath
@@ -53,7 +53,7 @@ static NSString *reuseIdentifier = @"task";
 
 -(void) startWorkingOn: (NSString *) name withDelegate:(id<TaskView>) view
 {
-//  [self.presenter startWorkingOn:name withDelegate:view];
+  [self.machine startTask:name withDelegate:view];
 }
 
 -(void) showYouWin

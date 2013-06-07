@@ -46,12 +46,17 @@
 
 -(void) updateClockOnTheWall
 {
+  [self.view updateClockWith:self.currentTime];
+}
+
+-(NSString *) currentTime
+{
   int hours = 9 + (self.increments / 4);
   if (hours > 12)
     hours -= 12;
   int minutes = 15 * (self.increments % 4);
 
-  [self.view updateClockWith:[NSString stringWithFormat:@"%d:%02d", hours, minutes]];
+  return [NSString stringWithFormat:@"%d:%02d", hours, minutes];
 }
 
 -(int) taskCount

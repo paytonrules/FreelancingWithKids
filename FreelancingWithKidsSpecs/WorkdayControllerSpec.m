@@ -1,7 +1,9 @@
 #import <OCDSpec2/OCDSpec2.h>
+#import <OCMock/OCMock.h>
 #import "WorkdayController.h"
 #import "WorkdayStateMachine.h"
 #import "WorkdayPresenter.h"
+#import "Task.h"
 
 OCDSpec2Context(WorkdayControllerSpec) {
   
@@ -35,7 +37,28 @@ OCDSpec2Context(WorkdayControllerSpec) {
 
       [ExpectInt(presenter.taskCount) toBe:2];
     });
-    
+
+    It(@"sends startWorkingOn to the stateMachine", ^{
+      id view = [OCMockObject mockForProtocol:@protocol(TaskView)];
+      id stateMachine = [OCMockObject mockForProtocol:@protocol(StateMachine)];
+      WorkdayController *cont = [[WorkdayController alloc] init];
+      cont.machine = stateMachine;
+
+      [(id<StateMachine>) [stateMachine expect] startTask:@"task name" withDelegate:view];
+
+      [cont startWorkingOn:@"task name" withDelegate:view];
+
+      [stateMachine verify];
+    });
+
+    It(@"initializes the clock from the presenter", ^{
+      // This depends on the workday presenter.  If that changes, then you'll wanna fix this test to use the factories
+      WorkdayController *cont = [[WorkdayController alloc] init];
+
+      cont.clockOnTheWall = [[UILabel alloc] init];
+      [cont viewDidLoad];
+
+      [ExpectObj(cont.clockOnTheWall.text) toBeEqualTo:@"9:00"];
+    });
   });
-  
 }

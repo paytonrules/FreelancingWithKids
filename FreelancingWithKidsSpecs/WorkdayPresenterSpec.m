@@ -62,6 +62,13 @@ OCDSpec2Context(WorkdayPresenterSpec) {
       [ExpectObj(view.timeAsString) toBeEqualTo:@"9:30"];
     });
 
+    It(@"allows reading of the time as a string as well", ^{
+      SimpleView *view = [SimpleView new];
+      WorkdayPresenter *presenter = [WorkdayPresenter presenterWithView: view];
+
+      [ExpectObj(presenter.currentTime) toBeEqualTo:@"9:00"];
+    });
+
     It(@"updates the stress of daddy for the minimum", ^{
       SimpleView *view = [SimpleView new];
       WorkdayPresenter *presenter = [WorkdayPresenter presenterWithView:view];

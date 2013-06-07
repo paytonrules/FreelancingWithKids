@@ -4,6 +4,7 @@
 #import "Task.h"
 #import "WorkdayStatus.h"
 #import "Presenter.h"
+#import "TickingClock.h"
 
 int const EIGHT_HOUR_DAY = 32;
 
@@ -29,7 +30,7 @@ int const EIGHT_HOUR_DAY = 32;
 
 -(id) initWithFreeLancer:(id<Freelancer>) employee presenter:(id<Presenter>) presenter
 {
-  return [self initWithFreeLancer:employee presenter:presenter clock:nil];
+  return [self initWithFreeLancer:employee presenter:presenter clock:[TickingClock clockWithUpdateInterval:10.0]];
 }
 
 -(id) initWithFreeLancer:(id<Freelancer>) employee presenter:(id<Presenter>) presenter clock:(id<WallClock>) clock
@@ -140,6 +141,7 @@ int const EIGHT_HOUR_DAY = 32;
   self.numTicks++;
   [self.employee clockTicked];
   [self.presenter clockTicked];
+  [self.presenter updateStress:self.employee.stress];
 }
 
 -(void) notifyOfSuccessfulDay
