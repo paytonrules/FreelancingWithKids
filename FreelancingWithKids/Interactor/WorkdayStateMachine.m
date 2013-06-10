@@ -12,7 +12,6 @@ int const EIGHT_HOUR_DAY = 32;
 
 @property(nonatomic, strong) id<Freelancer> employee;
 @property(nonatomic, strong) TKStateMachine *stateMachine;
-@property(nonatomic, strong) id<WallClock> clock;
 @property(nonatomic, strong) ToDoList *tasks;
 @property(nonatomic, strong) id<Presenter> presenter;
 @property(assign) int numTicks;
@@ -38,7 +37,6 @@ int const EIGHT_HOUR_DAY = 32;
   self = [super init];
   if (self) {
     self.employee = employee;
-    self.clock = clock;
     self.presenter = presenter;
 
     self.stateMachine = [TKStateMachine new];
@@ -46,7 +44,6 @@ int const EIGHT_HOUR_DAY = 32;
     TKState *wakingUp = [TKState stateWithName:@"wakingup"];
     [wakingUp setDidExitStateBlock:^(TKState *state, TKStateMachine *stateMachine) {
       [self setupInitialTasks];
-      [self startClock];
     }];
 
     TKState *working = [TKState stateWithName:@"working"];
@@ -74,7 +71,6 @@ int const EIGHT_HOUR_DAY = 32;
                                                    toState:successfulDay];
     [successfulDay setDidEnterStateBlock:^(TKState *state, TKStateMachine *stateMachine) {
       [self notifyOfSuccessfulDay];
-      [self stopClock];
     }];
 
     TKState *failedDay = [TKState stateWithName:@"failedDay"];
@@ -83,7 +79,6 @@ int const EIGHT_HOUR_DAY = 32;
                                                toState:failedDay];
     [failedDay setDidEnterStateBlock:^(TKState *state, TKStateMachine *stateMachine) {
       [self notifyOfFailedDay];
-      [self stopClock];
     }];
 
     [self.stateMachine addStatesFromArray:@[wakingUp, working, checkingClock, successfulDay, failedDay]];
@@ -104,14 +99,6 @@ int const EIGHT_HOUR_DAY = 32;
 +(id) machineWithFreeLancer:(id<Freelancer>) freelancer presenter:(id<Presenter>) presenter clock:(id <WallClock>)clock
 {
   return [[WorkdayStateMachine alloc] initWithFreeLancer:freelancer presenter:presenter clock:clock];
-}
-
--(void) startClock {
-  [self.clock start:self];
-}
-
--(void) stopClock {
-  [self.clock stop];
 }
 
 -(void) setupInitialTasks
@@ -171,7 +158,7 @@ int const EIGHT_HOUR_DAY = 32;
   [self.stateMachine fireEvent:@"start" error:&error];
 }
 
-- (void)clockTicked:(NSTimeInterval)interval {
+-(void) endTurn {
   NSError *error = nil;
   [self.stateMachine fireEvent:@"tick" error:&error];
 }

@@ -15,4 +15,8 @@
 @property (strong, nonatomic) id<StateMachine> machine;
 
 -(void) startWorkingOn: (NSString *) name withDelegate:(id<TaskView>) view;
+
+-(IBAction) playWithKid:(id)sender;
+
+- (IBAction)endTurn:(id)sender;
 @end

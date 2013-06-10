@@ -20,7 +20,7 @@ OCDSpec2Context(TickingClockSpec) {
     It(@"calls its delegate when the timer fires", ^{
       id delegate = [OCMockObject mockForProtocol:@protocol(ClockWatcher)];
       TickingClock *clock = [TickingClock clockWithUpdateInterval:600];
-      
+
       [[delegate expect] clockTicked:600];
       
       [clock start:delegate];
@@ -32,7 +32,7 @@ OCDSpec2Context(TickingClockSpec) {
     It(@"allows you to register other listeners before starting", ^{
       id delegate = [OCMockObject mockForProtocol:@protocol(ClockWatcher)];
       TickingClock *clock = [TickingClock clockWithUpdateInterval:600];
-      
+
       [[delegate expect] clockTicked:600];
       
       [clock registerWatcher:delegate];
@@ -46,7 +46,7 @@ OCDSpec2Context(TickingClockSpec) {
       id delegateRegistered = [OCMockObject mockForProtocol:@protocol(ClockWatcher)];
       id delegateStarted = [OCMockObject mockForProtocol:@protocol(ClockWatcher)];
       TickingClock *clock = [TickingClock clockWithUpdateInterval:600];
-      
+
       [[delegateRegistered expect] clockTicked:600];
       [[delegateStarted expect] clockTicked:600];
       
@@ -61,7 +61,7 @@ OCDSpec2Context(TickingClockSpec) {
     It(@"Doesnt register the same watcher twice", ^{
       id delegate = [OCMockObject mockForProtocol:@protocol(ClockWatcher)];
       TickingClock *clock = [TickingClock clockWithUpdateInterval:600];
-      
+
       [[delegate expect] clockTicked:600];
       
       [clock registerWatcher:delegate];

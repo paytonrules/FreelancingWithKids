@@ -79,4 +79,13 @@ static NSString *reuseIdentifier = @"task";
     // Dispose of any resources that can be recreated.
 }
 
+-(void) playWithKid:(id)sender
+{
+  [self.machine playWithKid];
+}
+
+-(IBAction) endTurn:(id)sender
+{
+  [self.machine endTurn];
+}
 @end

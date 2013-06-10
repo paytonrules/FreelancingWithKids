@@ -60,5 +60,29 @@ OCDSpec2Context(WorkdayControllerSpec) {
 
       [ExpectObj(cont.clockOnTheWall.text) toBeEqualTo:@"9:00"];
     });
+
+    It(@"sends the play with kid message to the state machine", ^{
+      id machine = [OCMockObject mockForProtocol:@protocol(StateMachine)];
+      WorkdayController *cont = [[WorkdayController alloc] init];
+      cont.machine = machine;
+
+      [[machine expect] playWithKid];
+
+      [cont playWithKid:nil];
+
+      [machine verify];
+    });
+
+    It(@"Ends a Turn", ^{
+      id machine = [OCMockObject mockForProtocol:@protocol(StateMachine)];
+      WorkdayController *cont = [[WorkdayController alloc] init];
+      cont.machine = machine;
+
+      [[machine expect] endTurn];
+
+      [cont endTurn:nil];
+
+      [machine verify];
+    });
   });
 }
