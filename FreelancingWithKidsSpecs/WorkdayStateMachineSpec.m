@@ -7,42 +7,12 @@
 #import "WorkdayPresenter.h"
 #import "FakePresenter.h"
 
-@interface TaskObserver : NSObject
-@property(strong, nonatomic) ToDoList *tasks;
-@end
-
-@implementation TaskObserver
-
--(void) completeAllTasks
-{
-  for(int i = 0; i < self.tasks.count; i++) {
-    [[self.tasks taskNumber:i] forceCompletion];
-  }
-}
-
--(void) initializeTasks:(NSNotification *) notification
-{
-  self.tasks = (ToDoList *)notification.userInfo[@"tasks"];
-}
-
--(int) taskCount
-{
-  return self.tasks.count;
-}
-@end
-
 void RunToEndOfDay(WorkdayStateMachine *machine)
 {
   for (int i = 0; i < EIGHT_HOUR_DAY; i++)
     [machine endTurn];
 }
 
-void CompleteAllTasks(ToDoList *tasks)
-{
-  for(int i = 0; i < tasks.count; i++) {
-    [[tasks taskNumber:i] forceCompletion];
-  }
-}
 
 OCDSpec2Context(WorkdayStateMachineSpec) {
 
@@ -57,13 +27,11 @@ OCDSpec2Context(WorkdayStateMachineSpec) {
       [ExpectInt(presenter.taskCount) toBe:2];
     });
 
-    It(@"watches clock ticks and tells its presenter", ^{
-      FakeWorkdayClock *clock = [FakeWorkdayClock new];
+    It(@"watches the clock ticked on every end turn", ^{
       id presenter = [OCMockObject niceMockForProtocol:@protocol(Presenter)];
 
       WorkdayStateMachine *machine = [WorkdayStateMachine machineWithFreeLancer:nil
-                                                                      presenter:presenter
-                                                                          clock:clock];
+                                                                      presenter:presenter];
       [machine start];
 
       [[presenter expect] clockTicked];
@@ -75,9 +43,8 @@ OCDSpec2Context(WorkdayStateMachineSpec) {
 
     It(@"Will inform the employee of clock ticks when the turn ends", ^{
       id daddy = [OCMockObject niceMockForProtocol:@protocol(Freelancer)];
-      FakeWorkdayClock *clock = [FakeWorkdayClock new];
 
-      WorkdayStateMachine *machine = [WorkdayStateMachine machineWithFreeLancer:daddy presenter:nil clock:clock];
+      WorkdayStateMachine *machine = [WorkdayStateMachine machineWithFreeLancer:daddy presenter:nil];
       [machine start];
 
       [[daddy expect] clockTicked];
@@ -91,9 +58,8 @@ OCDSpec2Context(WorkdayStateMachineSpec) {
       id daddy = [OCMockObject niceMockForProtocol:@protocol(Freelancer)];
       [[[daddy stub] andReturnValue:OCMOCK_VALUE((int){-20})] stress];
       FakePresenter *presenter = [FakePresenter new];
-      FakeWorkdayClock *clock = [FakeWorkdayClock new];
 
-      WorkdayStateMachine *machine = [WorkdayStateMachine machineWithFreeLancer:daddy presenter:presenter clock:clock];
+      WorkdayStateMachine *machine = [WorkdayStateMachine machineWithFreeLancer:daddy presenter:presenter];
 
       [machine start];
       [machine endTurn];
@@ -103,7 +69,7 @@ OCDSpec2Context(WorkdayStateMachineSpec) {
 
     It(@"Announces the day is successful if all the tasks are complete when the turn ends", ^{
       FakePresenter *presenter = [FakePresenter new];
-      WorkdayStateMachine *machine = [WorkdayStateMachine machineWithFreeLancer:nil presenter:presenter clock:nil];
+      WorkdayStateMachine *machine = [WorkdayStateMachine machineWithFreeLancer:nil presenter:presenter];
 
       [machine start];
       [presenter completeAllTasks];
@@ -114,7 +80,7 @@ OCDSpec2Context(WorkdayStateMachineSpec) {
 
     It(@"Announces the day is over and you failed if time is up on a tick, but tasks aren't complete", ^{
       FakePresenter *presenter = [FakePresenter new];
-      WorkdayStateMachine *machine = [WorkdayStateMachine machineWithFreeLancer:nil presenter:presenter clock:nil];
+      WorkdayStateMachine *machine = [WorkdayStateMachine machineWithFreeLancer:nil presenter:presenter];
 
       [machine start];
 
@@ -123,32 +89,9 @@ OCDSpec2Context(WorkdayStateMachineSpec) {
       [ExpectBool([presenter gameOverWith:Failed]) toBeTrue];
     });
 
-    It(@"Stops the clock when the day is over", ^{
-      FakeWorkdayClock *clock = [FakeWorkdayClock new];
-      FakePresenter *presenter = [FakePresenter new];
-      WorkdayStateMachine *machine = [WorkdayStateMachine machineWithFreeLancer:nil presenter: presenter clock:clock];
-
-      [machine start];
-      RunToEndOfDay(machine);
-
-      [ExpectBool(clock.started) toBeFalse];
-    });
-
-    It(@"Stops the clock on a successful day too", ^{
-      FakeWorkdayClock *clock = [FakeWorkdayClock new];
-      FakePresenter *presenter = [FakePresenter new];
-      WorkdayStateMachine *machine = [WorkdayStateMachine machineWithFreeLancer:nil presenter:presenter clock:clock];
-
-      [machine start];
-      [presenter completeAllTasks];
-      [machine endTurn];
-
-      [ExpectBool(clock.started) toBeFalse];
-    });
-
     It(@"doesn't notify anything if the tasks aren't done and the day isn't over", ^{
       FakePresenter *presenter = [FakePresenter new];
-      WorkdayStateMachine *machine = [WorkdayStateMachine machineWithFreeLancer:nil presenter:presenter clock:nil];
+      WorkdayStateMachine *machine = [WorkdayStateMachine machineWithFreeLancer:nil presenter:presenter];
 
       [machine start];
       [machine endTurn];
@@ -158,7 +101,7 @@ OCDSpec2Context(WorkdayStateMachineSpec) {
 
     It(@"prefers winning to losing - if the day is over but the tasks are done, you succeeded", ^{
       FakePresenter *presenter = [FakePresenter new];
-      WorkdayStateMachine *machine = [WorkdayStateMachine machineWithFreeLancer:nil presenter:presenter clock:nil];
+      WorkdayStateMachine *machine = [WorkdayStateMachine machineWithFreeLancer:nil presenter:presenter];
 
       [machine start];
       [presenter completeAllTasks];

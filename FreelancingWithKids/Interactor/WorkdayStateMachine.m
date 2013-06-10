@@ -29,11 +29,6 @@ int const EIGHT_HOUR_DAY = 32;
 
 -(id) initWithFreeLancer:(id<Freelancer>) employee presenter:(id<Presenter>) presenter
 {
-  return [self initWithFreeLancer:employee presenter:presenter clock:[TickingClock clockWithUpdateInterval:10.0]];
-}
-
--(id) initWithFreeLancer:(id<Freelancer>) employee presenter:(id<Presenter>) presenter clock:(id<WallClock>) clock
-{
   self = [super init];
   if (self) {
     self.employee = employee;
@@ -94,11 +89,6 @@ int const EIGHT_HOUR_DAY = 32;
 +(id) machineWithFreeLancer:(id<Freelancer>) freelancer presenter:(id<Presenter>) presenter
 {
   return [[WorkdayStateMachine alloc] initWithFreeLancer:freelancer presenter:presenter];
-}
-
-+(id) machineWithFreeLancer:(id<Freelancer>) freelancer presenter:(id<Presenter>) presenter clock:(id <WallClock>)clock
-{
-  return [[WorkdayStateMachine alloc] initWithFreeLancer:freelancer presenter:presenter clock:clock];
 }
 
 -(void) setupInitialTasks

@@ -9,6 +9,7 @@
 
 @implementation FakePresenter
 @synthesize todoList;
+@synthesize currentTime;
 
 -(void)completeAllTasks
 {

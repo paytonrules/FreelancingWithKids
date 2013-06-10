@@ -11,6 +11,5 @@ extern int const EIGHT_HOUR_DAY;
 @interface WorkdayStateMachine : NSObject<StateMachine>
 
 +(id) machineWithFreeLancer:(id<Freelancer>) freelancer presenter:(id<Presenter>) presenter;
-+(id) machineWithFreeLancer:(id<Freelancer>) freelancer presenter:(id<Presenter>) presenter clock:(id <WallClock>)clock;
 
 @end

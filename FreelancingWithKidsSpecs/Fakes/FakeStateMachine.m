@@ -3,11 +3,22 @@
 @implementation FakeStateMachine
 @synthesize stress = _stress;
 
--(void) start {
+-(void) start
+{
 
 }
 
 -(void) startTask:(NSString *)task withDelegate:(id <TaskView>)view {
+
+}
+
+- (void)endTurn
+{
+
+}
+
+- (void)playWithKid
+{
 
 }
 
